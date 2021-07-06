@@ -1,0 +1,32 @@
+{
+  "data":[
+    {
+      "id":"1434",
+      "name":"华北大区",
+      "pid":"0",
+      "orgId":"1017",
+      "group":"TYPE_1",
+      "childMenu":[
+        {
+          "id":"1022",
+          "name":"测试网3点22222222223222",
+          "pid":"1007",
+          "orgId":"1017",
+          "group":"TYPE_4",
+          "childMenu":[
+            {
+              "id":"1023",
+              "name":"测试网13点222222221223222",
+              "pid":"1022",
+              "orgId":"1017",
+              "group":"TYPE_4",
+              "childMenu":[]
+            }
+          ]
+        }
+      ]
+    },
+    {"id":"1437","name":"东北大区","pid":"0","orgId":"1017","group":"TYPE_1","childMenu":[{"id":"1022","name":"测试网3点22222222223222","pid":"1007","orgId":"1017","group":"TYPE_4","childMenu":[{"id":"1024","name":"测试网13点2222221221223222","pid":"1022","orgId":"1017","group":"TYPE_4","childMenu":[{"id":"1025","name":"测试网13点22222212211223222","pid":"1024","orgId":"1017","group":"TYPE_4","childMenu":[]},
+    {"id":"1027","name":"新网点","pid":"1024","orgId":"1017","group":"TYPE_4","childMenu":[]},{"id":"4675","name":"测试网13点222212212211223222","pid":"1024","orgId":"1017","group":"TYPE_4","childMenu":[]},{"id":"4676","name":"测试网13点2222121221212211223222","pid":"1024","orgId":"1017","group":"TYPE_4","childMenu":[]},{"id":"4677","name":"新网1点","pid":"1024","orgId":"1017","group":"TYPE_4","childMenu":[]},{"id":"4678","name":"2","pid":"1024","orgId":"1017","group":"TYPE_4","childMenu":[]}]}]}]},{"id":"1446","name":"华东大区","pid":"0","orgId":"1017","group":"TYPE_1","childMenu":[{"id":"1022","name":"测试网3点22222222223222","pid":"1007","orgId":"1017","group":"TYPE_4","childMenu":[{"id":"1023","name":"测试网13点222222221223222","pid":"1022","orgId":"1017","group":"TYPE_4"},{"id":"1024","name":"测试网13点2222221221223222","pid":"1022","orgId":"1017","group":"TYPE_4","childMenu":[{"id":"1025","name":"测试网13点22222212211223222","pid":"1024","orgId":"1017","group":"TYPE_4"},{"id":"1027","name":"新网点","pid":"1024","orgId":"1017","group":"TYPE_4"},{"id":"4675","name":"测试网13点222212212211223222","pid":"1024","orgId":"1017","group":"TYPE_4"},{"id":"4676","name":"测试网13点2222121221212211223222","pid":"1024","orgId":"1017","group":"TYPE_4"},{"id":"4677","name":"新网1点","pid":"1024","orgId":"1017","group":"TYPE_4"},{"id":"4678","name":"2","pid":"1024","orgId":"1017","group":"TYPE_4"}]},{"id":"1026","name":"名ww称","pid":"1022","orgId":"1017","group":"TYPE_4"}]}]}
+  ]
+}
