@@ -482,6 +482,31 @@ formObj:{
                       :disabled="item.disabled?item.disabled:false"
                       @click="formBtnClick($event,item.key)">{{item.title}}</el-button>
 
+                       <!-- popover 类型按钮-->
+                      <el-popover
+                        v-if="item.btnType=='popover'"
+                        :key="item.key"
+                        placement="bottom"
+                        :style="{'width':item.popoverWidth?item.popoverWidth:'200px','margin-left':item.popoverMargin=='left'?'10px':0,'margin-right':item.popoverMargin=='right'?'10px':0}"
+                        :title="item.popoverTitle?item.popoverTitle:''"
+                        :width="item.popoverWidth?item.popoverWidth:'200'"
+                        :trigger="item.popoverType?item.popoverType:'hover'"
+                        :content="item.popoverContent?item.popoverContent:''"
+                      >
+                        <div v-if="item.popoverHtml" v-html="item.popoverHtml" style="width:100%;backgroud:rabg(255,255,255,1)"></div>
+                        <el-button
+                          v-if="item.comp=='button'"
+                          :key="item.key"
+                          slot="reference"
+                          :type="item.type?item.type:''"
+                          :size="item.size?item.size:'mini'"
+                          @click="formClick($event,item.key)">
+                          {{item.title}}
+                        </el-button>
+
+                        <el-link v-if="item.comp=='text'" slot="reference"  type="primary">{{item.title}}</el-link>
+                      </el-popover>
+
                       <!-- 文件上传按钮 -->
                       <el-upload
                         v-if="item.btnType=='import'"
