@@ -121,7 +121,7 @@
               </template>
             </vxe-table-colgroup>
 
-            <template v-if="items.type=='column'">>
+            <template v-if="items.type=='column'">
                 <vxe-table-column
                   v-for="(item) in items.column"
                   :key = "item.key"
