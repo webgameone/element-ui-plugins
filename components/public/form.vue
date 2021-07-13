@@ -1,228 +1,3 @@
-/*
-formObj是一个集合对象，里面包含了针对formObj的配置，以及各个表单组件的配置参数
-结构：
-formObj:{
-  id:'idname',//（必填项）自定义form的id名称，很多功能需要使用自定义的id,因为一个页面可能会有多个form存在,如果使用同样的id名，配置会冲突
-  col:number,//自定义列数,如果不设置默认4列
-  labelPosition:'right',//label文字的对齐位置，如果不设置，默认右对齐
-  labelTop:true,//label文字在输入框的顶部显示，如果设置为true,注意id的名称一定要唯一性（否则多个form的id重名，将会导致不希望的label位置发生错误），如不设置，默认在输入框的左侧
-  labelWidth:number,//自定义label的宽度，如果不设置默认100px
-  needAdvanced:true,//是否需要展开收起功能,不设置或者设置为false，取消该功能
-  noButton:true,//不显示查询和重置按钮，true-不显示 ，不设置或者设置为false，显示查询和重置按钮
-  btnInline:false,//查询，重置按钮和右侧按钮是否在表单输入项的右侧，默认为false,当表单输入框非常少的时候（1-2个输入框），可以让查询和重置放在表单的右侧
-  labelSuffix:'：'，//当有表单页面全部都是详情页的时候(全部使用textComp类型组件展示)或者label在输入框的顶部时候，可以使用冒号去分割label与(右边的文本/底部的组件)
-
-  formCollapse:true,//开启可以折叠的form表单（允许一个表单存在多个折叠面板中，当使用这个功能时，formArr的数据结构必须修改为固定格式）
-  activeNames:[1,2,3],//当formCollapse为true时有效，默认展开的折叠面板
-
-  rules:{ //form表单验证
-    areaName: [
-      { required: true, message: '请输入活动名称', trigger: 'blur' },
-      { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-    ],
-    num:[
-      ................................
-    ]
-  },
-  //表单上方的按钮组的配置
-  topBtnArr:[
-    {
-      title:'全国总表',//title 按钮的名称
-      key:'nationalTable',//每个按钮对象的key必须不一样，需要通过key去获取事件类型
-      type:'success',//每个按钮的显示状态，不设置默认为''
-      size:'small', //按钮大小，如不设置默认small
-      icon:'.....' //按钮图标，如不设置默认没有图标
-
-      showPopover:true,//按钮是否带提示信息，如果不设置或者设置为false，按钮不带提示信息
-      popoverMargin:'left',//按钮的margin是左边还是右边,需要自己设置，left或者right
-      popoverTitle:'标题',//按钮的提示标题，默认为空
-      popoverWidth:300,//按钮的提示框宽度，默认为200
-      popoverType:'hover',//按钮的提示框的触发方式，默认为hover,也可以使用(click,focus,manual)
-      popoverContent:'提示的内容'
-    },
-    .........
-  ],
-  //表单下方右侧的按钮组
-  bottomBtnArr:[
-    {
-      title:'导出',
-      key:'download',
-      type:'success',
-      size:'small',
-      display:true,//true显示，false隐藏
-      icon:'.....'
-    }
-  ],
-  //下拉列表组件的options，通过key绑定，可以方便修改下拉列表的选项
-  selectData:{
-    websiteData:[{name:'20:00',id:1},{name:'21:00',id:2}],
-    ..................
-  },
-  //下拉列表组件的options，通过key绑定，可以方便对图片数据进行预处理(给imgComp赋值)
-  imgData:{
-    exceptionUrl:[]
-  },
-  //form表单组件
-  formArr:[
-    {
-      type:'nullComp', //只是占位置的，并不会显示任何东西
-      key:'',//因为是占位符使用，所以key可以不设置任何值
-      col:2, //自定义单个组件占据form的列数，默认是1个组件占据1列，如果希望一个组件占据2列或者3列，可以单独配置
-      outAdvanced:true
-    },
-    {
-      type:'textComp',
-      title:'文字组件',
-      key:'22222', //key值，唯一值
-      textCount:8, //文本字数限制
-      color:'#ff0000',
-      showTitle:true //如果有字数限制时，是否显示全部文字弹窗
-    },
-    {
-      type:'timeRangeComp', //时间范围组件
-      title:'查询时间', //label名称
-      key:'queryTime',  //key值，唯一值
-      defaultTime:['12:00:00', '23:59:59'],//默认时间，如果不设置默认['00:00:00', '23:59:59']
-      outAdvanced:true,  //当使用展开和收起功能时候，outAdvanced是默认在外部显示的
-      col:2,   //自定义单个组件占据form的列数，默认是1个组件占据1列，如果希望一个组件占据2列或者3列，可以单独配置
-      display:'none',//隐藏该组件，如果不设置默认为''
-    },
-    {
-      type:'dateTime',//年月日 选择组件
-      title:'查询时间', //label名称
-      key:'queryTime'  //key值，唯一值
-    },
-    {
-      type:'selectComp', //下拉列表组件
-      title:'大区',
-      key:'websiteData',
-      enableMatch:true,//是否开启输入匹配，如果不匹配自动清空
-      placeholder:'请选择网点', //自定义placeholder名称，不设置的话默认为'请选择'
-      custText:'content',//自定义text的字段名
-      custValue:'content',//自定义value的字段名
-      outAdvanced:true,
-      strongMatch:true,//强匹配模式-当输入的文字不在下拉列表中，就不被使用
-      allowCreate:true,//是否允许自己创建条目，不设置默认为false
-      remote:true, //是否允许远程搜索，true-允许 false-不允许
-      remoteMethod:
-    },
-    {
-      type:'selectShowIdComp', //自定义模板的下拉列表组件
-      title:'节点网点',
-      key:'siteName',
-      placeholder:'请选择或输入查找',
-      custText:'content',//自定义text的字段名
-      custValue:'content',//自定义value的字段名
-      listName:'城市', //下拉列表左侧的名称
-      listValue:'编码', //下拉列表右侧的名称
-      multiple: true, //允许多选
-      options:[ //自定义options
-        {
-          title:'城市', //对应的标题
-          str:'text', //对应的字段
-          mstyle:{width:'150px'} //自定义样式
-        },
-        {
-          title:'编码',
-          str:'code',
-          mstyle:{width:'100px'}
-        },
-        {
-          title:'网点类型',
-          str:'type',
-          mstyle:{width:'80px'}
-        }
-      ]
-    }
-    {
-      type:'selectInputComp',//带下拉条件的输入框
-      title:'',//这个组件不需要label的文字
-      key:'complaintInput',
-      selectkey:'complaintInputSelect',//下拉选项绑定的key
-      outAdvanced:true
-    },
-    {
-      type:'selectListComp', //带删除功能列表的下拉选择框
-      title:'所属路由',
-      key:'route'
-    },
-    {
-      type:'selectDateComp',//带下拉条件的日期选择器
-      title:'',//这个组件不需要label的文字
-      key:'complaintDate',
-      selectkey:'complaintDateSelect',//下拉选项绑定的key
-      outAdvanced:true
-    },
-    {
-      type:'inputComp',
-      title:'普通输入框',
-      key:'minput',
-      autocomplete:'on' //记忆并且自动填充 on-开启  off-关闭
-    },
-    {
-      type:'bigInputCheck',//后面带checkbox的textarea文本输入框
-      title:'单号',
-      checkName:'组合',//checkbox的名称
-      checkKey:'checked'//checbox绑定值
-    },
-    {
-      type:'numberInputComp', //数字输入框
-      title:'核载吨数',
-      key:'brand',
-      precision:2, //数值精度 2-2个小数点
-      controls:false, //是否显示右侧的数值调节按钮
-      min:0, //最小值，可以不设置
-      max:50 //最大值，可以不设置
-    },
-    {
-      type:'checkSelectComp',//带checkbox的下拉选择列表
-      title:'查询时间段',
-      key:'auditNo2',
-      checkKey:false //绑定checkbox
-    }
-    {
-      type:'slectTabel',//select中的options是table
-      title:'上站网点',
-      key:'preSiteCode',
-      display:'none'
-    },
-    {
-      type:'checkgroupComp', //checkbox组
-      title:' ',//checkbox组需要label,但是必须为空格
-      key:'showCheck',
-      col:2,
-      showPopover:true,//是否显示提示信息
-      popover:[ //如果有提示信息，设置提示内容
-        {
-          title:'标题1',
-          width:300,
-          type:'hover',
-          content:'这是里面的内容1'
-        },
-        {
-          title:'网点库存',
-          width:400,
-          type:'hover',
-          content:'这是里面的内容2'
-        },
-        .........................
-      ]
-    },
-    {
-      type: "imgComp",//图片展示+预览（这里面的数据需要在imgData里面赋值）
-      title: "异常图片",
-      key: "exceptionUrl"//自定义
-    },
-    ..................后续待添加
-  ],
-  //model是默认值赋值操作，里面的key都对应着formArr中的key值
-  model:{
-    text1:'这是编辑人的数据啊',
-    text2:'上海网点',
-    time1:"2021-01-21 10:16:59"
-  }
-}
-*/
 <template>
   <div :id="formObj.id">
     <div id="customForm" :ref="formObj.id">
@@ -328,6 +103,8 @@ formObj:{
                         @inputEnter="inputEnter"
                         @formRemoveFiles="formRemoveFiles"
                         @formVisibleChange="formVisibleChange"
+                        @getNodeData="getNodeData"
+                        @loadNode="loadNode"
                       />
 
                       <formItem
@@ -351,6 +128,8 @@ formObj:{
                         @inputEnter="inputEnter"
                         @formRemoveFiles="formRemoveFiles"
                         @formVisibleChange="formVisibleChange"
+                        @getNodeData="getNodeData"
+                        @loadNode="loadNode"
                       />
                     </el-col>
                 </el-form-item>
@@ -367,6 +146,7 @@ formObj:{
                 v-else
                 v-for="(item) in formObj.formArr"
                 :tag="item.type"
+                :hasslot="item.hasSlot"
                 :key="item.key"
                 :prop="item.key"
                 :label="item.title&&item.title!=''?item.title:' '"
@@ -401,6 +181,8 @@ formObj:{
                     @inputEnter="inputEnter"
                     @formRemoveFiles="formRemoveFiles"
                     @formVisibleChange="formVisibleChange"
+                    @getNodeData="getNodeData"
+                    @loadNode="loadNode"
                   />
 
                   <formItem
@@ -425,9 +207,19 @@ formObj:{
                     @inputEnter="inputEnter"
                     @formRemoveFiles="formRemoveFiles"
                     @formVisibleChange="formVisibleChange"
+                    @getNodeData="getNodeData"
+                    @loadNode="loadNode"
                   />
                   <!-- 副标题 -->
-                  <div class="secondTitle" v-if="item.hasSlot&&item.hasSlot==true&&item.needLable==true" :style="{float:'right',width:item.secondTitleWidth?item.secondTitleWidth:'auto'}">
+                  <div 
+                    class="secondTitle"
+                    v-if="item.hasSlot&&item.hasSlot==true&&item.needLable==true"
+                    :style="{
+                      float:formObj.labelTop?'left':'right',
+                      width:item.secondTitleWidth?item.secondTitleWidth:'auto',
+                      'margin-top':formObj.labelTop?'-56px':'0',
+                      'margin-left':formObj.labelTop?filterPre(item.slotData.width):'0'
+                    }">
                     <span>{{item.slotData.title}}</span>
                   </div>
                 </el-col>
@@ -507,6 +299,20 @@ formObj:{
                         <el-link v-if="item.comp=='text'" slot="reference"  type="primary">{{item.title}}</el-link>
                       </el-popover>
 
+                      <!-- 下拉菜单 -->
+                      <el-dropdown class="dropdownBtn" v-if="item.btnType=='dropdown'" :key="item.key" @command="formBtnCommand($event,item)">
+                        <el-button type="primary" size="mini">
+                          {{item.title}}<i class="el-icon-arrow-down el-icon--right"></i>
+                        </el-button>
+                        <el-dropdown-menu slot="dropdown">
+                          <el-dropdown-item
+                            v-for="(oper) in formObj.selectData[item.key]"
+                            :key="oper"
+                            :command="oper"
+                          >{{oper}}</el-dropdown-item>
+                        </el-dropdown-menu>
+                      </el-dropdown>
+
                       <!-- 文件上传按钮 -->
                       <el-upload
                         v-if="item.btnType=='import'"
@@ -544,7 +350,7 @@ formObj:{
                   <el-button-group>
                     <template v-for="(item) in formObj.bottomBtnArr">
 
-                       <!-- popover 类型按钮-->
+                      <!-- popover 类型按钮 带触摸弹窗的-->
                       <el-popover
                         v-if="item.btnType=='popover'"
                         :key="item.key"
@@ -569,6 +375,21 @@ formObj:{
                         <el-link v-if="item.comp=='text'" slot="reference"  type="primary">{{item.title}}</el-link>
                       </el-popover>
 
+                      <!-- 下拉菜单 -->
+                      <el-dropdown class="dropdownBtn" v-else-if="item.btnType=='dropdown'" :key="item.key" @command="formBtnCommand($event,item)">
+                        <el-button type="primary" size="mini">
+                          {{item.title}}<i class="el-icon-arrow-down el-icon--right"></i>
+                        </el-button>
+                        <el-dropdown-menu slot="dropdown">
+                          <el-dropdown-item
+                            v-for="(oper) in formObj.selectData[item.key]"
+                            :key="oper"
+                            :command="oper"
+                          >{{oper}}</el-dropdown-item>
+                        </el-dropdown-menu>
+                      </el-dropdown>
+
+                      <!-- 普通按钮 -->
                       <el-button
                         v-else
                         :key="item.key"
@@ -735,6 +556,10 @@ export default {
         if(formContent[i].parentNode.getAttribute('tag') == 'checkboxComp' && formContent[i].parentNode.getAttribute('tag').innerHtml==''){
           formContent[i].style.width = `100%`;
         }
+        //两个输入项的 通过hasslot判断
+        if(formContent[i].parentNode.getAttribute('hasslot') == 'true'&&this.formObj.labelTop==true){
+          formContent[i].style.width = `calc(100% - ${this.labelWidth/2}px)`;
+        }
       }
     },
     //查询列表
@@ -798,6 +623,12 @@ export default {
     //表单修改
     formChange(event,item,keyName,allData){
       this.$emit('formChange',event,item,keyName,allData)
+    },
+    getNodeData(data,item,tree) {
+      this.$emit("getNodeData", data, item,tree);
+    },
+    loadNode(node, resolve,item) {
+      this.$emit("loadNode", node, resolve, item);
     },
     //监测键盘Enter
     formKeyupEnter(event,item) {
@@ -869,6 +700,10 @@ export default {
     //前面带select的input输入事件
     inputChange(event,item,key){
       this.$emit('formChange',event,item,key)
+    },
+    //按钮下拉菜单
+    formBtnCommand(event,item){
+      this.$emit('formBtnCommand',event,item)
     },
     formBtnClick(event,item){
       this.$emit('formBtnClick',event,item)
@@ -991,6 +826,11 @@ export default {
       }
 
       return params;
+    },
+    //重新计算百分比的title位置
+    filterPre(pre){
+      let num = Number(pre.replace('%',''));
+      return num*1.4+'%'
     }
   },
 }
@@ -1049,11 +889,19 @@ export default {
     color: inherit;
     // line-height: 16px;
   }
-
   .formCollapseContainer{
     .el-form-item__error{
       right: 0;
       left:inherit!important;
+    }
+  }
+  .btnwrap{
+    .dropdownBtn{
+      // height: 28px;
+      float: left;
+      .el-button{
+        // height: 28px;
+      }
     }
   }
 }

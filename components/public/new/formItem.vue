@@ -143,6 +143,8 @@
         @formBlur="formBlur"
         @formFocus="formFocus"
         @formVisibleChange="formVisibleChange"
+        @getNodeData="getNodeData"
+        @loadNode="loadNode"
       ></selectTree>
     </div>
 
@@ -916,6 +918,12 @@ export default {
       }
 
     },
+    getNodeData(data,item,tree) {
+      this.$emit("getNodeData", data, item,tree);
+    },
+    loadNode(node, resolve,item) {
+      this.$emit("loadNode", node, resolve, item);
+    },
     handleRemove(file, fileList,item) {
       this.$emit('formRemoveFiles',fileList,item)
     },
@@ -973,6 +981,10 @@ export default {
     .el-input{
       height: 28px;
     }
+  }
+  //时间范围中间得‘至’字
+  .el-date-editor .el-range-separator{
+    width:20px;
   }
   //普通输入框的样式
   .inputComponent{

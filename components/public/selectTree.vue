@@ -7,6 +7,7 @@
       placeholder="请选择"
       @change="formChange($event,item)"
       @clear="handleClear"
+      :disabled="item.disabled?item.disabled:false"
       :ref="formItem[item.key]+'_treeSelect'"
     >
       <el-option hidden :value="formItem[item.key]"></el-option>
