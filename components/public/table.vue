@@ -958,6 +958,11 @@ export default {
 }
 </script>
 
+<style lang="scss">
+.vxe-table .vxe-table--fixed-left-wrapper .vxe-table--body-wrapper{
+  width: auto;
+}
+</style>
 <style lang="scss" scoped>
 //table过滤下拉列表得宽度
 .my-select {
