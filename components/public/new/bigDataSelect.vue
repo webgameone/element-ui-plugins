@@ -70,6 +70,7 @@
     <el-select
       v-else
       filterable
+      class="selectComp"
       :multiple="item.multiple?item.multiple:false"
       :remote="item.remote?item.remote:false"
       :remote-method="item.remoteMethod?item.remoteMethod:null"
@@ -79,7 +80,7 @@
       :allow-create="item.allowCreate?item.allowCreate:false"
       :disabled="item.disabled?item.disabled:false"
       v-model="formItem[item.key]"
-      style="width:100%"
+      :style="{width:'100%'}"
       :filter-method="item.filterMethod?item.filterMethod:defaultFilter"
       v-el-select-loadmore:rangeNumber="loadMore(rangeNumber)"
       @change="formChange($event,item)"
@@ -88,7 +89,7 @@
       @visible-change="formVisibleChange($event,item)"
     >
       <el-option
-        v-for="(it,index) in newSelectlist.slice(0, rangeNumber)"
+        v-for="(it,index) in currentSelectList.slice(0, rangeNumber)"
         :key="it[item.custValue]?it[item.custValue]:it.value"
         :label="it[item.custText]?it[item.custText]:it.text"
         :value="it[item.custValue]?it[item.custValue]:it.value"
@@ -153,19 +154,43 @@ export default {
       return {
         index:0,
         choose: "",
-        rangeNumber: 10,
+        rangeNumber: 10,//默认先展示50条数据
         backList:null, //备份的数据
-        newSelectlist:[]
+        newSelectlist:[],
+        currentSelectList:[],
       }
   },
   watch:{
     selectlist:{
       handler(newVal){
+        //全部的列表
         this.newSelectlist = JSON.parse(JSON.stringify(newVal));
+        //默认的渲染列表
+        this.currentSelectList = this.newSelectlist;
+        // console.log(this.newSelectlist.length);
         //备份数据
         this.backList = JSON.parse(JSON.stringify(newVal));
       },
       deep:true,
+      immediate:true
+    },
+    item:{
+      // handler(newVal){
+      //   console.log(this.formItem);
+      //   console.log(this.formItem[newVal.key]);
+      // },
+      // immediate:true
+    },
+    formItem:{
+      handler(newVal){
+        if(newVal[this.item.key] instanceof Array&&newVal[this.item.key].length>0){
+          //下拉-多选
+          this.bigDataSetData(newVal[this.item.key])
+        }else if(newVal[this.item.key]&&newVal[this.item.key]!==undefined){
+          //下拉-单选
+          this.bigDataSetData(newVal[this.item.key])
+        }
+      },
       immediate:true
     }
   },
@@ -173,7 +198,6 @@ export default {
     // console.log(this.selectlist);
   },
   created(){
-
   },
   mounted() {
     if(this.item.selectKey){
@@ -223,9 +247,10 @@ export default {
         this.index = index;
       },
       loadMore(n){
-          //n是默认初始展示的条数会在渲染的时候就可以获取,具体可以打log查看
-          //if(n < 8) this.rangeNumber = 10 //elementui下拉超过7条才会出滚动条,如果初始不出滚动条无法触发loadMore方法
-          return () => this.rangeNumber += 5 //每次滚动到底部可以新增条数  可自定义
+        // console.log(n);
+        //n是默认初始展示的条数会在渲染的时候就可以获取,具体可以打log查看
+        //if(n < 8) this.rangeNumber = 10 //elementui下拉超过7条才会出滚动条,如果初始不出滚动条无法触发loadMore方法
+        return () => this.rangeNumber += 5 //每次滚动到底部可以新增条数  可自定义
       },
       formChange(event,item){
         // console.log(event);
@@ -242,10 +267,50 @@ export default {
         if(this.formItem[this.item.key]==null||this.formItem[this.item.key]==''){
           //如果什么都没有选，就还是给默认值
           setTimeout(() => {
-            this.newSelectlist = this.backList
+            this.newSelectlist = this.backList;
           }, 0);
         }
         this.$emit('formVisibleChange',event,item)
+      },
+      //大数据的回显
+      bigDataSetData(value){
+        let len = this.newSelectlist.length;
+        
+        if(value instanceof Array&&value.length>0){
+          let valuenLen = value.length;
+          //多选
+          for(let i=0;i<valuenLen;i++){
+            let index = this.newSelectlist.findIndex(e=>{
+              return e.value==value[i] || e[this.item.custValue]==value[i]
+            })
+
+            if(index!=-1&&index>this.rangeNumber){
+              //找到了对应的下标
+              let t = this.newSelectlist[index];
+              //删掉那个数字
+              this.currentSelectList.splice(index,1);
+
+              //将这个回显放在最前面
+              this.currentSelectList.unshift(t)
+            }
+          }
+        }else{
+          //单选
+          for(let i=0;i<len;i++){
+            if(value == this.newSelectlist[i].value||value == this.newSelectlist[i][this.item.custValue]){
+              //如果在范围内，就不用理会
+              if(i<=this.rangeNumber){
+                return;
+              }
+              let t = this.newSelectlist[i];
+              //删掉那个数字
+              this.currentSelectList.splice(i,1);
+
+              //将这个回显放在最前面
+              this.currentSelectList.unshift(t)
+            }
+          }
+        }
       }
   }
 };

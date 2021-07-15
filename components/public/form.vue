@@ -1,6 +1,6 @@
 <template>
   <div :id="formObj.id">
-    <div id="customForm" :ref="formObj.id">
+    <div id="customForm" class="clearfix" :ref="formObj.id">
       <!-- 表单上方查询按钮组 -->
       <div class="btnbox">
         <template v-if="formObj.topBtnArr&&formObj.topBtnArr.length>0">
@@ -49,7 +49,7 @@
       <div class="search" :style="{ marginTop: formObj.searchTop?formObj.searchTop:'20px' }" v-if="formObj.formArr&&formObj.formArr.length>0">
         <el-form
             :ref="'form_'+formObj.id"
-            class="demo-form-inline"
+            class="demo-form-inline clearfix"
             :label-position="formObj.labelPosition?formObj.labelPosition:'right'"
             :rules="formObj.rules?formObj.rules:null"
             :label-width="formObj.labelTop?'100%':(formObj.labelWidth?formObj.labelWidth+'px':'100px')"
@@ -831,7 +831,13 @@ export default {
     filterPre(pre){
       let num = Number(pre.replace('%',''));
       return num*1.4+'%'
-    }
+    },
+    // bigDataSetData(value){
+    //   console.log(this.$refs);
+    //   // console.log('formItem_'+this.formObj.id);
+    //   // console.log(this.$refs['formItem_'+this.formObj.id]);
+    //   // this.$refs['formItem_'+this.formObj.id].bigDataSetData(value);
+    // }
   },
 }
 </script>

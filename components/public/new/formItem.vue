@@ -104,7 +104,7 @@
       :allow-create="item.allowCreate?item.allowCreate:false"
       :disabled="item.disabled?item.disabled:false"
       v-model="formItem[item.key]"
-      style="width:100%"
+      style="width:100%;"
       autocomplete
       :filter-method="item.filterMethod"
       @change="formChange($event,item)"
@@ -126,6 +126,7 @@
         :formObj="formObj"
         :item="item"
         :formItem="formItem"
+        ref="bigDataSelectComp"
         @formChange="formChange"
         @formBlur="formBlur"
         @formFocus="formFocus"
@@ -971,17 +972,38 @@ export default {
     },
     defaultTrue(flag) {
       return flag || flag === undefined ? true : false
+    },
+    bigDataSetData(value){
+      this.$refs.bigDataSelectComp.bigDataSetData(value)
     }
   },
 }
 </script>
 <style lang="scss">
+//多选的样式
+.el-select-dropdown.is-multiple{
+  margin-top:30px!important;
+}
+
+
 .formItemContainer{
   .el-select{
     .el-input{
       height: 28px;
     }
   }
+
+  //多选
+  .el-select__tags{
+    position: absolute;
+    top:0;
+    display: inline-block;
+    transform:none;
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height:48px;
+  }
+  
   //时间范围中间得‘至’字
   .el-date-editor .el-range-separator{
     width:20px;
