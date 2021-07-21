@@ -154,7 +154,7 @@ export default {
       return {
         index:0,
         choose: "",
-        rangeNumber: 10,//默认先展示50条数据
+        rangeNumber: 10,//默认先展示10条数据
         backList:null, //备份的数据
         newSelectlist:[],
         currentSelectList:[],
@@ -275,7 +275,7 @@ export default {
       //大数据的回显
       bigDataSetData(value){
         let len = this.newSelectlist.length;
-        
+
         if(value instanceof Array&&value.length>0){
           let valuenLen = value.length;
           //多选

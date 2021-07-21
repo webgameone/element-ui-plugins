@@ -223,6 +223,17 @@
       @formChange="formChange"
     ></selectList>
 
+    <!-- 自定义table带删除功能列表的巨量数据select组件库 -->
+    <bigSelectList
+      v-if="item.type=='bigSelectListComp'"
+      style="width:100%"
+      :formObj="formObj"
+      :item="item"
+      :formItem="formItem"
+      @formChange="formChange"
+    ></bigSelectList>
+
+
     <!-- 前面带select的输入框 -->
     <selectinput
       v-if="item.type=='selectInputComp'"
@@ -602,6 +613,7 @@ import DatePickers from '@/components/public/new/DatePickers'
 import beforeSelect from '@/components/public/new/beforeDrapdownSelect'
 import bigInput from '@/components/public/new/bigInput'
 import selectList from '@/components/public/new/selectList'
+import bigSelectList from '@/components/public/new/bigSelectList'
 import bigDataSelect from '@/components/public/new/bigDataSelect'
 import selectTree from '@/components/public/selectTree'
 
@@ -642,6 +654,7 @@ export default {
     beforeSelect,
     bigInput,
     selectList,
+    bigSelectList,
     bigDataSelect,
     selectTree
   },
@@ -984,6 +997,11 @@ export default {
 .el-select-dropdown.is-multiple{
   margin-top:30px!important;
 }
+.selectListFormComp{
+  .el-select-dropdown.is-multiple{
+    margin-top:10px!important;
+  }
+}
 
 
 .formItemContainer{
@@ -1002,8 +1020,9 @@ export default {
     overflow-x: auto;
     overflow-y: auto;
     max-height:48px;
+    margin-top: 3px;
   }
-  
+
   //时间范围中间得‘至’字
   .el-date-editor .el-range-separator{
     width:20px;

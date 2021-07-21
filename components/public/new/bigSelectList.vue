@@ -14,12 +14,18 @@
       :disabled="item.disabled?item.disabled:false"
       style="width:100%"
       :filter-method="item.filterMethod"
+      v-el-select-loadmore:rangeNumber="loadMore(rangeNumber)"
       @change="formChange($event,item)"
       @blur="formBlur($event,item)"
       @focus="formFocus()"
       @visible-change="formVisibleChange($event,item)"
     >
-      <el-option v-for="(item) in formObj.selectData[item.key]" :key="item.value" :label="item.text" :value="item.value">{{ item.text }}</el-option>
+      <el-option
+        v-for="(item) in newSelectlist.slice(0, rangeNumber)"
+        :key="item.value"
+        :label="item.text"
+        :value="item.value"
+      >{{ item.text }}</el-option>
     </el-select>
 
     <div>
@@ -27,20 +33,24 @@
         :data="tableData"
         class="compTable"
         border
-        style="width: 100%;"
-        height=200
-        :show-header="false"
+        style="width:'100%'"
+        :height="item.height"
+        :show-header="item.showHeader||false"
         :row-class-name="tableRowClassName">
         <el-table-column
           type="index"
+          label="序号"
           align="center"
-          width="40">
+          width="60">
         </el-table-column>
         <el-table-column
-          prop="date"
-          label="路由"
-          align="center"
-          min-width="200">
+          v-for="(it) in item.tableColData"
+          :key="it.title"
+          :label="it.title"
+          :align="it.align||'center'"
+          :prop="it.key"
+          :width="it.width"
+          :min-width="it.minWidth||'200'">
         </el-table-column>
         <el-table-column
           fixed="right"
@@ -59,6 +69,26 @@
 
 <script>
 export default {
+  directives: {
+    'el-select-loadmore':{
+        bind(el, binding) {
+            let self = this
+            // 获取element-ui定义好的scroll盒子
+            const SELECTWRAP_DOM = el.querySelector('.el-select-dropdown .el-select-dropdown__wrap');
+            SELECTWRAP_DOM.addEventListener('scroll', function () {
+                /**
+                * scrollHeight 获取元素内容高度(只读)
+                * scrollTop 获取或者设置元素的偏移值,常用于, 计算滚动条的位置, 当一个元素的容器没有产生垂直方向的滚动条, 那它的scrollTop的值默认为0.
+                * clientHeight 读取元素的可见高度(只读)
+                * 如果元素滚动到底, 下面等式返回true, 没有则返回false:
+                * ele.scrollHeight - ele.scrollTop === ele.clientHeight;
+                */
+                const condition = this.scrollHeight - this.scrollTop <= this.clientHeight;
+                if (condition) binding.value()
+            });
+        }
+    }
+  },
   props:{
     formObj: {
       type: Object,
@@ -84,17 +114,11 @@ export default {
   data(){
     return{
       tableData: [
-        // {
-        //   date: '1111111111111111111.jpg',
-        // },
-        // {
-        //   date: '2222222222222222222222222222222222222222222222222222222222222222222222222222222.jpg',
-        // },
-        // {
-        //   date: '3333333333333333333333333333333333333.jpg',
-        // }
       ],
-      selectList:[]
+      rangeNumber: 10,//默认先展示10条数据
+      selectList:[],
+      newSelectlist:[],
+      backList:null, //备份的数据
     }
   },
   watch:{
@@ -104,6 +128,9 @@ export default {
           let tempArr = [];
 
           this.selectList = val[this.item.key];
+          this.newSelectlist = JSON.parse(JSON.stringify(this.formObj.selectData[this.item.key]));
+          //备份数据
+          this.backList = JSON.parse(JSON.stringify(this.formObj.selectData[this.item.key]));
 
           let mtime = setInterval(() => {
             if(this.formObj.selectData[this.item.key] && this.formObj.selectData[this.item.key].length!==0 &&temp){
@@ -113,9 +140,7 @@ export default {
               this.formObj.selectData[this.item.key].map((item)=>{
                 temp.map((it)=>{
                   if((it)==(item.value)){
-                    let obj = {
-                      date:item.text
-                    }
+                    let obj = item.table;
                     tempArr.push(obj)
                   }
                 })
@@ -132,6 +157,12 @@ export default {
   mounted(){
   },
   methods: {
+    loadMore(n){
+      // console.log(n);
+      //n是默认初始展示的条数会在渲染的时候就可以获取,具体可以打log查看
+      //if(n < 8) this.rangeNumber = 10 //elementui下拉超过7条才会出滚动条,如果初始不出滚动条无法触发loadMore方法
+      return () => this.rangeNumber += 5 //每次滚动到底部可以新增条数  可自定义
+    },
     formChange(event,item){
       this.selectList = event;
       let tempArr = [];
@@ -155,9 +186,7 @@ export default {
         this.formObj.selectData[this.item.key].map((item)=>{
           event.map((it)=>{
             if((it)==(item.value)){
-              let obj = {
-                date:item.text
-              }
+              let obj = item.table;
               tempArr.push(obj)
             }
           })
@@ -170,17 +199,21 @@ export default {
       this.$emit('formChange',event,item,item.key)
     },
     formBlur(){
-
     },
     formFocus(){
-
     },
     formVisibleChange(event,item){
-
+      if(this.formItem[this.item.key]==null||this.formItem[this.item.key]==''){
+          //如果什么都没有选，就还是给默认值
+          setTimeout(() => {
+            this.newSelectlist = this.backList;
+          }, 0);
+        }
+        this.$emit('formVisibleChange',event,item)
     },
     deleteFn(row){
       //获取对应的text
-      let v = row.date;
+      let v = row;
       let tempArr = [];
 
       if(this.item.valueType=='array'){
@@ -188,6 +221,7 @@ export default {
         let index = this.selectList.findIndex((item)=>{
           return v==item[0]
         });
+
         //从列表移除
         this.selectList.splice(index,1);
 
@@ -195,9 +229,7 @@ export default {
         this.formObj.selectData[this.item.key].map((item)=>{
           this.selectList.map((it)=>{
             if((it[0])==(item.value[0])){
-              let obj = {
-                date:item.text
-              }
+              let obj = item.table
               tempArr.push(obj)
             }
           })
@@ -209,7 +241,7 @@ export default {
         //非数组的值
         //获取对应的value
         this.formObj.selectData[this.item.key].map((item)=>{
-          if(v==item.text){
+          if(v==item.table){
             v = item.value
           }
         })
@@ -226,9 +258,7 @@ export default {
         this.formObj.selectData[this.item.key].map((item)=>{
           this.selectList.map((it)=>{
             if((it)==(item.value)){
-              let obj = {
-                date:item.text
-              }
+              let obj = item.table;
               tempArr.push(obj)
             }
           })
@@ -244,6 +274,16 @@ export default {
 }
 </script>
 
+<style lang="scss">
+.selectListFormComp{
+  .el-select__input.is-mini{
+    width: auto!important;
+    // height: auto!important;
+  }
+}
+
+
+</style>
 <style lang="scss" scoped>
 .selectListFormComp{
   .compTable{

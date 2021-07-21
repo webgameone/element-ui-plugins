@@ -12,6 +12,8 @@
         @formKeyupEnter="formKeyupEnter"
         @formVisibleChange="formVisibleChange"
         @resetForm="resetForm"
+        @getNodeData="getNodeData"
+        @loadNode="loadNode"
       ></ui-form>
     </div>
 
@@ -54,7 +56,7 @@
     </ui-drag-popup>
 
     <!-- ztree弹窗 -->
-    <!-- <ui-drag-popup
+    <ui-drag-popup
       v-if="showZtreePopup"
       :popObj="popObj"
       :dialogVisible="showZtreePopup"
@@ -65,7 +67,7 @@
           :treeProps="ztreeObj"
         ></ui-ztree>
       </div>
-    </ui-drag-popup> -->
+    </ui-drag-popup>
 
     <!-- 抽屉弹窗 -->
     <ui-drawer-popup
@@ -76,7 +78,7 @@
     >
       <div slot="slot">
         <!-- form组件库 -->
-        <!-- <ui-form ref="drawerForm" :formObj="drawerForm"></ui-form> -->
+        <ui-form ref="drawerForm" :formObj="drawerForm"></ui-form>
       </div>
     </ui-drawer-popup>
 
@@ -131,6 +133,7 @@ export default {
         btnInline: true, //查询按钮默认在右侧
         btnArrPos: "left", //下方按钮组默认位置
         showpopup: true,
+        needAdvanced:true,//展开收起
         searchTop: '10px',//form距离顶部距离，默认20px
         // 表单下方的按钮组
         bottomBtnArr: [
@@ -158,6 +161,11 @@ export default {
             key: "drawerBtn"
           },
           {
+            title:'更多操作',
+            key:'moreOperation',
+            btnType:'dropdown'
+          },
+          {
             title: "自定义弹窗",
             key: "customDrawerBtn"
           },
@@ -177,6 +185,11 @@ export default {
           routeName2: [],
           routeName3: [],
           routeType: [], //路由类型
+          moreOperation:[
+            '操作1',
+            '操作2',
+            '操作3'
+          ],//更多操作
           radioComp1: [
             {
               title: "第一个"
@@ -274,7 +287,7 @@ export default {
             slotData:{
               width:'40%',
               type: "selectComp",
-              marginLeft:'5px',
+              // marginLeft:'5px',
               title: "路由",
               key: "routeType",
               custText: "content",
@@ -289,6 +302,8 @@ export default {
             isHand:true,
             placeholder: "请选择或输入查找",
             width:'65%',
+            custText:'mtext',
+            custValue:'mvalue',
 
             hasSlot:true,//是否 可以在当前列中再加入一个输入项，但是两个输入项的宽度需要自定义，否则都为100%
             slotData:{
@@ -308,12 +323,12 @@ export default {
 
             hasSlot: true, //是否 可以在当前列中再加入一个输入项，但是两个输入项的宽度需要自定义，否则都为100%
             slotData: {
-              type: "inputComp",
-              key: "driver1Name",
-              maxlength: 50,
-              clearable: true,
-              autocomplete: "on",
-              outAdvanced: true,
+              type:"dateRangeComp",
+              title:'查询时间',
+              key:'queryTime',
+              outAdvanced:true,
+              clearable:false,
+              outAdvanced:true,
               width: `calc(100% - 120px)`,//如果是120，后面的就使用120
             }
           },
@@ -329,6 +344,8 @@ export default {
             title: "网点名称",
             key: "routeName",
             isHand: true,
+            custText:'mtext',
+            custValue:'mvalue',
             placeholder: "请选择或输入查找",
           },
           {
@@ -345,6 +362,8 @@ export default {
             key: "routeName2",
             isHand: true,
             multiple: true,
+            custText:'mtext',
+            custValue:'mvalue',
             placeholder: "请选择或输入查找",
             filterMethod: query => {
               if (query !== "") {
@@ -540,34 +559,6 @@ export default {
                 {
                   label: "一级 1",
                   id:1,
-                  children: [
-                    {
-                      label: "二级 1-1",
-                      id:11,
-                      children: [
-                        {
-                          label: "三级 1-1-1",
-                          id:111,
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  label: "一级 2",
-                  id:2,
-                  children: [
-                    {
-                      label: "二级 2-1",
-                      id:21,
-                      children: [
-                        {
-                          label: "三级 2-1-1",
-                          id:211,
-                        }
-                      ]
-                    }
-                  ]
                 }
               ],
               checkedKeys: [],
@@ -579,7 +570,8 @@ export default {
               showCheckbox: false,
               checkOnClickNode: true,
               checkStrictly: false,
-              expandOnClickNode:false
+              expandOnClickNode:false,
+              lazy:true
             }
           },
         ]
@@ -654,6 +646,26 @@ export default {
               //   width:60,
               //   align:'center'
               // },
+                 {
+                title: "操作",
+                key: "operation",
+                width: 140,
+                align: "center",
+                fixed: "left",
+                operation: true,
+                child: [
+                  {
+                    title: "开启编辑",
+                    key: "edit",
+                    type: "text"
+                  },
+                  {
+                    title: "纯文字",
+                    key: "oldDetail",
+                    type: "text"
+                  }
+                ]
+              },
               {
                 type: "seq",
                 title: "序号",
@@ -671,6 +683,26 @@ export default {
                 title: "驾照类型",
                 key: "content",
                 width: 120,
+                align: "center",
+                editRender: {
+                  name: "input",
+                  attrs: { type: "text" }
+                }
+              },
+              {
+                title: "驾照类型2",
+                key: "content2",
+                width: 150,
+                align: "center",
+                editRender: {
+                  name: "input",
+                  attrs: { type: "text" }
+                }
+              },
+              {
+                title: "驾照类型3",
+                key: "content3",
+                width: 150,
                 align: "center",
                 editRender: {
                   name: "input",
@@ -835,11 +867,15 @@ export default {
         col: 1, // 自定义列数
         labelWidth: 110, // 自定义label的宽度
         noButton: true, //不显示查询按钮
+        labelTop: true,
+        labelPosition: 'left',
         // 下拉列表的options
         selectData: {
           radioComp1: [{ title: "导航菜单" }, { title: "功能菜单" }],
           routeName2:[],
           routeName3: [],
+          selectListA:[
+          ],
           icon: [
             { text: "11111", value: "11111" },
             { text: "11111", value: "11111" },
@@ -868,6 +904,27 @@ export default {
         },
         // form表单组件
         formArr: [
+          {
+            type: "selectComp",
+            title: "弹窗1",
+            key: "111111",
+            isHand:true,
+            placeholder: "请选择或输入查找",
+            width:'42%',
+
+            hasSlot:true,//是否 可以在当前列中再加入一个输入项，但是两个输入项的宽度需要自定义，否则都为100%
+            needLable:true,
+            // secondTitleWidth:'calc(20% - 5px)',
+            slotData:{
+              width:'42%',
+              type: "selectComp",
+              title: "弹窗2",
+              key: "routeType",
+              custText: "content",
+              custValue: "content",
+              placeholder: "请选择或输入查找"
+            },
+          },
           {
             type: "bigDataSelectComp",
             title: "大数据多选",
@@ -995,6 +1052,32 @@ export default {
             title: "菜单icon",
             key: "icon",
             placeholder: "请选择或输入查找"
+          },
+          {
+            type: "bigSelectListComp",
+            title: "",
+            key: "selectListA",
+            multiple: true,
+            placeholder: "请选择或输入查找",
+            showHeader:true,//显示每列的标题
+            height:'300',
+            tableColData:[
+              {
+                title:'列表1',
+                width:'80',
+                key:'col1'
+              },
+              {
+                title:'列表2',
+                minWidth:'200',
+                key:'col2'
+              },
+              {
+                title:'列表3',
+                minWidth:'100',
+                key:'col3'
+              }
+            ]
           }
         ]
       },
@@ -1350,6 +1433,11 @@ export default {
       //隐藏
       // this.$refs.xTable.setOperationAttribute(this.tableObj.col.length-1,'reject2','hide',true)
 
+      //大数据下拉列表单选的回显
+      this.$refs.uiForm.formItem.routeName = 3;
+      //大数据下拉列表多选的回显
+      this.$refs.uiForm.formItem.routeName2 = [5,300,700,1800,5000]
+
       setTimeout(() => {
         // this.$refs.uiForm.$refs.vxeSelectKey.setNewData('下拉选项2');
         // console.log(this.$refs.uiForm.$refs.formItem_testForm);
@@ -1363,10 +1451,10 @@ export default {
   methods: {
     //创建大数据测试
     getList() {
-      for (let i = 0; i < 1000; i++) {
+      for (let i = 0; i < 10000; i++) {
         this.routeNameData.push({
-          text: "menu" + i,
-          value: i,
+          mtext: "menu" + i,
+          mvalue: i,
           other: "other"+i
         }); //测试数据10万条数据, 这里数据多少条无所谓,list.slice(0, rangeNumber)方法只会默认加载初始的10条数据
         this.dataForm.selectData.routeName = this.routeNameData;
@@ -1408,7 +1496,23 @@ export default {
     },
     formBtnClick(event, item) {
       if (item == "btn1") {
+        this.queryForm.selectData.selectListA=[];
+        for(let i=0;i<100;i++){
+          let t = {
+            text:`列表${i}`,
+            value:`列表${i}`,
+            table:{col1:`数据${i}`,col2:`数据${i}`,col3:`数据${i}`}
+          }
+          this.queryForm.selectData.selectListA.push(t);
+        }
         this.showpopup = true;
+
+        setTimeout(() => {
+          //赋值测试
+          this.$refs.userForm.formItem.selectListA=[
+            '列表3','列表5','列表30'
+          ]
+        }, 300);
       } else if (item === "drawerBtn") {
         this.showDrawer = true;
       } else if (item === "customDrawerBtn") {
@@ -1448,6 +1552,7 @@ export default {
     },
     popupBtnFn(type) {
       if (type == "close") {
+        console.log('关闭弹窗')
         this.showpopup = false;
         this.showZtreePopup = false
       }
@@ -1529,6 +1634,19 @@ export default {
     },
     resetForm() {
       // console.log(this.$refs['selectTree_tree'])
+    },
+    getNodeData(data,item,tree) {
+      // console.log(tree)
+      // console.log(item)
+    },
+    loadNode(node, resolve) {
+      // console.log(node)
+      resolve([
+        {
+          label: "二级 1-1",
+          id:11
+        }
+      ])
     },
     checkChange(node, check, checked) {
       // console.log(node)
