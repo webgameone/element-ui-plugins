@@ -1,6 +1,6 @@
 //支持大数据的下拉列表
 <template>
-  <div style="width:100%;">
+  <div id="bigDataSelectComps" style="width:100%;">
     <!-- 下拉组件展示id和名称 -->
     <el-select
       v-if="item.selectType&&item.selectType=='selectShowIdComp'"
@@ -70,7 +70,7 @@
     <el-select
       v-else
       filterable
-      class="selectComp"
+      :class="item.multiple?'selectMultiple selectComp':'selectComp'"
       :multiple="item.multiple?item.multiple:false"
       :remote="item.remote?item.remote:false"
       :remote-method="item.remoteMethod?item.remoteMethod:null"

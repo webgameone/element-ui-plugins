@@ -211,7 +211,7 @@
                     @loadNode="loadNode"
                   />
                   <!-- 副标题 -->
-                  <div 
+                  <div
                     class="secondTitle"
                     v-if="item.hasSlot&&item.hasSlot==true&&item.needLable==true"
                     :style="{
@@ -226,10 +226,21 @@
             </el-form-item>
 
             <!-- form内右侧的查询和重置 -->
-            <div v-if="formObj.btnInline&&(!formObj.noButton)" style="float:left;margin-left:10px;margin-bottom:18px;">
+            <div v-if="formObj.btnInline" style="float:left;margin-left:10px;margin-bottom:18px;">
               <span class="table-page-search-submitButtons" :style="advanced && {overflow: 'hidden' } || {} ">
                 <el-button v-if="formObj.noButton?!formObj.noButton:'true'" :disabled="formObj.searchDisable?formObj.searchDisable:false" type="primary" size="mini" @click="searchlist">查询</el-button>
                 <el-button v-if="formObj.noButton?!formObj.noButton:'true'" style="margin-left: 8px" size="mini" @click="Reset()">重置</el-button>
+
+                <!-- 自定义按钮组 -->
+                <template v-if="formObj.custQueryBtn&&formObj.custQueryBtn.length>0">
+                  <el-button
+                  v-for="(it) in formObj.custQueryBtn"
+                  :key="it.key"
+                  :disabled="it.disable||false"
+                  :type="it.type||'primary'"
+                  size="mini"
+                  @click="formClick($event,it.key)">{{it.title}}</el-button>
+                </template>
                 <a v-if="formObj.needAdvanced" @click="toggleAdvanced" style="margin-left: 8px;font-size:12px;cursor: pointer;color:#409EFF">
                   {{ advanced ? '收起' : '展开' }}
                   <i :class="advanced ? 'el-icon-arrow-up':'el-icon-arrow-down'"></i>
@@ -250,7 +261,7 @@
 
             <!-- 展开收起和右下角的按钮组 在form表单底部-->
             <el-row class="btnwrap"
-              v-if="!formObj.btnInline&&(!formObj.noButton)" style="display:inline-block;width:100%;">
+              v-if="!formObj.btnInline" style="display:inline-block;width:100%;">
               <el-col :span="12">
                 <span class="table-page-search-submitButtons" :style="advanced && {overflow: 'hidden' } || {} ">
                   <el-button v-if="formObj.noButton?!formObj.noButton:'true'" type="primary" size="mini" @click="searchlist">查询</el-button>
@@ -881,6 +892,7 @@ export default {
   }
   .el-form-item{
     margin-right:0;
+    float: left;
   }
   .el-collapse{
     border-top:none;

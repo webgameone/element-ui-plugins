@@ -992,16 +992,17 @@ export default {
   },
 }
 </script>
+
 <style lang="scss">
 //多选的样式
-.el-select-dropdown.is-multiple{
-  margin-top:30px!important;
-}
-.selectListFormComp{
-  .el-select-dropdown.is-multiple{
-    margin-top:10px!important;
+#bigDataSelectComps{
+  .selectMultiple{
+    .el-input{
+      display: inline-table;
+    }
   }
 }
+
 
 
 .formItemContainer{

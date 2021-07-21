@@ -135,6 +135,16 @@ export default {
         showpopup: true,
         needAdvanced:true,//展开收起
         searchTop: '10px',//form距离顶部距离，默认20px
+        noButton:false,//是否因此查询和重置按钮
+        //自定义的查询按钮
+        custQueryBtn:[
+          {
+            title: "增加",
+            key: "add",
+            type: "primary",
+            disabled: false
+          }
+        ],
         // 表单下方的按钮组
         bottomBtnArr: [
           {
