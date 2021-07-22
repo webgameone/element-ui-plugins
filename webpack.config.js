@@ -111,8 +111,8 @@ if (process.env.NODE_ENV === 'production') {
     output: {
       path: path.resolve(__dirname, './dist'),
       publicPath: '/dist/',
-      filename: 'oaUIPlugins.js',
-      library: 'oaUIPlugins',
+      filename: 'elementUIPlugins.js',
+      library: 'elementUIPlugins',
       libraryTarget: 'umd',
       umdNamedDefine: true
     },

@@ -1,11 +1,11 @@
 {
-  "name": "oa-ui-plugins",
+  "name": "element-ui-plugins",
   "description": "form&table",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "liuqing <442720327@qq.com>",
   "license": "MIT",
   "private": false,
-  "main": "dist/oaUIPlugins.js",
+  "main": "dist/elementUIPlugins.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
