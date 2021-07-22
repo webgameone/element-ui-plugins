@@ -250,6 +250,7 @@ export default {
         this.$emit('formChange',event,item,this.newSelectlist[this.index])
       },
       formBlur(event,item){
+        console.log(item);
         this.$emit('formBlur',event,item)
       },
       formFocus(){
