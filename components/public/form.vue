@@ -659,7 +659,7 @@ export default {
     },
     //form的blur事件
     formBlur(event,item,expandName,expandCode){
-      if(item.type=="selectComp"){
+      if(item.type=="selectComp"||item.type=="bigDataSelectComp"||item.type=="bigSelectListComp"){
         //下拉列表
         if(event.target.value!==''){
           let re = this.formObj.selectData[item.key].findIndex((item,index)=>{

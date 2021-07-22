@@ -232,6 +232,7 @@
       :formItem="formItem"
       @formChange="formChange"
       @getBigSelectListTableData="getBigSelectListTableData"
+      @formBlur="formBlur"
     ></bigSelectList>
 
 
@@ -727,6 +728,42 @@ export default {
     formBlur(event,item,expandName,expandCode){
       if(item.type=="selectComp"){
         //下拉列表
+        if(event.target.value!==''){
+          let re = this.formObj.selectData[item.key].findIndex((it,index)=>{
+            //如果有自定义的text
+            if(item.custText){
+              return it[item.custText]==event.target.value;
+            }else{
+              return it.text==event.target.value;
+            }
+
+          })
+
+          if(re!==-1){
+            if(item.custValue){
+              this.$set(this.formItem,item.key,this.formObj.selectData[item.key][re][item.custValue]);
+            }else{
+              this.$set(this.formItem,item.key,this.formObj.selectData[item.key][re].value);
+            }
+          }else{
+            //如果开启了强匹配模式
+            if(item.strongMatch){
+              return;
+            }else{
+              // 判断是否保存手动输入的值
+              if(item.isHand) {
+                this.$set(this.formItem,item.key,event.target.value);
+              }
+            }
+          }
+        }else{
+          //是否开启了匹配
+          if(item.enableMatch){
+            this.$set(this.formItem,item.key,'');
+          }
+        }
+      }else if(item.type=="bigDataSelectComp"){
+        //巨量下拉列表
         if(event.target.value!==''){
           let re = this.formObj.selectData[item.key].findIndex((it,index)=>{
             //如果有自定义的text

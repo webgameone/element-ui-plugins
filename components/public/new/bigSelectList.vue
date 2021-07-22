@@ -221,9 +221,11 @@ export default {
 
       this.$emit('formChange',event,item,item.key)
     },
-    formBlur(){
+    formBlur(event,item){
+      this.$emit('formBlur',event,item)
     },
     formFocus(){
+      this.$emit('formFocus')
     },
     formVisibleChange(event,item){
       if(this.formItem[this.item.key]==null||this.formItem[this.item.key]==''){
