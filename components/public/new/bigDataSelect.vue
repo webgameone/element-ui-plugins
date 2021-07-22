@@ -34,7 +34,7 @@
             </el-option>
           </div>
           <el-option
-          v-for="(it,index) in newSelectlist.slice(0, rangeNumber)"
+          v-for="(it,index) in currentSelectList.slice(0, rangeNumber)"
           :key="it[item.custValue]?it[item.custValue]:it.value"
           :label="it[item.custText]?it[item.custText]:it.text"
           :value="it[item.custValue]?it[item.custValue]:it.value"
@@ -54,7 +54,7 @@
             </div>
           </el-option>
         </div>
-        <el-option v-for="(it) in newSelectlist.slice(0, rangeNumber)"
+        <el-option v-for="(it) in currentSelectList.slice(0, rangeNumber)"
           :key="it[item.custValue]?it[item.custValue]:it.value"
           :label="it[item.custText]?it[item.custText]:it.text"
           :value="it[item.custValue]?it[item.custValue]:it.value">
@@ -216,23 +216,15 @@ export default {
   methods: {
       defaultFilter(query){
         if (query !== "") {
-          // console.log('开始过滤');
-          // console.log(this.backList);
-          this.newSelectlist = this.backList.filter(
+          this.currentSelectList = this.backList.filter(
             item => {
               if(typeof (this.item.custText)=='undefined'){
-                // console.log('第一个');
-                // console.log(this.item.custText);
-                // console.log(this.backList);
-                // console.log(item[this.item.custText]);
                 if (item.text.indexOf(query) > -1) {
+                  // console.log(item);
                   return item;
                 }
               }else{
                 // console.log('第二个');
-                // console.log(this.item.custText);
-                // console.log(this.backList);
-                // console.log(item[this.item.custText]);
                 if (item[this.item.custText].indexOf(query) > -1) {
                   return item;
                 }
@@ -240,7 +232,7 @@ export default {
             }
           );
         }else{
-          this.newSelectlist = this.backList
+          this.currentSelectList = this.backList
         }
       },
       getClickIndex(index){
@@ -316,6 +308,14 @@ export default {
 };
 </script>
 
+<style lang="scss">
+#bigDataSelectComps{
+  .el-select__input.is-mini{
+    width: 92%!important;
+    // height: auto!important;
+  }
+}
+</style>
 <style lang="scss" scoped>
 //带ID的下拉列表
 .selectShowIdCompClass{

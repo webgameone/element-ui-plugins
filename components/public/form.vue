@@ -105,6 +105,7 @@
                         @formVisibleChange="formVisibleChange"
                         @getNodeData="getNodeData"
                         @loadNode="loadNode"
+                        @getBigSelectListTableData="getBigSelectListTableData"
                       />
 
                       <formItem
@@ -130,6 +131,7 @@
                         @formVisibleChange="formVisibleChange"
                         @getNodeData="getNodeData"
                         @loadNode="loadNode"
+                        @getBigSelectListTableData="getBigSelectListTableData"
                       />
                     </el-col>
                 </el-form-item>
@@ -183,6 +185,7 @@
                     @formVisibleChange="formVisibleChange"
                     @getNodeData="getNodeData"
                     @loadNode="loadNode"
+                    @getBigSelectListTableData="getBigSelectListTableData"
                   />
 
                   <formItem
@@ -209,6 +212,7 @@
                     @formVisibleChange="formVisibleChange"
                     @getNodeData="getNodeData"
                     @loadNode="loadNode"
+                    @getBigSelectListTableData="getBigSelectListTableData"
                   />
                   <!-- 副标题 -->
                   <div
@@ -843,6 +847,10 @@ export default {
       let num = Number(pre.replace('%',''));
       return num*1.4+'%'
     },
+    //底部带自定义tbale的下拉列表的回调
+    getBigSelectListTableData(tableData,item){
+      this.$emit('getBigSelectListTableData',tableData,item)
+    }
     // bigDataSetData(value){
     //   console.log(this.$refs);
     //   // console.log('formItem_'+this.formObj.id);

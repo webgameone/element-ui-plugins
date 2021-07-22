@@ -13,7 +13,7 @@
       :allow-create="item.allowCreate?item.allowCreate:false"
       :disabled="item.disabled?item.disabled:false"
       style="width:100%"
-      :filter-method="item.filterMethod"
+      :filter-method="item.filterMethod?item.filterMethod:defaultFilter"
       v-el-select-loadmore:rangeNumber="loadMore(rangeNumber)"
       @change="formChange($event,item)"
       @blur="formBlur($event,item)"
@@ -148,6 +148,7 @@ export default {
 
               //table显示值
               this.tableData = tempArr;
+              this.getTableData();
             }
           }, 100);
         },
@@ -157,6 +158,26 @@ export default {
   mounted(){
   },
   methods: {
+    defaultFilter(query){
+      if (query !== "") {
+        // console.log('开始过滤');
+        this.newSelectlist = this.backList.filter(
+          item => {
+            if(typeof (this.item.custText)=='undefined'){
+              if (item.text.indexOf(query) > -1) {
+                return item;
+              }
+            }else{
+              if (item[this.item.custText].indexOf(query) > -1) {
+                return item;
+              }
+            }
+          }
+        );
+      }else{
+        this.newSelectlist = this.backList
+      }
+    },
     loadMore(n){
       // console.log(n);
       //n是默认初始展示的条数会在渲染的时候就可以获取,具体可以打log查看
@@ -181,6 +202,7 @@ export default {
 
         //table显示值
         this.tableData = tempArr;
+        this.getTableData();
       }else{
         //非数组值
         this.formObj.selectData[this.item.key].map((item)=>{
@@ -194,6 +216,7 @@ export default {
 
         //table显示值
         this.tableData = tempArr;
+        this.getTableData();
       }
 
       this.$emit('formChange',event,item,item.key)
@@ -237,6 +260,7 @@ export default {
 
         //table显示值
         this.tableData = tempArr;
+        this.getTableData();
       }else{
         //非数组的值
         //获取对应的value
@@ -266,9 +290,14 @@ export default {
 
         //table显示值
         this.tableData = tempArr;
+        this.getTableData();
       }
 
       this.$emit('formChange',this.selectList,this.item,this.item.key)
+    },
+    //获得table的数据
+    getTableData(){
+     this.$emit('getBigSelectListTableData',this.tableData,this.item)
     }
   },
 }

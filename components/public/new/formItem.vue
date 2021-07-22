@@ -231,6 +231,7 @@
       :item="item"
       :formItem="formItem"
       @formChange="formChange"
+      @getBigSelectListTableData="getBigSelectListTableData"
     ></bigSelectList>
 
 
@@ -876,6 +877,10 @@ export default {
     inputEnter(event,item){
       this.$refs.checkInput[0].select()
       this.$emit("inputEnter",event,item)
+    },
+    //底部带自定义tbale的下拉列表的回调
+    getBigSelectListTableData(tableData,item){
+      this.$emit('getBigSelectListTableData',tableData,item)
     },
     //上传组件方法
     //上传的文件change
