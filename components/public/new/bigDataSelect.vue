@@ -22,6 +22,7 @@
       @change="formChange($event,item)"
       @blur="formBlur($event,item)"
       @focus="formFocus()"
+      @clear="formClear(item)"
       @visible-change="formVisibleChange($event,item)"
     >
       <!-- 可以自定义option的数量 -->
@@ -86,6 +87,7 @@
       @change="formChange($event,item)"
       @blur="formBlur($event,item)"
       @focus="formFocus()"
+      @clear="formClear(item)"
       @visible-change="formVisibleChange($event,item)"
     >
       <el-option
@@ -250,11 +252,14 @@ export default {
         this.$emit('formChange',event,item,this.newSelectlist[this.index])
       },
       formBlur(event,item){
-        console.log(item);
+        // console.log(event.target.value);
         this.$emit('formBlur',event,item)
       },
       formFocus(){
         this.$emit('formFocus')
+      },
+      formClear(item){
+        this.$emit('formClear',item);
       },
       formVisibleChange(event,item){
         if(this.formItem[this.item.key]==null||this.formItem[this.item.key]==''){

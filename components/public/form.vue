@@ -97,6 +97,7 @@
                         @formUploadChange="formUploadChange"
                         @submitFormUpload="submitFormUpload"
                         @formBlur="formBlur"
+                        @formClear="formClear"
                         @optionChange="optionChange"
                         @formBtnClick="formBtnClick"
                         @inputCheckChange="inputCheckChange"
@@ -123,6 +124,7 @@
                         @formUploadChange="formUploadChange"
                         @submitFormUpload="submitFormUpload"
                         @formBlur="formBlur"
+                        @formClear="formClear"
                         @optionChange="optionChange"
                         @formBtnClick="formBtnClick"
                         @inputCheckChange="inputCheckChange"
@@ -177,6 +179,7 @@
                     @formUploadChange="formUploadChange"
                     @submitFormUpload="submitFormUpload"
                     @formBlur="formBlur"
+                    @formClear="formClear"
                     @optionChange="optionChange"
                     @formBtnClick="formBtnClick"
                     @inputCheckChange="inputCheckChange"
@@ -204,6 +207,7 @@
                     @formUploadChange="formUploadChange"
                     @submitFormUpload="submitFormUpload"
                     @formBlur="formBlur"
+                    @formClear="formClear"
                     @optionChange="optionChange"
                     @formBtnClick="formBtnClick"
                     @inputCheckChange="inputCheckChange"
@@ -689,9 +693,11 @@ export default {
         }else{
           this.$set(this.formItem,item.key,'');
         }
-      }else{
-        this.$emit('formBlur',event,item,item.key)
       }
+      this.$emit('formBlur',event,item,item.key)
+    },
+    formClear(item){
+      this.$emit('formClear',item);
     },
     //form删除已上传的文件
     formRemoveFiles(event,item){

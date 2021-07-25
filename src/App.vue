@@ -6,6 +6,7 @@
         ref="uiForm"
         :formObj="dataForm"
         @formReady="dataFormReady"
+        @formBlur="formBlur"
         @formBtnClick="formBtnClick"
         @formChange="formChange"
         @searchList="searchList"
@@ -374,23 +375,7 @@ export default {
             multiple: true,
             custText:'mtext',
             custValue:'mvalue',
-            placeholder: "请选择或输入查找",
-            filterMethod: query => {
-              if (query !== "") {
-                setTimeout(() => {
-                  this.dataForm.selectData.routeName2 = this.routeNameData.filter(
-                    item => {
-                      // return item.value.indexOf(query) > -1;
-                      if (item.text.includes(query)) {
-                        return item;
-                      }
-                    }
-                  );
-                }, 100);
-              } else {
-                this.queryForm.selectData.routeName2 = this.routeNameData;
-              }
-            }
+            placeholder: "请选择或输入查找"
           },
           {
             type: "bigDataSelectComp",
@@ -401,36 +386,20 @@ export default {
             collapseTags: true,
             selectType: "selectShowIdComp",
             placeholder: "请选择或输入查找",
-            custText: "text",
-            custValue: "value",
+            custText: "mtext",
+            custValue: "mvalue",
             options: [
               {
                 title: "城市",
-                str: "text",
+                str: "mtext",
                 mstyle: { width: "50%" }
               },
               {
                 title: "编码",
-                str: "value",
+                str: "mvalue",
                 mstyle: { width: "50%", textAlign: "center" }
               }
-            ],
-            filterMethod: query => {
-              if (query !== "") {
-                setTimeout(() => {
-                  this.dataForm.selectData.routeName3 = this.routeNameData.filter(
-                    item => {
-                      // return item.value.indexOf(query) > -1;
-                      if (item.text.includes(query)) {
-                        return item;
-                      }
-                    }
-                  );
-                }, 100);
-              } else {
-                this.queryForm.selectData.routeName3 = this.routeNameData;
-              }
-            }
+            ]
           },
           {
             type: "selectComp",
@@ -471,24 +440,7 @@ export default {
                 str: "orgCode",
                 mstyle: { textAlign: "center", width: "50%" }
               }
-            ],
-            filterMethod: query => {
-              if (query !== " ") {
-                setTimeout(() => {
-                  this.queryForm.selectData.siteName = this.allOutletslist.filter(
-                    item => {
-                      return item.orgName.indexOf(query) > -1;
-                    }
-                  );
-                }, 200);
-              } else {
-                this.queryForm.selectData.siteName = this.allOutletslist.filter(
-                  (item, index) => {
-                    return index < 50;
-                  }
-                );
-              }
-            }
+            ]
           },
           {
             type: "selectShowIdComp",
@@ -508,29 +460,13 @@ export default {
                 str: "orgCode",
                 mstyle: { width: "50%", textAlign: "center" }
               }
-            ],
-            filterMethod: query => {
-              if (query !== "") {
-                setTimeout(() => {
-                  this.queryForm.selectData.childSiteName = this.allOutletslist.filter(
-                    item => {
-                      return item.orgName.indexOf(query) > -1;
-                    }
-                  );
-                }, 200);
-              } else {
-                this.queryForm.selectData.childSiteName = this.allOutletslist.filter(
-                  (item, index) => {
-                    return index < 50;
-                  }
-                );
-              }
-            }
+            ]
           },
           {
             type: "selectComp",
             title: "审核状态",
             key: "status",
+            isHand:true,
             placeholder: "请选择或输入查找"
           },
           {
@@ -1071,6 +1007,7 @@ export default {
             placeholder: "请选择或输入查找",
             showHeader:true,//显示每列的标题
             height:'300',
+            isHand: true,
             tableColData:[
               {
                 title:'列表1',
@@ -1459,9 +1396,11 @@ export default {
     });
   },
   methods: {
+    formBlur(event){
+    },
     //创建大数据测试
     getList() {
-      for (let i = 0; i < 10000; i++) {
+      for (let i = 0; i < 100; i++) {
         this.routeNameData.push({
           mtext: "menu" + i,
           mvalue: i,

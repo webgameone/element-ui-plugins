@@ -130,6 +130,7 @@
         @formChange="formChange"
         @formBlur="formBlur"
         @formFocus="formFocus"
+        @formClear="formClear"
         @formVisibleChange="formVisibleChange"
       ></bigDataSelect>
     </div>
@@ -862,9 +863,8 @@ export default {
             this.$set(this.formItem,item.key,'');
           }
         }
-      }else{
-        this.$emit('formBlur',event,item,item.key)
       }
+      this.$emit('formBlur',event,item,item.key)
     },
     //form的焦点事件
     formFocus(event,item){
@@ -890,6 +890,9 @@ export default {
           e.value = mvalue;
         }, 50);
       }
+    },
+    formClear(item){
+      this.$emit('formClear',item);
     },
     //前面带select的日期修改事件
     selectDateChange(event,item,key){
