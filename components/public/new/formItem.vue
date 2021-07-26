@@ -1039,34 +1039,11 @@ export default {
 </script>
 
 <style lang="scss">
-//多选的样式
-#bigDataSelectComps{
-  .selectMultiple{
-    .el-input{
-      display: inline-table;
-    }
-  }
-}
-
-
-
 .formItemContainer{
   .el-select{
     .el-input{
       height: 28px;
     }
-  }
-
-  //多选
-  .el-select__tags{
-    position: absolute;
-    top:0;
-    display: inline-block;
-    transform:none;
-    overflow-x: auto;
-    overflow-y: auto;
-    max-height:48px;
-    margin-top: 3px;
   }
 
   //时间范围中间得‘至’字
@@ -1157,7 +1134,6 @@ export default {
   .el-upload-dragger .el-icon-upload{
     margin:0;
   }
-
   textarea{
     resize:none;
   }
@@ -1182,6 +1158,14 @@ export default {
   .dropDowmComponents{
     .el-input__inner{
       border: none;
+      background: transparent;
+    }
+  }
+  //多选的样式
+  .selectMultiple{
+    height: 100%!important;
+    .el-input{
+      height: 100%;
     }
   }
 }

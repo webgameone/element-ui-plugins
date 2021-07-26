@@ -71,6 +71,7 @@
     <el-select
       v-else
       filterable
+      collapse-tags
       :class="item.multiple?'selectMultiple selectComp':'selectComp'"
       :multiple="item.multiple?item.multiple:false"
       :remote="item.remote?item.remote:false"
@@ -159,7 +160,7 @@ export default {
         rangeNumber: 10,//默认先展示10条数据
         backList:null, //备份的数据
         newSelectlist:[],
-        currentSelectList:[],
+        currentSelectList:[]
       }
   },
   watch:{
@@ -205,15 +206,6 @@ export default {
     if(this.item.selectKey){
       this.item.key = this.item.selectKey
     }
-
-    // let mtime = setInterval(() => {
-    //   if(this.selectlist&&this.selectlist.length!=0){
-    //     clearInterval(mtime);
-    //     //备份数据
-    //     this.backList = JSON.parse(JSON.stringify(this.selectlist));
-    //     // console.log(this.backList);
-    //   }
-    // }, 100);
   },
   methods: {
       defaultFilter(query){
@@ -262,6 +254,12 @@ export default {
         this.$emit('formClear',item);
       },
       formVisibleChange(event,item){
+        // if(event){
+        //   this.focusSelect = false;
+        // }else{
+        //   this.focusSelect = true;
+        // }
+
         if(this.formItem[this.item.key]==null||this.formItem[this.item.key]==''){
           //如果什么都没有选，就还是给默认值
           setTimeout(() => {
@@ -317,7 +315,7 @@ export default {
 <style lang="scss">
 #bigDataSelectComps{
   .el-select__input.is-mini{
-    width: 92%!important;
+    // width: 92%!important;
     // height: auto!important;
   }
 }

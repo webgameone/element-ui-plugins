@@ -905,6 +905,7 @@ export default {
     margin-right:10px!important;
   }
   .el-form-item{
+    min-height: 30px;//最小高度
     margin-right:0;
     float: left;
   }

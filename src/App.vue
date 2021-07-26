@@ -285,6 +285,16 @@ export default {
             outAdvanced: true,
           },
           {
+            type: "bigDataSelectComp",
+            title: "大数据多选",
+            key: "routeName2",
+            isHand: true,
+            multiple: true,
+            custText:'mtext',
+            custValue:'mvalue',
+            placeholder: "请选择或输入查找"
+          },
+          {
             type: "selectComp",
             title: "归属",
             key: "111111",
@@ -366,16 +376,6 @@ export default {
             disabled:false,
             marginLeft:'5px',
             secondTitle: "这个没标题"
-          },
-          {
-            type: "bigDataSelectComp",
-            title: "大数据多选",
-            key: "routeName2",
-            isHand: true,
-            multiple: true,
-            custText:'mtext',
-            custValue:'mvalue',
-            placeholder: "请选择或输入查找"
           },
           {
             type: "bigDataSelectComp",
