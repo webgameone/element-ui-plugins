@@ -367,7 +367,7 @@
       v-model="formItem[item.key]"
       :disabled="(!item.disabled || item.disabled == undefined)?false:true"
       @change="formChange($event,item)"
-      style="width:100%"
+      style="width:100%;height:28px;"
     >
       <template  v-for="(nitem,index) in formObj.selectData[item.key]">
         <el-popover
@@ -394,14 +394,6 @@
         >
         </el-checkbox>
       </template>
-
-
-        <!-- <el-checkbox
-          v-for="(nitem) in formObj.selectData[item.key]"
-          :key="nitem"
-          :label="nitem"
-        >
-        </el-checkbox> -->
     </el-checkbox-group>
 
     <!-- 下拉组件带table -->
