@@ -1089,6 +1089,11 @@ export default {
     //   cursor: pointer;
     // }
   }
+  .upload-demo{
+    .el-upload {
+      width:100%;
+    }
+  }
   //自动上传文件模块
   .upload-demo-auto{
     .el-upload{
