@@ -887,6 +887,7 @@ export default {
   }
   .el-form-item__content{
     line-height: 27px!important;
+    min-height:29px;
   }
   .el-collapse{
     border-top:none;
