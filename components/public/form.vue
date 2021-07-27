@@ -349,7 +349,7 @@
                         <el-button
                           :size="item.size?item.size:'mini'"
                           :icon="item.icon?item.icon:''"
-                          style="border-radius:0;border:0;height:28px"
+                          style="border-radius:0;border:0;height:29px"
                           type="primary"
                         >{{item.title}}</el-button>
                       </el-upload>
@@ -877,9 +877,6 @@ export default {
   *zoom:1;
 }
 #customForm{
-  .el-form-item__content{
-    // height: 28px!important;
-  }
   .el-radio{
     margin-right:10px!important;
   }

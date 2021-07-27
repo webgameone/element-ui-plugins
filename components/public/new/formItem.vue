@@ -1035,6 +1035,9 @@ export default {
 
 <style lang="scss">
 .formItemContainer{
+  .el-form-item__label{
+    line-height: 29px;
+  }
   .nullComp{
     height: 29px;
   }
