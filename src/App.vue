@@ -292,7 +292,9 @@ export default {
             multiple: true,
             custText:'mtext',
             custValue:'mvalue',
-            placeholder: "请选择或输入查找"
+            placeholder: "请选择或输入查找",
+            col:2,
+            outAdvanced: true,
           },
           {
             type: "selectComp",
@@ -347,9 +349,7 @@ export default {
               type:"dateRangeComp",
               title:'查询时间',
               key:'queryTime',
-              outAdvanced:true,
               clearable:false,
-              outAdvanced:true,
               width: `calc(100% - 120px)`,//如果是120，后面的就使用120
             }
           },
@@ -357,7 +357,6 @@ export default {
             type: "radioComp",
             title: "radio组件",
             key: "radioComp1",
-            outAdvanced: true,
             startIndex: 1 //下标从1开始，而不是从0开始
           },
           {
@@ -407,6 +406,7 @@ export default {
             key: "routeType",
             custText: "content",
             custValue: "content",
+            // col:2,
             placeholder: "请选择或输入查找"
           },
           {
@@ -475,8 +475,7 @@ export default {
             key: "allRouteQuery",
             maxlength: 200,
             clearable: true,
-            autocomplete: "on",
-            outAdvanced: true
+            autocomplete: "on"
           },
           {
             type: "cascader",
@@ -484,14 +483,6 @@ export default {
             key: "cascaderKey",
             clearable: true,
             collapseTags: true
-          },
-          {
-            type:'uploadComp',
-            title:'背景图',
-            key:'attachmentUrl',
-            uploadType:'autoUpload',
-            multiple:false,//如果设置未false或者去掉该属性，下方会有列表框，并且支持多选
-            acceptSize:10 //只允许上传小于10M的文件
           },
           {
             type: "selectTree",
@@ -519,7 +510,15 @@ export default {
               expandOnClickNode:false,
               lazy:true
             }
-          },
+          }
+          // {
+          //   type:'uploadComp',
+          //   title:'背景图',
+          //   key:'attachmentUrl',
+          //   uploadType:'autoUpload',
+          //   multiple:false,//如果设置未false或者去掉该属性，下方会有列表框，并且支持多选
+          //   acceptSize:10 //只允许上传小于10M的文件
+          // }
         ]
       },
       //table组件库
