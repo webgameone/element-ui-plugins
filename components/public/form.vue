@@ -503,7 +503,7 @@ export default {
       let mainFormObj = document.getElementById(this.formObj.id);
       let elformItem = mainFormObj.getElementsByClassName('el-form-item');
 
-      let colCount = 0;
+      let colCount = -1;
       //初始化formItem,并且修改最左侧的组件的样式
       this.formObj.formArr.forEach((item,index)=>{
         if(item.key && item.key!==''){
@@ -511,11 +511,13 @@ export default {
         }
 
         //让最左侧的组件一直在最左侧，不会因为高度问题导致错位
-        if(item.col&&isNaN(item.col)){
+        if(item.col&&item.col>1){
           colCount+=item.col;
         }else{
           colCount+=1;
         }
+
+        // console.log(colCount);
 
         if(index!=0 && (colCount)%this.formObj.col==0){
           if(elformItem[index]){
