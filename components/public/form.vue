@@ -499,15 +499,19 @@ export default {
       //设置labelWidth的宽度
       this.setFormContent();
 
-      //初始化formItem
-      for(let item of this.formObj.formArr){
+      //获取所有el-form-item元素
+      let mainFormObj = document.getElementById(this.formObj.id);
+      let elformItem = mainFormObj.getElementsByClassName('el-form-item');
+
+      //初始化formItem,并且修改最左侧的组件的样式
+      this.formObj.formArr.forEach((item,index)=>{
         if(item.key && item.key!==''){
           this.$set(this.$refs['form_'+this.formObj.id].model,item.key,null)
         }
-      }
-
-      //一进来先重置下，但是必须每个对象都要给个id值
-      // this.$refs['form_'+this.formObj.id].resetFields();
+        if(index!=0 && index%this.formObj.col==0){
+          elformItem[index].style.clear="left";
+        }
+      })
 
       //初始化formItem
       for(let item of this.formObj.formArr){

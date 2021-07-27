@@ -8,8 +8,10 @@
     <!-- 普通文本显示组件 -->
     <el-tooltip
       v-if="item.type=='textComp'"
+      :disabled="item.showTitle?!item.showTitle:true"
     >
       <div v-if="item.showTitle?item.showTitle:false" slot="content">{{formItem[item.key]}}</div>
+
       <span
         v-if="item.textCount&&item.textCount>0"
         :style="{color:item.color?item.color:'#000000'}"
