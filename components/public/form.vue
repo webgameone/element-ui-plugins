@@ -885,6 +885,9 @@ export default {
     margin-right:0;
     float: left;
   }
+  .el-form-item__content{
+    line-height: 27px!important;
+  }
   .el-collapse{
     border-top:none;
     .el-collapse-item__header{
