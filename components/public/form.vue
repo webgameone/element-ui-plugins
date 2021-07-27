@@ -896,7 +896,7 @@ export default {
   .el-form-item__label{
     float: inherit;
     color: inherit;
-    // line-height: 16px;
+    line-height: 29px;
   }
   .formCollapseContainer{
     .el-form-item__error{
