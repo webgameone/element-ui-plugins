@@ -169,7 +169,7 @@
                   <span :class="{'cellclick':row[item.key]!==0}" @click="CellClick(row[item.key],item.title,row)">{{row[item.key]}}</span>
                 </template>
                 <!-- 操作 -->
-                <template v-else-if="item.operation"  v-slot="{ row }">
+                <template v-else-if="item.operation"  v-slot="{ row,rowIndex }">
                   <template v-for="(it,index) in item.child">
                       <el-button
                         v-if="it.type=='text'"
@@ -180,13 +180,13 @@
                           color:it.color?it.color:'default',
                           'display':it.hide&&it.hide==true?'none':'inline-block'
                         }"
-                        @click="operationFn($event,row,it.key,index)"
+                        @click="operationFn($event,row,it.key,index,rowIndex)"
                       >{{it.title}}</el-button>
 
                       <vxe-switch 
                         v-if="it.type=='switch'"
                         :key="it.key"
-                        @change="operationFn($event,row,it.key,index)"
+                        @change="operationFn($event,row,it.key,index,rowIndex)"
                         v-model="row[it.key]"
                         :on-label="it.onLabel?it.onLabel:' '"
                         :off-label="it.offLabel?it.offLabel:' '"
@@ -196,6 +196,7 @@
                       <i
                         v-if="it.type=='icon'"
                         :key="it.key"
+                        :keyType="it.key"
                         :style="{
                           'margin-left':it.margin?it.margin+'px':'4px',
                           'margin-right':it.margin?it.margin+'px':'4px',
@@ -205,7 +206,7 @@
                           'display':it.hide&&it.hide==true?'none':'inline-block'
                         }"
                         :class="'operationIcon iconfont '+it.icon"
-                        @click="operationFn($event,row,it.key,index)"
+                        @click="operationFn($event,row,it.key,index,rowIndex)"
                       ></i>
 
                       <el-popconfirm
@@ -213,7 +214,7 @@
                         :key="it.key"
                         :placement="it.placement?it.placement:'top'"
                         :title="it.popTitle&&popTitle!=''?it.popTitle:'确定删除吗？'"
-                        @confirm="operationFn($event,row,it.key,index)"
+                        @confirm="operationFn($event,row,it.key,index,rowIndex)"
                       >
                         <i
                           v-if="it.popconfirmType=='icon'"
@@ -285,7 +286,7 @@
                               'color':it.color?it.color:'#00ff00'
                             }"
                             :class="'operationIcon iconfont el-icon-check'"
-                            @click="operationFn($event,row,'save',index)"
+                            @click="operationFn($event,row,'save',index,rowIndex)"
                           ></i>
                           <i
                             :style="{
@@ -296,7 +297,7 @@
                               'color':it.color?it.color:'#ff0000'
                             }"
                             :class="'operationIcon iconfont el-icon-close'"
-                            @click="operationFn($event,row,'cancel',index)"
+                            @click="operationFn($event,row,'cancel',index,rowIndex)"
                           ></i>
                         </template>
 
@@ -312,7 +313,7 @@
                               'color':'#ff0000',
                             }"
                             :class="'operationIcon iconfont '+it.addIcon"
-                            @click="operationFn($event,row,'addChild',index)"
+                            @click="operationFn($event,row,'addChild',index,rowIndex)"
                           ></i>
                           <i
                             :style="{
@@ -323,7 +324,7 @@
                               'color':'#409EFF',
                             }"
                             :class="'operationIcon iconfont '+it.editIcon"
-                            @click="operationFn($event,row,'edit',index)"
+                            @click="operationFn($event,row,'edit',index,rowIndex)"
                           ></i>
                           <i
                             :style="{
@@ -334,7 +335,7 @@
                               'color':'#ff0000',
                             }"
                             :class="'operationIcon iconfont '+it.deleteIcon"
-                            @click="operationFn($event,row,'delete',index)"
+                            @click="operationFn($event,row,'delete',index,rowIndex)"
                           ></i>
                         </template>
                       </div>
@@ -729,11 +730,11 @@ export default {
       this.$emit('filterMethod',option,row)
     },
     //table行操作列事件
-    operationFn(event,row,key,index){
+    operationFn(event,row,key,index,rowIndex){
       // console.log(event)
       // console.log(row);
       // console.log(key)
-      this.$emit('tableOperation',event,row,key,index)
+      this.$emit('tableOperation',event,row,key,index,rowIndex)
     },
     //强制刷新table
     reFreshTable(){
