@@ -1,7 +1,7 @@
 <template>
   <div class="formItemContainer">
     <!-- null只是占位置的 -->
-    <div v-if="item.type=='nullComp'" style="width:100%;height:28px;"></div>
+    <div class="nullComp" v-if="item.type=='nullComp'" style="width:100%;"></div>
 
     <!-- 普通文本显示组件 -->
     <el-tooltip
@@ -31,7 +31,8 @@
 
     <!-- 时间查询组件 -->
     <el-date-picker
-      style="width:100%;height:28px;"
+      class="timeRangeClass"
+      style="width:100%;"
       v-if="item.type=='timeRangeComp'"
       v-model="formItem[item.key]"
       type="datetimerange"
@@ -263,7 +264,7 @@
       @change="formBlur($event,item)"
       @keyup.enter.native="formKeyupEnter($event,item)"
       :placeholder="item.placeholder?item.placeholder:'请输入内容'"
-      style="width:100%;height:28px;"
+      style="width:100%;"
     >
       <!-- 前面的下拉列表 -->
       <bigDataSelect
@@ -363,11 +364,12 @@
 
     <!-- checkbox-group -->
     <el-checkbox-group
+      class="checkgroupClass"
       v-if="item.type=='checkgroupComp'"
       v-model="formItem[item.key]"
       :disabled="(!item.disabled || item.disabled == undefined)?false:true"
       @change="formChange($event,item)"
-      style="width:100%;height:28px;"
+      style="width:100%;x;"
     >
       <template  v-for="(nitem,index) in formObj.selectData[item.key]">
         <el-popover
@@ -414,7 +416,8 @@
 
     <!-- 年月日 -->
     <el-date-picker
-      style="width:100%;height:28px;"
+      class="dateTimeClass"
+      style="width:100%;"
       v-if="item.type=='dateTime'"
       v-model="formItem[item.key]"
       :popper-append-to-body="false"
@@ -546,7 +549,7 @@
     <!--                                              以下都是小组件                                                                   -->
 
     <!-- checkbox组件 -->
-    <div v-if="item.type=='checkboxComp'">
+    <div class="checkboxClass" v-if="item.type=='checkboxComp'">
       <el-checkbox
         @change="formChange($event,item)"
         v-model="formItem[item.key]"
@@ -1032,23 +1035,35 @@ export default {
 
 <style lang="scss">
 .formItemContainer{
+  .nullComp{
+    height: 29px;
+  }
+  //dateTime类型的
+  .dateTimeClass{
+    height:29px;
+  }
+  .checkgroupClass{
+    height:29px;
+  }
+  .timeRangeClass{
+    height:29px;
+  }
   .el-select{
     .el-input{
-      height: 28px;
+      height: 29px;
     }
   }
-
-  //时间范围中间得‘至’字
-  .el-date-editor .el-range-separator{
-    width:20px;
+  .checkboxClass{
+    height: 29px;
   }
   //普通输入框的样式
   .inputComponent{
+    height: 29px;
     .el-select{
       margin:0;
     }
     .el-input__inner{
-      height: 28px;
+      height: 29px;
     }
     .el-select {
       height: 26px;
@@ -1060,26 +1075,44 @@ export default {
       width: 100%;
     }
     .el-input__inner{
-      height: 28px;
+      height: 29px;
     }
+  }
+  .el-input-group__append, .el-input-group__prepend {
+    cursor: pointer;
+    height: 26px;
+    padding: 0;
+    .slotButton {
+      padding: 5px 10px;
+    }
+  }
+  .vxeSelectComp{
+    height: 29px;
+    .el-dropdown{
+      width: 100%;
+      overflow: hidden;
+    }
+    .el-dropdown-link{
+      display: block;
+      width: 99%;
+      overflow: hidden;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      position: relative;
+    }
+    .el-icon--right{
+      position: absolute;
+      right: 1px;
+      top:8px;
+    }
+  }
+  /*上面都是输入框的高度 */
 
-    // .my-dropdown{
-    //   border-radius: 4px;
-    //   border: 1px solid #dcdfe6;
-    //   background-color: #fff;
-    // }
-    // .list-item{
-    //   padding:3px 0 3px 10px;
-    // }
-    // .list-item:hover {
-    //   background-color: #f5f7fa;
-    // }
-    // .el-input__icon{
-    //   line-height: 33px;
-    // }
-    // .vxe-input--inner{
-    //   cursor: pointer;
-    // }
+
+  //时间范围中间得‘至’字
+  .el-date-editor .el-range-separator{
+    width:20px;
   }
   .upload-demo{
     .el-upload {
@@ -1138,17 +1171,6 @@ export default {
   .selectShowIdCompClass{
     .el-scrollbar{
       position: relative;
-    }
-  }
-  .el-input-group__append, .el-input-group__prepend {
-    // color: #ffffff;
-    // background-color: #1A8CFF;
-    // border: 1px solid #1A8CFF;
-    cursor: pointer;
-    height: 26px;
-    padding: 0;
-    .slotButton {
-      padding: 5px 10px;
     }
   }
   //前置下拉

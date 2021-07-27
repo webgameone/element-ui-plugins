@@ -880,32 +880,11 @@ export default {
   .el-form-item__content{
     // height: 28px!important;
   }
-  .vxeSelectComp{
-    height: 28px;
-    .el-dropdown{
-      width: 100%;
-      overflow: hidden;
-    }
-    .el-dropdown-link{
-      display: block;
-      width: 99%;
-      overflow: hidden;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      position: relative;
-    }
-    .el-icon--right{
-      position: absolute;
-      right: 1px;
-      top:8px;
-    }
-  }
   .el-radio{
     margin-right:10px!important;
   }
   .el-form-item{
-    min-height: 30px;//最小高度
+    // min-height: 30px;//最小高度
     margin-right:0;
     float: left;
   }
