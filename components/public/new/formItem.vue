@@ -2,6 +2,8 @@
   <div class="formItemContainer">
     <!-- null只是占位置的 -->
     <div class="nullComp" v-if="item.type=='nullComp'" style="width:100%;"></div>
+    <!-- topNull 文字在上面时候使用-->
+    <div class="nullTopComp" v-if="item.type=='nullTopComp'" style="width:100%;"></div>
 
     <!-- 普通文本显示组件 -->
     <el-tooltip
@@ -1037,6 +1039,10 @@ export default {
 .formItemContainer{
   .nullComp{
     height: 29px;
+  }
+  //文字在顶部时候使用
+  .nullTopComp{
+    height: 58px;
   }
   //dateTime类型的
   .dateTimeClass{

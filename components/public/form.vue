@@ -76,7 +76,7 @@
                   :style="{
                     width:formObj.col?(100/(item.col&&item.col!==1?(formObj.col/item.col):formObj.col)+'%'):'25%',
                     display:item.display?item.display:(formObj.needAdvanced==null||item.outAdvanced||advanced)?'inline-block':'none',
-                    opacity:item.type=='nullComp'?'0':'1',
+                    opacity:(item.type=='nullComp'||item.type=='nullTopComp')?'0':'1',
                     color:item.color?item.color+'!important':'#606266',
                     fontWeight:item.fontWeight?item.fontWeight:'default'
                     }"
@@ -158,7 +158,7 @@
                   width:formObj.col?(100/(item.col&&item.col!==1?(formObj.col/item.col):formObj.col)+'%'):'25%',
                   display:item.display?item.display:(formObj.needAdvanced==null||item.outAdvanced||advanced)?'inline-block':'none',
                   float:(item.title==' '||item.title=='')&&(item.type!=='vxeSelect'&&item.type!=='checkboxComp'&&item.type!=='radioComp')?none:'left',
-                  opacity:item.type=='nullComp'?'0':'1'
+                  opacity:(item.type=='nullComp'||item.type=='nullTopComp')?'0':'1',
                   }"
                 >
                 <!-- <span v-if="item.labelSlot" slot="label" v-html="item.title"></span> -->
