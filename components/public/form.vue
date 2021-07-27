@@ -594,7 +594,8 @@ export default {
         }
         //两个输入项的 通过hasslot判断
         if(formContent[i].parentNode.getAttribute('hasslot') == 'true'&&this.formObj.labelTop==true){
-          formContent[i].style.width = `calc(100% - ${this.labelWidth/2}px)`;
+          // formContent[i].style.width = `calc(100% - ${this.labelWidth/2}px)`;
+          formContent[i].style.width = `calc(100% - ${this.labelWidth}px)`;
         }
       }
     },
