@@ -1035,8 +1035,8 @@ export default {
         noButton: true, //不显示查询按钮
         labelTop: true,
         labelPosition: 'left',
-        formCollapse:true,//开启可以折叠的form表单
-        activeNames:[1,2,3],
+        // formCollapse:true,//开启可以折叠的form表单
+        // activeNames:[1,2,3],
         // 下拉列表的options
         selectData: {
         },
@@ -1044,42 +1044,41 @@ export default {
         },
         // form表单组件
         formArr: [
-          // {
-          //   type:'numberInputComp', //数字输入框
-          //   title:'数字输入框',
-          //   key:'brand',
-          //   precision:2, //数值精度 2-2个小数点，不设置该属性或者为0时只能输入整数
-          //   controls:false, //是否显示右侧的数值调节按钮
-          //   min:0, //最小值，可以不设置
-          //   max:50, //最大值，可以不设置
-          //   width:'49%',
+          {
+            type:'numberInputComp', //数字输入框
+            title:'数字输入框',
+            key:'brand1',
+            precision:2, //数值精度 2-2个小数点，不设置该属性或者为0时只能输入整数
+            controls:false, //是否显示右侧的数值调节按钮
+            min:0, //最小值，可以不设置
+            max:50, //最大值，可以不设置
+            width:'49%',
 
-          //   hasSlot:true,//是否 可以在当前列中再加入一个输入项，但是两个输入项的宽度需要自定义，否则都为100%
-          //   needLable:true,
-          //   slotData:{
-          //     width:'49%',//副标题的位置
-          //     type:'numberInputComp', //数字输入框
-          //     title:'数字输入框',
-          //     key:'brand',
-          //     precision:2, //数值精度 2-2个小数点，不设置该属性或者为0时只能输入整数
-          //     controls:false, //是否显示右侧的数值调节按钮
-          //     min:0, //最小值，可以不设置
-          //     max:50, //最大值，可以不设置
-          //   }
-          // },
-          // {
-          //   type: 'selectComp',
-          //   title: '普通下拉',
-          //   key: 'selectA',
-          //   placeholder: '不支持巨量数据，大量数据会卡',
-          // },
-          // {
-          //   type: 'selectComp',
-          //   title: '普通下拉',
-          //   key: 'selectA',
-          //   placeholder: '不支持巨量数据，大量数据会卡',
-          // },
-
+            hasSlot:true,//是否 可以在当前列中再加入一个输入项，但是两个输入项的宽度需要自定义，否则都为100%
+            needLable:true,
+            slotData:{
+              width:'49%',//副标题的位置
+              type:'numberInputComp', //数字输入框
+              title:'数字输入框',
+              key:'brand2',
+              precision:2, //数值精度 2-2个小数点，不设置该属性或者为0时只能输入整数
+              controls:false, //是否显示右侧的数值调节按钮
+              min:0, //最小值，可以不设置
+              max:50, //最大值，可以不设置
+            }
+          },
+          {
+            type: "inputComp",
+            title: "派车单编号",
+            key: "sendCarFormId",
+          },
+          {
+            type: 'selectComp',
+            title: '普通下拉',
+            key: 'selectA',
+            placeholder: '不支持巨量数据，大量数据会卡',
+          },
+          /*
           {
             key: "base",
             title: "基础资料",
@@ -1093,7 +1092,7 @@ export default {
               {
                 type:'numberInputComp', //数字输入框
                 title:'数字输入框',
-                key:'brand',
+                key:'brand1',
                 precision:2, //数值精度 2-2个小数点，不设置该属性或者为0时只能输入整数
                 controls:false, //是否显示右侧的数值调节按钮
                 min:0, //最小值，可以不设置
@@ -1106,7 +1105,7 @@ export default {
                   width:'49%',
                   type:'numberInputComp', //数字输入框
                   title:'数字输入框',
-                  key:'brand',
+                  key:'brand2',
                   precision:2, //数值精度 2-2个小数点，不设置该属性或者为0时只能输入整数
                   controls:false, //是否显示右侧的数值调节按钮
                   min:0, //最小值，可以不设置
@@ -1228,7 +1227,13 @@ export default {
               },
             ],
           }
-        ]
+          */
+        ],
+        model:{
+          sendCarFormId:'测试的值',
+          brand1:11.22,
+          brand2:25.32
+        }
       },
       drawerForm: {
         id: "drawerForm",

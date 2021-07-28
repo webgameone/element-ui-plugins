@@ -580,19 +580,72 @@ export default {
         })
       }
 
-      //初始化formItem
-      for(let item of this.formObj.formArr){
-        if(item.key && item.key!==''){
-          // this.$set(this.$refs['form_'+this.formObj.id].model,item.key,null)
+      //初始化formItem的值
+      if(this.formObj.formCollapse){
+        //如果是折叠的form
+        let allItem = [];
+        //初始化formItem,并且修改最左侧的组件的样式
+        this.formObj.formArr.forEach((item,index)=>{
+          for(let its in item){
+            if(its=='formItem'){
+              allItem = allItem.concat(item[its]);
+            }
+          }
+        })
 
-          //model默认值赋值操作
-          if(this.formObj.model){
-            if(this.formObj.model[item.key]){
-              this.$set(this.$refs['form_'+this.formObj.id].model,item.key,this.formObj.model[item.key])
+        for(let item of allItem){
+          if(item.key && item.key!==''){
+            //model默认值赋值操作
+            if(this.formObj.model){
+              if(this.formObj.model[item.key]){
+                setTimeout(() => {
+                  this.$set(this.$refs['form_'+this.formObj.id].model,item.key,this.formObj.model[item.key])
+                }, 50);
+              }
+            }
+          }
+          //如果有组合组件
+          if(item.slotData&&item.slotData.key&&item.slotData.key!==''){
+            console.log(item.slotData.key);
+            //model默认值赋值操作 组合组件
+            if(this.formObj.model){
+              if(this.formObj.model[item.key]){
+                setTimeout(() => {
+                  this.$set(this.$refs['form_'+this.formObj.id].model,item.slotData.key,this.formObj.model[item.slotData.key])
+                }, 50);
+              }
+            }
+          }
+        }
+      }else{
+        //非折叠的form
+        for(let item of this.formObj.formArr){
+          if(item.key && item.key!==''){
+            console.log(item.key);
+            //model默认值赋值操作
+            if(this.formObj.model){
+              if(this.formObj.model[item.key]){
+                setTimeout(() => {
+                  this.$set(this.$refs['form_'+this.formObj.id].model,item.key,this.formObj.model[item.key])
+                }, 50);
+              }
+            }
+          }
+          //如果有组合组件
+          if(item.slotData&&item.slotData.key&&item.slotData.key!==''){
+            console.log(item.slotData.key);
+            //model默认值赋值操作 组合组件
+            if(this.formObj.model){
+              if(this.formObj.model[item.key]){
+                setTimeout(() => {
+                  this.$set(this.$refs['form_'+this.formObj.id].model,item.slotData.key,this.formObj.model[item.slotData.key])
+                }, 50);
+              }
             }
           }
         }
       }
+
 
       //如果label的位置设置在输入框的顶部，就修改label的padding-left
       if(this.formObj.labelTop){
