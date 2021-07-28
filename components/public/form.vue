@@ -70,6 +70,7 @@
                 <el-form-item
                   v-for="(item) in items.formItem"
                   :tag="item.type"
+                  :hasslot="item.hasSlot"
                   :key="item.key"
                   :prop="item.key"
                   :label="item.title&&item.title!=''?item.title:' '"
@@ -89,7 +90,7 @@
                         :item="item"
                         :style="{
                           width:item.width?item.width:'100%',
-                          marginLeft:(formObj.labelTop&&formObj.labelTop==true)?(labelWidth/2+'px'):0,float:'left'
+                          float:'left'
                         }"
                         @formClick="formClick"
                         @formChange="formChange"
@@ -115,8 +116,9 @@
                         :formObj="formObj"
                         :item="item.slotData"
                         :style="{
-                          width:item.slotData.width?`calc(${item.slotData.width} - 10px)`:'100%',
-                          float:'right'
+                          width:item.slotData.width?item.slotData.width:'100%',
+                          float:item.slotData.float?item.slotData.float:'right',
+                          marginLeft:item.slotData.marginLeft?item.slotData.marginLeft:'0'
                         }"
                         @formClick="formClick"
                         @formChange="formChange"
@@ -135,6 +137,18 @@
                         @loadNode="loadNode"
                         @getBigSelectListTableData="getBigSelectListTableData"
                       />
+                      <!-- 副标题 -->
+                      <div
+                        class="secondTitle"
+                        v-if="item.hasSlot&&item.hasSlot==true&&item.needLable==true"
+                        :style="{
+                          float:formObj.labelTop?'left':'right',
+                          width:item.secondTitleWidth?item.secondTitleWidth:'auto',
+                          'margin-top':formObj.labelTop?'-56px':'0',
+                          'margin-left':formObj.labelTop?filterPre(item.slotData.width):'0'
+                        }">
+                        <span>{{item.slotData.title}}</span>
+                      </div>
                     </el-col>
                 </el-form-item>
 
@@ -171,7 +185,7 @@
                     :item="item"
                     :style="{
                       width:item.width?item.width:'100%',
-                      marginLeft:(formObj.labelTop&&formObj.labelTop==true)?(labelWidth/2+'px'):0,float:'left'
+                      float:'left'
                     }"
                     @formClick="formClick"
                     @formChange="formChange"
@@ -632,9 +646,11 @@ export default {
         if(formContent[i].parentNode.getAttribute('tag') == 'checkboxComp' && formContent[i].parentNode.getAttribute('tag').innerHtml==''){
           formContent[i].style.width = `100%`;
         }
+        if(this.formObj.labelTop==true){
+          formContent[i].style.marginLeft = `${this.labelWidth/2}px`;
+        }
         //两个输入项的 通过hasslot判断
-        if(formContent[i].parentNode.getAttribute('hasslot') == 'true'&&this.formObj.labelTop==true){
-          // formContent[i].style.width = `calc(100% - ${this.labelWidth/2}px)`;
+        if(formContent[i].parentNode.getAttribute('hasslot') == 'true' && this.formObj.labelTop){
           formContent[i].style.width = `calc(100% - ${this.labelWidth}px)`;
         }
       }
@@ -909,7 +925,7 @@ export default {
     //重新计算百分比的title位置
     filterPre(pre){
       let num = Number(pre.replace('%',''));
-      return num*1.4+'%'
+      return 100-num+'%'
     },
     //底部带自定义tbale的下拉列表的回调
     getBigSelectListTableData(tableData,item){

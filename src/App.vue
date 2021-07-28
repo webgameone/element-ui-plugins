@@ -1044,6 +1044,42 @@ export default {
         },
         // form表单组件
         formArr: [
+          // {
+          //   type:'numberInputComp', //数字输入框
+          //   title:'数字输入框',
+          //   key:'brand',
+          //   precision:2, //数值精度 2-2个小数点，不设置该属性或者为0时只能输入整数
+          //   controls:false, //是否显示右侧的数值调节按钮
+          //   min:0, //最小值，可以不设置
+          //   max:50, //最大值，可以不设置
+          //   width:'49%',
+
+          //   hasSlot:true,//是否 可以在当前列中再加入一个输入项，但是两个输入项的宽度需要自定义，否则都为100%
+          //   needLable:true,
+          //   slotData:{
+          //     width:'49%',//副标题的位置
+          //     type:'numberInputComp', //数字输入框
+          //     title:'数字输入框',
+          //     key:'brand',
+          //     precision:2, //数值精度 2-2个小数点，不设置该属性或者为0时只能输入整数
+          //     controls:false, //是否显示右侧的数值调节按钮
+          //     min:0, //最小值，可以不设置
+          //     max:50, //最大值，可以不设置
+          //   }
+          // },
+          // {
+          //   type: 'selectComp',
+          //   title: '普通下拉',
+          //   key: 'selectA',
+          //   placeholder: '不支持巨量数据，大量数据会卡',
+          // },
+          // {
+          //   type: 'selectComp',
+          //   title: '普通下拉',
+          //   key: 'selectA',
+          //   placeholder: '不支持巨量数据，大量数据会卡',
+          // },
+
           {
             key: "base",
             title: "基础资料",
@@ -1055,9 +1091,27 @@ export default {
                 placeholder: '不支持巨量数据，大量数据会卡',
               },
               {
-                type: "nullTopComp",
-                key: "",
-                col:2
+                type:'numberInputComp', //数字输入框
+                title:'数字输入框',
+                key:'brand',
+                precision:2, //数值精度 2-2个小数点，不设置该属性或者为0时只能输入整数
+                controls:false, //是否显示右侧的数值调节按钮
+                min:0, //最小值，可以不设置
+                max:50, //最大值，可以不设置
+                width:'49%',
+
+                hasSlot:true,//是否 可以在当前列中再加入一个输入项，但是两个输入项的宽度需要自定义，否则都为100%
+                needLable:true,//是否需要副标题
+                slotData:{
+                  width:'49%',
+                  type:'numberInputComp', //数字输入框
+                  title:'数字输入框',
+                  key:'brand',
+                  precision:2, //数值精度 2-2个小数点，不设置该属性或者为0时只能输入整数
+                  controls:false, //是否显示右侧的数值调节按钮
+                  min:0, //最小值，可以不设置
+                  max:50, //最大值，可以不设置
+                },
               },
               {
                 type: "inputComp",
