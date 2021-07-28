@@ -504,27 +504,67 @@ export default {
       let elformItem = mainFormObj.getElementsByClassName('el-form-item');
 
       let colCount = -1;
-      //初始化formItem,并且修改最左侧的组件的样式
-      this.formObj.formArr.forEach((item,index)=>{
-        if(item.key && item.key!==''){
-          this.$set(this.$refs['form_'+this.formObj.id].model,item.key,null)
-        }
 
-        //让最左侧的组件一直在最左侧，不会因为高度问题导致错位
-        if(item.col&&item.col>1){
-          colCount+=item.col;
-        }else{
-          colCount+=1;
-        }
+      if(this.formObj.formCollapse){
+        //如果是折叠的form
+        let allItem = [];
+        //初始化formItem,并且修改最左侧的组件的样式
+        this.formObj.formArr.forEach((item,index)=>{
 
-        // console.log(colCount);
-
-        if(index!=0 && (colCount)%this.formObj.col==0){
-          if(elformItem[index]){
-            elformItem[index].style.clear="left";
+          for(let its in item){
+            if(its=='formItem'){
+              // allItem = allItem.concat(item[its]);
+              allItem.push(item[its]);
+            }
           }
-        }
-      })
+        })
+
+        //修改
+        let custIndex = 0;
+        allItem.forEach((it)=>{
+          colCount=-1;
+          it.forEach((t,tIndex)=>{
+            if(t.key!=null){
+              this.$set(this.$refs['form_'+this.formObj.id].model,t.key,null)
+
+              //让最左侧的组件一直在最左侧，不会因为高度问题导致错位
+              if(t.col&&t.col>1){
+                colCount+=t.col;
+              }else{
+                colCount+=1;
+              }
+
+              if(custIndex!=0 && (colCount)%this.formObj.col==0){
+                if(elformItem[custIndex]){
+                  elformItem[custIndex].style.clear="left";
+                }
+              }
+              custIndex++;
+            }
+          });
+        })
+      }else{
+        //初始化formItem,并且修改最左侧的组件的样式
+        this.formObj.formArr.forEach((item,index)=>{
+          //非折叠form
+          if(item.key!=null){
+            this.$set(this.$refs['form_'+this.formObj.id].model,item.key,null)
+          }
+
+          //让最左侧的组件一直在最左侧，不会因为高度问题导致错位
+          if(item.col&&item.col>1){
+            colCount+=item.col;
+          }else{
+            colCount+=1;
+          }
+
+          if(index!=0 && (colCount)%this.formObj.col==0){
+            if(elformItem[index]){
+              elformItem[index].style.clear="left";
+            }
+          }
+        })
+      }
 
       //初始化formItem
       for(let item of this.formObj.formArr){

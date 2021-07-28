@@ -51,7 +51,7 @@
         <ui-form
           @formReady="userFormReady"
           ref="userForm"
-          :formObj="queryForm"
+          :formObj="queryForm2"
         ></ui-form>
       </div>
     </ui-drag-popup>
@@ -797,7 +797,7 @@ export default {
       //弹窗对象
       popObj: {
         title: "新增",
-        col: 3, //弹窗列数
+        col: 4, //弹窗列数
         loading: false,
         // showFooter: false//隐藏底部按钮
       },
@@ -1024,6 +1024,155 @@ export default {
                 key:'col3'
               }
             ]
+          }
+        ]
+      },
+      //测试form
+      queryForm2: {
+        id: "popupForm2",
+        col: 3, // 自定义列数
+        labelWidth: 110, // 自定义label的宽度
+        noButton: true, //不显示查询按钮
+        labelTop: true,
+        labelPosition: 'left',
+        formCollapse:true,//开启可以折叠的form表单
+        activeNames:[1,2,3],
+        // 下拉列表的options
+        selectData: {
+        },
+        rules: {
+        },
+        // form表单组件
+        formArr: [
+          {
+            key: "base",
+            title: "基础资料",
+            formItem: [
+              {
+                type: 'selectComp',
+                title: '普通下拉',
+                key: 'selectA',
+                placeholder: '不支持巨量数据，大量数据会卡',
+              },
+              {
+                type: "nullTopComp",
+                key: "",
+                col:2
+              },
+              {
+                type: "inputComp",
+                title: "派车单编号",
+                key: "sendCarFormId",
+              },
+              {
+                type: 'selectComp',
+                title: '普通下拉',
+                key: 'selectB',
+                placeholder: '不支持巨量数据，大量数据会卡',
+              },
+              {
+                type: "inputComp",
+                title: "路由名称",
+                key: "routeName",
+                disabled: true,
+              },
+              {
+                type: "inputComp",
+                title: "全程路由",
+                key: "allRoute",
+                disabled: true,
+              },
+              {
+                type: "inputComp",
+                title: "司机一姓名",
+                key: "driver1Name",
+                disabled: true,
+              },
+              {
+                type: "inputComp",
+                title: "司机二姓名",
+                key: "driver2Name",
+                disabled: true,
+              },
+              {
+                type: "inputComp",
+                title: "车牌号码",
+                key: "carNumber",
+                disabled: true,
+              },
+              {
+                type: "inputComp",
+                title: "司机一电话",
+                key: "driver1Phone",
+                disabled: true,
+              },
+              {
+                type: "inputComp",
+                title: "司机二电话",
+                key: "driver2Phone",
+                disabled: true,
+              },
+              {
+                type: "inputComp",
+                title: "车辆类型",
+                key: "carType",
+                disabled: true,
+              },
+              {
+                type: "inputComp",
+                title: "车辆用途",
+                key: "carUseType",
+                disabled: true,
+              },
+              {
+                type: "inputComp",
+                title: "路由类型",
+                key: "routeType",
+                disabled: true,
+              },
+              {
+                type: "inputComp",
+                title: "路由编号",
+                key: "routeCode",
+                disabled: true,
+              },
+            ],
+          },
+          {
+            key: "base2",
+            title: "其他数据",
+            formItem: [
+              {
+                type: "dateTime",
+                timeType:"datetime",
+                title: "异常时间",
+                key: "exceptionTime",
+                minWidth: 150,
+                align: "center",
+                format:"yyyy-MM-dd HH:mm:ss",
+                valueFormat:"yyyy-MM-dd HH:mm:ss"
+              },
+              {
+                type: "inputComp",
+                title: "异常地址",
+                key: "exceptionAddress",
+                minlength: "4",
+                maxlength: "200",
+              },
+              {
+                type: "uploadComp",
+                uploadType: "handUpload",
+                title: "异常图片",
+                key: "exceptionUrl",
+              },
+              {
+                type: "textareaComp",
+                title: "异常说明",
+                key: "exceptionDesc",
+                minlength: "4",
+                maxlength: "480",
+              },
+            ],
           }
         ]
       },
