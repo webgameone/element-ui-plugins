@@ -50,6 +50,7 @@
         <!-- form组件库 -->
         <ui-form
           @formReady="userFormReady"
+          @formClick="userFormClick"
           ref="userForm"
           :formObj="queryForm2"
         ></ui-form>
@@ -1838,12 +1839,16 @@ export default {
       ])
     },
     slotLabel(name) {
-      return `<span>${name}</span><span style="color:#FF4D4D">(注意：${name}之间请以";"隔开)</span>`;
+      return `<span>${name}</span><span name="names" data-name="tag" style="color:#FF4D4D;cursor:pointer;">(注意：${name}之间请以";"隔开)</span>`;
     },
     checkChange(node, check, checked) {
       // console.log(node)
       // console.log(check)
       // console.log(checked)
+    },
+    userFormClick(event){
+      console.log(event.target.getAttribute('name'));
+      console.log(event.target.dataset.name);
     }
   }
 };

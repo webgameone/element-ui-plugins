@@ -83,7 +83,7 @@
                     }"
                   >
                     <!-- 自定义的label -->
-                    <span v-if="item.labelSlot" slot="label" v-html="item.title"></span>
+                    <span v-if="item.labelSlot" slot="label" v-html="item.title" @click="formClick"></span>
                     <el-col :span="24">
                       <formItem
                         :formItem="formItem"
@@ -179,7 +179,7 @@
                   }"
                 >
                 <!-- 自定义的label -->
-                <span v-if="item.labelSlot" slot="label" v-html="item.title"></span>
+                <span v-if="item.labelSlot" slot="label" v-html="item.title" @click="formClick"></span>
                 <el-col :span="24">
                   <!-- 这里的marginLeft只有在label出现在上方的时候才有效 -->
                   <formItem
