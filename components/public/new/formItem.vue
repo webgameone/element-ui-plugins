@@ -1051,7 +1051,8 @@ export default {
     height:29px;
   }
   .checkgroupClass{
-    height:29px;
+    //这里需要自适应高度
+    height:100%;
   }
   .timeRangeClass{
     height:29px;
@@ -1196,4 +1197,7 @@ export default {
     }
   }
 }
+</style>
+
+<style lang="scss" scoped>
 </style>

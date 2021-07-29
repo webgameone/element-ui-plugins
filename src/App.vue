@@ -531,7 +531,14 @@ export default {
               expandOnClickNode:false,
               lazy:true
             }
-          }
+          },
+          {
+            type:'uploadComp', //图片展示+预览（这里面的数据需要在imgData里面赋值）
+            title:'手动上传',
+            key:'uploadB',
+            uploadType:'handUpload', //手动上传
+            acceptSize:10  //只允许上传小于10M的文件
+          },
           // {
           //   type:'uploadComp',
           //   title:'背景图',
