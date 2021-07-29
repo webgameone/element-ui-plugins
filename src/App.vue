@@ -197,6 +197,7 @@ export default {
           routeName2: [],
           routeName3: [],
           routeType: [], //路由类型
+          checkGroup:['标题1','标题2'],
           moreOperation:[
             '操作1',
             '操作2',
@@ -269,6 +270,25 @@ export default {
           //     width: "30%"
           //   }
           // },
+          {
+            type: 'checkgroupComp', //checkbox组
+            title: 'checkgroup', //checkbox组需要label,但是必须为空格
+            key: 'checkGroup',
+            showPopover: true, //是否显示提示信息
+            popover: [
+              //如果有提示信息，设置提示内容
+              {
+                title: '标题1',
+
+                content: '这是里面的内容1',
+              },
+              {
+                title: '标题2',
+
+                content: '这是里面的内容2',
+              }
+            ]
+          },
           {
             type: "inputComp",
             title: "输入框",
@@ -520,7 +540,10 @@ export default {
           //   multiple:false,//如果设置未false或者去掉该属性，下方会有列表框，并且支持多选
           //   acceptSize:10 //只允许上传小于10M的文件
           // }
-        ]
+        ],
+        model:{
+          checkGroup:[]
+        }
       },
       //table组件库
       tableObj: {

@@ -175,6 +175,7 @@
                   float:(item.title==' '||item.title=='')&&(item.type!=='vxeSelect'&&item.type!=='checkboxComp'&&item.type!=='radioComp')?none:'left',
                   opacity:(item.type=='nullComp'||item.type=='nullTopComp')?'0':'1',
                   color:item.titleColor?item.titleColor:'#606266',
+                  fontWeight:item.fontWeight?item.fontWeight:'default'
                   }"
                 >
                 <!-- 自定义的label -->
@@ -604,6 +605,8 @@ export default {
                 setTimeout(() => {
                   this.$set(this.$refs['form_'+this.formObj.id].model,item.key,this.formObj.model[item.key])
                 }, 50);
+                //checkgroupComp类型需要立即执行
+                this.$set(this.$refs['form_'+this.formObj.id].model,item.key,this.formObj.model[item.key])
               }
             }
           }
@@ -624,13 +627,14 @@ export default {
         //非折叠的form
         for(let item of this.formObj.formArr){
           if(item.key && item.key!==''){
-            console.log(item.key);
             //model默认值赋值操作
             if(this.formObj.model){
               if(this.formObj.model[item.key]){
                 setTimeout(() => {
                   this.$set(this.$refs['form_'+this.formObj.id].model,item.key,this.formObj.model[item.key])
                 }, 50);
+                //checkgroupComp类型需要立即执行
+                this.$set(this.$refs['form_'+this.formObj.id].model,item.key,this.formObj.model[item.key])
               }
             }
           }
