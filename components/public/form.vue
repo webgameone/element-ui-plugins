@@ -78,10 +78,11 @@
                     width:formObj.col?(100/(item.col&&item.col!==1?(formObj.col/item.col):formObj.col)+'%'):'25%',
                     display:item.display?item.display:(formObj.needAdvanced==null||item.outAdvanced||advanced)?'inline-block':'none',
                     opacity:(item.type=='nullComp'||item.type=='nullTopComp')?'0':'1',
-                    color:item.color?item.color+'!important':'#606266',
+                    color:item.titleColor?item.titleColor:'#606266',
                     fontWeight:item.fontWeight?item.fontWeight:'default'
                     }"
                   >
+                    <!-- 自定义的label -->
                     <span v-if="item.labelSlot" slot="label" v-html="item.title"></span>
                     <el-col :span="24">
                       <formItem
@@ -173,9 +174,11 @@
                   display:item.display?item.display:(formObj.needAdvanced==null||item.outAdvanced||advanced)?'inline-block':'none',
                   float:(item.title==' '||item.title=='')&&(item.type!=='vxeSelect'&&item.type!=='checkboxComp'&&item.type!=='radioComp')?none:'left',
                   opacity:(item.type=='nullComp'||item.type=='nullTopComp')?'0':'1',
+                  color:item.titleColor?item.titleColor:'#606266',
                   }"
                 >
-                <!-- <span v-if="item.labelSlot" slot="label" v-html="item.title"></span> -->
+                <!-- 自定义的label -->
+                <span v-if="item.labelSlot" slot="label" v-html="item.title"></span>
                 <el-col :span="24">
                   <!-- 这里的marginLeft只有在label出现在上方的时候才有效 -->
                   <formItem

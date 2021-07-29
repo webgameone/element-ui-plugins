@@ -123,6 +123,7 @@ import { data } from '@/utils/ztreeData.json'
 export default {
   name: "app",
   data() {
+    const that = this;
     return {
       showpopup: false,
       showZtreePopup:false,
@@ -1047,6 +1048,7 @@ export default {
           {
             type:'numberInputComp', //数字输入框
             title:'数字输入框',
+            titleColor:'#ff0000',
             key:'brand1',
             precision:2, //数值精度 2-2个小数点，不设置该属性或者为0时只能输入整数
             controls:false, //是否显示右侧的数值调节按钮
@@ -1069,7 +1071,8 @@ export default {
           },
           {
             type: "inputComp",
-            title: "派车单编号",
+            title: that.slotLabel("服务区域"),
+            labelSlot:true,
             key: "sendCarFormId",
           },
           {
@@ -1803,6 +1806,9 @@ export default {
           id:11
         }
       ])
+    },
+    slotLabel(name) {
+      return `<span>${name}</span><span style="color:#FF4D4D">(注意：${name}之间请以";"隔开)</span>`;
     },
     checkChange(node, check, checked) {
       // console.log(node)
