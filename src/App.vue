@@ -131,6 +131,8 @@ export default {
       // form组件库
       dataForm: {
         id: "testForm",
+        fixedWidth:false,//固定宽度，不使用自适应
+        labelPosition:'right',
         col: 4, // 自定义列数
         labelWidth: 120, // 自定义label的宽度
         btnInline: true, //查询按钮默认在右侧
@@ -428,6 +430,7 @@ export default {
             key: "routeType",
             custText: "content",
             custValue: "content",
+            width:400,
             // col:2,
             placeholder: "请选择或输入查找"
           },
@@ -1067,8 +1070,8 @@ export default {
         noButton: true, //不显示查询按钮
         labelTop: true,
         labelPosition: 'left',
-        // formCollapse:true,//开启可以折叠的form表单
-        // activeNames:[1,2,3],
+        formCollapse:true,//开启可以折叠的form表单
+        activeNames:[1,2,3],
         // 下拉列表的options
         selectData: {
         },
@@ -1076,6 +1079,7 @@ export default {
         },
         // form表单组件
         formArr: [
+          /*
           {
             type:'numberInputComp', //数字输入框
             title:'数字输入框',
@@ -1112,7 +1116,8 @@ export default {
             key: 'selectA',
             placeholder: '不支持巨量数据，大量数据会卡',
           },
-          /*
+          */
+
           {
             key: "base",
             title: "基础资料",
@@ -1261,7 +1266,6 @@ export default {
               },
             ],
           }
-          */
         ],
         model:{
           sendCarFormId:'测试的值',

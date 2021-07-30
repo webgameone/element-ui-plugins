@@ -49,10 +49,10 @@
       <div class="search" :style="{ marginTop: formObj.searchTop?formObj.searchTop:'20px' }" v-if="formObj.formArr&&formObj.formArr.length>0">
         <el-form
             :ref="'form_'+formObj.id"
-            class="demo-form-inline clearfix"
+            class="demo-form-inline clearfix formFlex"
             :label-position="formObj.labelPosition?formObj.labelPosition:'right'"
             :rules="formObj.rules?formObj.rules:null"
-            :label-width="formObj.labelTop?'100%':(formObj.labelWidth?formObj.labelWidth+'px':'100px')"
+            :label-width="formObj.fixedWidth?'auto':(formObj.labelTop?'100%':(formObj.labelWidth?formObj.labelWidth+'px':'100px'))"
             :inline="formObj.formArr.inline?formObj.formArr.inline:true"
             :model="formItem"
             :label-suffix="formObj.labelSuffix?formObj.labelSuffix:''"
@@ -66,8 +66,10 @@
                 :name="index+1"
                 :key="items.key"
                 style="position:relative"
+                class="formFlex"
               >
-                <el-form-item
+                <div class="formFlex">
+                  <el-form-item
                   v-for="(item) in items.formItem"
                   :tag="item.type"
                   :hasslot="item.hasSlot"
@@ -75,11 +77,12 @@
                   :prop="item.key"
                   :label="item.title&&item.title!=''?item.title:' '"
                   :style="{
-                    width:formObj.col?(100/(item.col&&item.col!==1?(formObj.col/item.col):formObj.col)+'%'):'25%',
+                    width: formObj.fixedWidth?'auto':(formObj.col?(100/(item.col&&item.col!==1?(formObj.col/item.col):formObj.col)+'%'):'25%'),
                     display:item.display?item.display:(formObj.needAdvanced==null||item.outAdvanced||advanced)?'inline-block':'none',
                     opacity:(item.type=='nullComp'||item.type=='nullTopComp')?'0':'1',
                     color:item.titleColor?item.titleColor:'#606266',
-                    fontWeight:item.fontWeight?item.fontWeight:'default'
+                    fontWeight:item.fontWeight?item.fontWeight:'default',
+                    marginLeft:formObj.fixedWidth?'15px':0
                     }"
                   >
                     <!-- 自定义的label -->
@@ -151,10 +154,12 @@
                         <span>{{item.slotData.title}}</span>
                       </div>
                     </el-col>
-                </el-form-item>
+                  </el-form-item>
 
-                <!-- 预留插槽 -->
-                <slot v-if="items.formCollapseSlotShow" name="formCollapseSlot" :slotkey="items.key" :slotIndex="index"></slot>
+                  <!-- 预留插槽 -->
+                  <slot v-if="items.formCollapseSlotShow" name="formCollapseSlot" :slotkey="items.key" :slotIndex="index"></slot>
+                </div>
+
 
               </el-collapse-item>
             </el-collapse>
@@ -170,12 +175,13 @@
                 :prop="item.key"
                 :label="item.title&&item.title!=''?item.title:' '"
                 :style="{
-                  width:formObj.col?(100/(item.col&&item.col!==1?(formObj.col/item.col):formObj.col)+'%'):'25%',
+                  width: formObj.fixedWidth?'auto':(formObj.col?(100/(item.col&&item.col!==1?(formObj.col/item.col):formObj.col)+'%'):'25%'),
                   display:item.display?item.display:(formObj.needAdvanced==null||item.outAdvanced||advanced)?'inline-block':'none',
                   float:(item.title==' '||item.title=='')&&(item.type!=='vxeSelect'&&item.type!=='checkboxComp'&&item.type!=='radioComp')?none:'left',
                   opacity:(item.type=='nullComp'||item.type=='nullTopComp')?'0':'1',
                   color:item.titleColor?item.titleColor:'#606266',
-                  fontWeight:item.fontWeight?item.fontWeight:'default'
+                  fontWeight:item.fontWeight?item.fontWeight:'default',
+                  marginLeft:formObj.fixedWidth?'15px':0
                   }"
                 >
                 <!-- 自定义的label -->
@@ -521,8 +527,8 @@ export default {
       let mainFormObj = document.getElementById(this.formObj.id);
       let elformItem = mainFormObj.getElementsByClassName('el-form-item');
 
+      /*
       let colCount = -1;
-
       if(this.formObj.formCollapse){
         //如果是折叠的form
         let allItem = [];
@@ -562,7 +568,7 @@ export default {
           });
         })
       }else{
-        //初始化formItem,并且修改最左侧的组件的样式
+        初始化formItem,并且修改最左侧的组件的样式
         this.formObj.formArr.forEach((item,index)=>{
           //非折叠form
           if(item.key!=null){
@@ -583,6 +589,7 @@ export default {
           }
         })
       }
+      */
 
       //初始化formItem的值
       if(this.formObj.formCollapse){
@@ -687,31 +694,38 @@ export default {
         this.labelWidth = this.formObj.labelWidth;
       }
 
+
+
       let custForm = this.$refs[this.formObj.id];
       let formContent = custForm.getElementsByClassName('el-form-item__content');
+      let formItemContainer = custForm.getElementsByClassName('formItemContainer');
       let len = formContent.length;
 
       for(let i=0;i<len;i++){
-        formContent[i].style.width = `calc(100% - ${this.labelWidth}px)`;
-
-        if(formContent[i].parentNode.getAttribute('tag') == 'selectInputComp' ||formContent[i].parentNode.getAttribute('tag') == 'selectDateComp' ||formContent[i].parentNode.getAttribute('tag') == 'beforeSelectComp'){
-          //如果是带select的输入框或者带select的日期选择器，是不需要label的
-          formContent[i].style.width = `100%`;
-        }
-        //新的-如果是前面带select的
-        if(formContent[i].parentNode.getAttribute('tag') == 'vxeSelect'){
-          formContent[i].style.width = `100%`;
-        }
-        //checkboxComp
-        if(formContent[i].parentNode.getAttribute('tag') == 'checkboxComp' && formContent[i].parentNode.getAttribute('tag').innerHtml==''){
-          formContent[i].style.width = `100%`;
-        }
-        if(this.formObj.labelTop==true){
-          formContent[i].style.marginLeft = `${this.labelWidth/2}px`;
-        }
-        //两个输入项的 通过hasslot判断
-        if(formContent[i].parentNode.getAttribute('hasslot') == 'true' && this.formObj.labelTop){
+        if(this.formObj.fixedWidth){
+          formItemContainer[i].style.width = this.formObj.formArr[i].width?this.formObj.formArr[i].width+'px':'auto';
+        }else{
           formContent[i].style.width = `calc(100% - ${this.labelWidth}px)`;
+
+          if(formContent[i].parentNode.getAttribute('tag') == 'selectInputComp' ||formContent[i].parentNode.getAttribute('tag') == 'selectDateComp' ||formContent[i].parentNode.getAttribute('tag') == 'beforeSelectComp'){
+            //如果是带select的输入框或者带select的日期选择器，是不需要label的
+            formContent[i].style.width = `100%`;
+          }
+          //新的-如果是前面带select的
+          if(formContent[i].parentNode.getAttribute('tag') == 'vxeSelect'){
+            formContent[i].style.width = `100%`;
+          }
+          //checkboxComp
+          if(formContent[i].parentNode.getAttribute('tag') == 'checkboxComp' && formContent[i].parentNode.getAttribute('tag').innerHtml==''){
+            formContent[i].style.width = `100%`;
+          }
+          if(this.formObj.labelTop==true){
+            formContent[i].style.marginLeft = `${this.labelWidth/2}px`;
+          }
+          //两个输入项的 通过hasslot判断
+          if(formContent[i].parentNode.getAttribute('hasslot') == 'true' && this.formObj.labelTop){
+            formContent[i].style.width = `calc(100% - ${this.labelWidth}px)`;
+          }
         }
       }
     },
@@ -1002,6 +1016,11 @@ export default {
 </script>
 
 <style lang="scss">
+.formFlex{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 .clearfix:after{
   content:'';
   display: table;
