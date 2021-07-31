@@ -259,25 +259,25 @@
 
             <!-- form内右侧的查询和重置 -->
             <div v-if="formObj.btnInline" style="float:left;margin-left:10px;margin-bottom:18px;">
-              <span class="table-page-search-submitButtons" :style="advanced && {overflow: 'hidden' } || {} ">
+              <a v-if="formObj.needAdvanced" @click="toggleAdvanced" style="float:left;margin-right:8px;margin-top:4px;font-size:12px;cursor:pointer;color:#409EFF">
+                {{ advanced ? '收起' : '展开' }}
+                <i :class="advanced ? 'el-icon-arrow-up':'el-icon-arrow-down'"></i>
+              </a>
+              <span v-if="!formObj.noButton" class="table-page-search-submitButtons" :style="advanced && {overflow: 'hidden' } || {} ">
                 <el-button v-if="formObj.noButton?!formObj.noButton:'true'" :disabled="formObj.searchDisable?formObj.searchDisable:false" type="primary" size="mini" @click="searchlist">查询</el-button>
                 <el-button v-if="formObj.noButton?!formObj.noButton:'true'" style="margin-left: 8px" size="mini" @click="Reset()">重置</el-button>
-
-                <!-- 自定义按钮组 -->
-                <template v-if="formObj.custQueryBtn&&formObj.custQueryBtn.length>0">
-                  <el-button
-                  v-for="(it) in formObj.custQueryBtn"
-                  :key="it.key"
-                  :disabled="it.disable||false"
-                  :type="it.type||'primary'"
-                  size="mini"
-                  @click="formClick($event,it.key)">{{it.title}}</el-button>
-                </template>
-                <a v-if="formObj.needAdvanced" @click="toggleAdvanced" style="margin-left: 8px;font-size:12px;cursor: pointer;color:#409EFF">
-                  {{ advanced ? '收起' : '展开' }}
-                  <i :class="advanced ? 'el-icon-arrow-up':'el-icon-arrow-down'"></i>
-                </a>
               </span>
+              <!-- 自定义按钮组 -->
+              <template v-if="formObj.custQueryBtn&&formObj.custQueryBtn.length>0">
+                <el-button
+                v-for="(it) in formObj.custQueryBtn"
+                :key="it.key"
+                :disabled="it.disable||false"
+                :type="it.type||'primary'"
+                size="mini"
+                style="float:right;margin-left:10px;"
+                @click="formClick($event,it.key)">{{it.title}}</el-button>
+              </template>
             </div>
 
             <!-- 表单左下方的按钮组 暂时不使用-->
@@ -291,97 +291,93 @@
               {{item.title}}</el-button>
             </el-form-item> -->
 
-            <!-- 展开收起和右下角的按钮组 在form表单底部-->
-            <el-row class="btnwrap"
-              v-if="!formObj.btnInline" style="display:inline-block;width:100%;">
-              <el-col :span="12">
-                <span class="table-page-search-submitButtons" :style="advanced && {overflow: 'hidden' } || {} ">
-                  <el-button v-if="formObj.noButton?!formObj.noButton:'true'" type="primary" size="mini" @click="searchlist">查询</el-button>
-                  <el-button v-if="formObj.noButton?!formObj.noButton:'true'" style="margin-left: 8px" size="mini" @click="Reset()">重置</el-button>
-                  <a v-if="formObj.needAdvanced" @click="toggleAdvanced" style="margin-left: 8px;font-size:12px;cursor: pointer;color:#409EFF">
-                    {{ advanced ? '收起' : '展开' }}
-                    <i :class="advanced ? 'el-icon-arrow-up':'el-icon-arrow-down'"></i>
-                  </a>
-                </span>
-              </el-col>
-              <el-col :span="12">
-                <span class="table-page-search-toolbar" :style="{float: 'right', marginRight: '0'}">
-                  <el-button-group>
-                    <template v-for="(item) in formObj.bottomBtnArr">
-                      <el-button
-                      v-if="(item.btnType||item.display==false)?false:true"
-                      :key="item.key"
-                      :type="item.type?item.type:''"
-                      :size="item.size?item.size:'mini'"
-                      :icon="item.icon?item.icon:''"
-                      :disabled="item.disabled?item.disabled:false"
-                      @click="formBtnClick($event,item.key)">{{item.title}}</el-button>
-
-                       <!-- popover 类型按钮-->
-                      <el-popover
-                        v-if="item.btnType=='popover'"
-                        :key="item.key"
-                        placement="bottom"
-                        :style="{'width':item.popoverWidth?item.popoverWidth:'200px','margin-left':item.popoverMargin=='left'?'10px':0,'margin-right':item.popoverMargin=='right'?'10px':0}"
-                        :title="item.popoverTitle?item.popoverTitle:''"
-                        :width="item.popoverWidth?item.popoverWidth:'200'"
-                        :trigger="item.popoverType?item.popoverType:'hover'"
-                        :content="item.popoverContent?item.popoverContent:''"
-                      >
-                        <div v-if="item.popoverHtml" v-html="item.popoverHtml" style="width:100%;backgroud:rabg(255,255,255,1)"></div>
+            <!-- 展开收起和右下角的按钮组 在form表单底部 新-->
+            <el-row v-if="!formObj.btnInline" class="btnwrap"
+                :style="{
+                  display:!formObj.noButton||(formObj.bottomBtnArr&&formObj.bottomBtnArr.length>0)?'inline-block':'none',
+                  width:'100%'}">
+                <el-col :span="!formObj.noButton?12:0" v-if="!formObj.noButton">
+                  <span class="table-page-search-submitButtons" :style="advanced && {overflow: 'hidden' } || {} ">
+                    <el-button v-if="formObj.noButton?!formObj.noButton:'true'" type="primary" size="mini" @click="searchlist">查询</el-button>
+                    <el-button v-if="formObj.noButton?!formObj.noButton:'true'" style="margin-left: 8px" size="mini" @click="Reset()">重置</el-button>
+                  </span>
+                </el-col>
+                <el-col :span="!formObj.noButton?12:(formObj.bottomBtnArr&&formObj.bottomBtnArr.length>0?24:0)">
+                  <span class="table-page-search-toolbar" :style="{float: 'right', marginRight: '0'}">
+                    <el-button-group>
+                      <template v-for="(item) in formObj.bottomBtnArr">
                         <el-button
-                          v-if="item.comp=='button'"
+                        v-if="(item.btnType||item.display==false)?false:true"
+                        :key="item.key"
+                        :type="item.type?item.type:''"
+                        :size="item.size?item.size:'mini'"
+                        :icon="item.icon?item.icon:''"
+                        :disabled="item.disabled?item.disabled:false"
+                        @click="formBtnClick($event,item.key)">{{item.title}}</el-button>
+
+                        <el-popover
+                          v-if="item.btnType=='popover'"
                           :key="item.key"
-                          slot="reference"
-                          :type="item.type?item.type:''"
-                          :size="item.size?item.size:'mini'"
-                          @click="formClick($event,item.key)">
-                          {{item.title}}
-                        </el-button>
+                          placement="bottom"
+                          :style="{'width':item.popoverWidth?item.popoverWidth:'200px','margin-left':item.popoverMargin=='left'?'10px':0,'margin-right':item.popoverMargin=='right'?'10px':0}"
+                          :title="item.popoverTitle?item.popoverTitle:''"
+                          :width="item.popoverWidth?item.popoverWidth:'200'"
+                          :trigger="item.popoverType?item.popoverType:'hover'"
+                          :content="item.popoverContent?item.popoverContent:''"
+                        >
+                          <div v-if="item.popoverHtml" v-html="item.popoverHtml" style="width:100%;backgroud:rabg(255,255,255,1)"></div>
+                          <el-button
+                            v-if="item.comp=='button'"
+                            :key="item.key"
+                            slot="reference"
+                            :type="item.type?item.type:''"
+                            :size="item.size?item.size:'mini'"
+                            @click="formClick($event,item.key)">
+                            {{item.title}}
+                          </el-button>
 
-                        <el-link v-if="item.comp=='text'" slot="reference"  type="primary">{{item.title}}</el-link>
-                      </el-popover>
+                          <el-link v-if="item.comp=='text'" slot="reference"  type="primary">{{item.title}}</el-link>
+                        </el-popover>
 
-                      <!-- 下拉菜单 -->
-                      <el-dropdown class="dropdownBtn" v-if="item.btnType=='dropdown'" :key="item.key" @command="formBtnCommand($event,item)">
-                        <el-button type="primary" size="mini">
-                          {{item.title}}<i class="el-icon-arrow-down el-icon--right"></i>
-                        </el-button>
-                        <el-dropdown-menu slot="dropdown">
-                          <el-dropdown-item
-                            v-for="(oper) in formObj.selectData[item.key]"
-                            :key="oper"
-                            :command="oper"
-                          >{{oper}}</el-dropdown-item>
-                        </el-dropdown-menu>
-                      </el-dropdown>
+                        <el-dropdown class="dropdownBtn" v-if="item.btnType=='dropdown'" :key="item.key" @command="formBtnCommand($event,item)">
+                          <el-button type="primary" size="mini">
+                            {{item.title}}<i class="el-icon-arrow-down el-icon--right"></i>
+                          </el-button>
+                          <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item
+                              v-for="(oper) in formObj.selectData[item.key]"
+                              :key="oper"
+                              :command="oper"
+                            >{{oper}}</el-dropdown-item>
+                          </el-dropdown-menu>
+                        </el-dropdown>
 
-                      <!-- 文件上传按钮 -->
-                      <el-upload
-                        v-if="item.btnType=='import'"
-                        :key="item.key"
-                        style="float:left;"
-                        ref="uploadFile"
-                        :accept="item.acceptFile?item.acceptFile:''"
-                        action=""
-                        multiple
-                        :limit="item.fileLimit?item.fileLimit:1"
-                        :http-request="function (file) { return formImportFn(file, item)}"
-                        :show-file-list="false"
-                        :before-upload="function (file) { return beforeUpload(file, item)}"
-                      >
-                        <el-button
-                          :size="item.size?item.size:'mini'"
-                          :icon="item.icon?item.icon:''"
-                          style="border-radius:0;border:0;height:29px"
-                          type="primary"
-                        >{{item.title}}</el-button>
-                      </el-upload>
+                        <el-upload
+                          v-if="item.btnType=='import'"
+                          :key="item.key"
+                          style="float:left;"
+                          ref="uploadFile"
+                          :accept="item.acceptFile?item.acceptFile:''"
+                          action=""
+                          multiple
+                          :limit="item.fileLimit?item.fileLimit:1"
+                          :http-request="function (file) { return formImportFn(file, item)}"
+                          :show-file-list="false"
+                          :before-upload="function (file) { return beforeUpload(file, item)}"
+                        >
+                          <el-button
+                            :size="item.size?item.size:'mini'"
+                            :icon="item.icon?item.icon:''"
+                            style="border-radius:0;border:0;height:29px"
+                            type="primary"
+                          >{{item.title}}</el-button>
+                        </el-upload>
                     </template>
-                  </el-button-group>
-                </span>
-              </el-col>
+                    </el-button-group>
+                  </span>
+                </el-col>
             </el-row>
+
 
             <!-- 右下角的按钮组 默认在form表单右侧-->
             <div class="btnwrap"
