@@ -1,5 +1,5 @@
 <template>
-  <div style="height:100%;overflow:hidden;">
+  <div class="tableCompBox" style="height:100%;overflow:hidden;">
     <slot name="tableTopSolt"></slot>
     <div :style="{'height':`calc(100% - ${tableObj.offsetHeight?tableObj.offsetHeight:0}px)`,'overflow':'hidden'}">
       <vxe-table
@@ -247,7 +247,7 @@
                         trigger="click"
                         :title="it.popTitle&&popTitle!=''?it.popTitle:''"
                       >
-                        <div style="display:flex;flex-direction:column" v-if="it.popData && it.popData.length">
+                        <div class="table_tablePopoverBtn" style="display:flex;flex-direction:column" v-if="it.popData && it.popData.length">
                           <el-button type="text" v-for="pop in it.popData" :key="pop.key" @click="operationFn($event,row,pop.key,index)">{{ pop.title }}</el-button>
                         </div>
                         <i
@@ -960,6 +960,11 @@ export default {
 </script>
 
 <style lang="scss">
+.table_tablePopoverBtn{
+  button{
+    margin-left:0!important;
+  }
+}
 .vxe-table .vxe-table--fixed-left-wrapper .vxe-table--body-wrapper{
   width: auto;
 }
