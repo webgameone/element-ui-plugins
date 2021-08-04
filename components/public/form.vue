@@ -886,11 +886,13 @@ export default {
           if(j!==-1){
             this.formObj.formArr[i].formItem[j][attrName] = value;
             // 第二个状态跟第一个保持一致
-            if(this.formObj.formArr[i].formItem[j].hasSlot) {
-              this.formObj.formArr[i].formItem[j].slotData[attrName] = value
-            }
-            if(this.formObj.formArr[i].formItem[j].showSelect) {
-              this.formObj.formArr[i].formItem[j].select[attrName] = value
+            if(this.formObj.formArr[i].formItem[j].hasSlot&&!this.formObj.formArr[i].formItem[j].eachAttribute){
+              if(this.formObj.formArr[i].formItem[j].hasSlot) {
+                this.formObj.formArr[i].formItem[j].slotData[attrName] = value
+              }
+              if(this.formObj.formArr[i].formItem[j].showSelect) {
+                this.formObj.formArr[i].formItem[j].select[attrName] = value
+              }
             }
           }
         }
@@ -902,15 +904,18 @@ export default {
 
         if(i!==-1){
           this.formObj.formArr[i][attrName] = value
-          // 第二个状态跟第一个保持一致
-            if(this.formObj.formArr[i].hasSlot) {
-              this.formObj.formArr[i].slotData[attrName] = value
-            }
-            if(this.formObj.formArr[i].hasSlot) {
-              this.formObj.formArr[i].slotData[attrName] = value
-            }
-            if(this.formObj.formArr[i].showSelect) {
-              this.formObj.formArr[i].select[attrName] = value
+            // 第二个状态跟第一个保持一致
+            if(this.formObj.formArr[i].hasSlot&&!this.formObj.formArr[i].eachAttribute){
+              //两个状态不保持一致
+              if(this.formObj.formArr[i].hasSlot) {
+                this.formObj.formArr[i].slotData[attrName] = value
+              }
+              if(this.formObj.formArr[i].hasSlot) {
+                this.formObj.formArr[i].slotData[attrName] = value
+              }
+              if(this.formObj.formArr[i].showSelect) {
+                this.formObj.formArr[i].select[attrName] = value
+              }
             }
         }
       }

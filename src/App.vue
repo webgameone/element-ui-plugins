@@ -349,13 +349,15 @@ export default {
             isHand:true,
             placeholder: "请选择或输入查找",
             width:'65%',
+            disabled:false,
             custText:'mtext',
             custValue:'mvalue',
 
             hasSlot:true,//是否 可以在当前列中再加入一个输入项，但是两个输入项的宽度需要自定义，否则都为100%
+            eachAttribute:true,
             slotData:{
               type:'checkboxComp',
-              key:'isEnable1',
+              key:'isHaveDown',
               title:'含下级',
               width:'30%',
               float:'left',
@@ -1718,6 +1720,9 @@ export default {
     formChange(event, item, itemKey) {
       // console.log(event);
       // console.log(item.key);
+      if(itemKey == 'isHaveDown'){
+        this.$refs.uiForm.setFormAttribute('routeName','disabled',true)
+      }
     },
     formKeyupEnter(event, item, itemKey) {
       // console.log(item)
@@ -1810,6 +1815,7 @@ export default {
     },
     //form 下拉列表事件
     formVisibleChange(event, item) {
+      console.log(keyName);
       if (item.key == "routeName" && event == false) {
         setTimeout(() => {
           this.dataForm.selectData.routeName = this.routeNameData;
