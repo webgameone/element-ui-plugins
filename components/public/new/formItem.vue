@@ -101,6 +101,7 @@
       v-if="item.type=='selectComp'"
       filterable
       :multiple="item.multiple?item.multiple:false"
+      :collapse-tags="item.collapseTags && item.multiple ? true : false"
       :remote="item.remote?item.remote:false"
       :remote-method="item.remoteMethod?item.remoteMethod:null"
       :placeholder="item.placeholder?item.placeholder:'请选择'"
@@ -162,6 +163,7 @@
       filterable
       class="selectShowIdCompClass"
       :multiple="item.multiple?item.multiple:false"
+      :collapse-tags="item.collapseTags && item.multiple ? true : false"
       :remote="item.remote?item.remote:false"
       :remote-method="item.remoteMethod?item.remoteMethod:null"
       :placeholder="item.placeholder?item.placeholder:'请选择'"

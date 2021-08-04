@@ -71,7 +71,7 @@
     <el-select
       v-else
       filterable
-      collapse-tags
+      :collapse-tags="item.collapseTags && item.multiple ? true : false"
       :class="item.multiple?'selectMultiple selectComp':'selectComp'"
       :multiple="item.multiple?item.multiple:false"
       :remote="item.remote?item.remote:false"
