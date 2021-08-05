@@ -27,6 +27,7 @@
       style="width:100%"
       v-if="item.type=='timeHMSComp'"
       v-model="formItem[item.key]"
+      :disabled="item.disabled?item.disabled:false"
       :editable="item.editable!=null?item.editable:true"
       :picker-options="item.pickerOptions?item.pickerOptions:null"
       @change="formChange($event,item)"
@@ -445,18 +446,20 @@
       v-model="formItem[item.key]"
       type="month"
       :format="item.format?item.format:'yyyy-MM'"
+      :disabled="item.disabled?item.disabled:false"
       :value-format="item.valueformat?item.valueformat:'yyyy-MM'"
       placeholder="选择月份">
     </el-date-picker>
     <!-- 选择月份开始和结束月份 -->
     <el-date-picker
-     v-if="item.type=='datamonthTime'"
+      v-if="item.type=='datamonthTime'"
       v-model="formItem[item.key]"
       type="monthrange"
       :clearable="item.clearable?item.clearable:false"
       :format="item.format?item.format:'yyyy-MM'"
       :value-format="item.valueformat?item.valueformat:'yyyy-MM'"
       :picker-options="item.pickerOptions?item.pickerOptions:null"
+      :disabled="item.disabled?item.disabled:false"
       range-separator="至"
       start-placeholder="开始月份"
       end-placeholder="结束月份"
