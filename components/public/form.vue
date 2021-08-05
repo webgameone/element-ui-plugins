@@ -880,11 +880,23 @@ export default {
         //折叠的form结构
         for(let i=0;i<this.formObj.formArr.length;i++){
           let j = this.formObj.formArr[i].formItem.findIndex((e,index)=>{
+            if(e.hasSlot&&e.slotData){
+              if(e.slotData.key == keyName){
+                return e.slotData.key == keyName;
+              }
+            }
             return e.key == keyName;
           })
 
           if(j!==-1){
-            this.formObj.formArr[i].formItem[j][attrName] = value;
+            if(this.formObj.formArr[i].formItem[j][key]==keyName){
+              this.formObj.formArr[i].formItem[j][attrName] = value;
+            }
+            //1.有hasSlot,2.slotData里面的key值一样,3.eachAttribute分开属性设置
+            if(this.formObj.formArr[i].formItem[j].hasSlot && this.formObj.formArr[i].formItem[j].slotData.key==keyName&&this.formObj.formArr[i].formItem[j].eachAttribute){
+              this.formObj.formArr[i].formItem[j].slotData[attrName] = value
+            }
+
             // 第二个状态跟第一个保持一致
             if(this.formObj.formArr[i].formItem[j].hasSlot&&!this.formObj.formArr[i].formItem[j].eachAttribute){
               if(this.formObj.formArr[i].formItem[j].hasSlot) {
@@ -899,24 +911,37 @@ export default {
       }else{
         //非折叠的form结构
         let i = this.formObj.formArr.findIndex((e,index)=>{
+          if(e.hasSlot&&e.slotData){
+            if(e.slotData.key == keyName){
+              return e.slotData.key == keyName;
+            }
+          }
           return e.key == keyName;
         })
 
+
         if(i!==-1){
-          this.formObj.formArr[i][attrName] = value
-            // 第二个状态跟第一个保持一致
-            if(this.formObj.formArr[i].hasSlot&&!this.formObj.formArr[i].eachAttribute){
-              //两个状态不保持一致
-              if(this.formObj.formArr[i].hasSlot) {
-                this.formObj.formArr[i].slotData[attrName] = value
-              }
-              if(this.formObj.formArr[i].hasSlot) {
-                this.formObj.formArr[i].slotData[attrName] = value
-              }
-              if(this.formObj.formArr[i].showSelect) {
-                this.formObj.formArr[i].select[attrName] = value
-              }
+          if(this.formObj.formArr[i].key==keyName){
+            this.formObj.formArr[i][attrName] = value
+          }
+          //1.有hasSlot,2.slotData里面的key值一样,3.eachAttribute分开属性设置
+          if(this.formObj.formArr[i].hasSlot && this.formObj.formArr[i].slotData.key==keyName&&this.formObj.formArr[i].eachAttribute){
+            this.formObj.formArr[i].slotData[attrName] = value;
+          }
+
+          // 第二个状态跟第一个保持一致
+          if(this.formObj.formArr[i].hasSlot&&!this.formObj.formArr[i].eachAttribute){
+            //两个状态不保持一致
+            if(this.formObj.formArr[i].hasSlot) {
+              this.formObj.formArr[i].slotData[attrName] = value
             }
+            if(this.formObj.formArr[i].hasSlot) {
+              this.formObj.formArr[i].slotData[attrName] = value
+            }
+            if(this.formObj.formArr[i].showSelect) {
+              this.formObj.formArr[i].select[attrName] = value
+            }
+          }
         }
       }
 

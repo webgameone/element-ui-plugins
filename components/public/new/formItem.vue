@@ -77,6 +77,7 @@
       end-placeholder="结束日期"
       format='yyyy-MM-dd'
       value-format='yyyy-MM-dd'
+      :disabled="item.disabled?item.disabled:false"
       :clearable="item.clearable===false?item.clearable:true"
       :picker-options="item.pickerOptions?item.pickerOptions:null"
       @change="formChange($event,item)"

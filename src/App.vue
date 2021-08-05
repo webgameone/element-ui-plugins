@@ -370,12 +370,14 @@ export default {
             title: " ",
             width:120,
 
+            eachAttribute:true,
             hasSlot: true, //是否 可以在当前列中再加入一个输入项，但是两个输入项的宽度需要自定义，否则都为100%
             slotData: {
               type:"dateRangeComp",
               title:'查询时间',
               key:'queryTime',
               clearable:false,
+              disabled:false,
               width: `calc(100% - 120px)`,//如果是120，后面的就使用120
             }
           },
@@ -1718,14 +1720,14 @@ export default {
       }
     },
     formChange(event, item, itemKey) {
-      // console.log(event);
-      // console.log(item.key);
       if(itemKey == 'isHaveDown'){
         this.$refs.uiForm.setFormAttribute('routeName','disabled',true)
+      }else if(itemKey == 'vxeSelectKey'){
+        console.log('执行了');
+        this.$refs.uiForm.setFormAttribute('queryTime','disabled',true)
       }
     },
     formKeyupEnter(event, item, itemKey) {
-      // console.log(item)
     },
     formClick(event, item) {
       switch (item.key) {
@@ -1815,7 +1817,6 @@ export default {
     },
     //form 下拉列表事件
     formVisibleChange(event, item) {
-      console.log(keyName);
       if (item.key == "routeName" && event == false) {
         setTimeout(() => {
           this.dataForm.selectData.routeName = this.routeNameData;
