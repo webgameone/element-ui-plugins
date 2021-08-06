@@ -24,6 +24,7 @@
                 slot="reference"
                 :type="item.type?item.type:''"
                 :size="item.size?item.size:'small'"
+                :icon="item.icon||''"
                 @click="formClick($event,item.key)">
                 {{item.title}}
               </el-button>
@@ -37,6 +38,7 @@
               :key="item.key"
               :type="item.type?item.type:''"
               :size="item.size?item.size:'small'"
+              :icon="item.icon||''"
               @click="formClick($event,item.key)">
               {{item.title}}
             </el-button>
