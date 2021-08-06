@@ -920,7 +920,7 @@ export default {
     },
     //input  enter事件
     inputEnter(event,item){
-      this.$refs.checkInput[0].select()
+      this.$refs.checkInput.select()
       this.$emit("inputEnter",event,item)
     },
     //底部带自定义tbale的下拉列表的回调

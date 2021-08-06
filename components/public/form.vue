@@ -910,7 +910,6 @@ export default {
     },
     //input  enter事件
     inputEnter(event,item){
-      this.$refs.checkInput[0].select()
       this.$emit("inputEnter",event,item)
     },
     //form按钮-上传文件
