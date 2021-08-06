@@ -523,70 +523,6 @@ export default {
       let mainFormObj = document.getElementById(this.formObj.id);
       let elformItem = mainFormObj.getElementsByClassName('el-form-item');
 
-      /*
-      let colCount = -1;
-      if(this.formObj.formCollapse){
-        //如果是折叠的form
-        let allItem = [];
-        //初始化formItem,并且修改最左侧的组件的样式
-        this.formObj.formArr.forEach((item,index)=>{
-
-          for(let its in item){
-            if(its=='formItem'){
-              // allItem = allItem.concat(item[its]);
-              allItem.push(item[its]);
-            }
-          }
-        })
-
-        //修改
-        let custIndex = 0;
-        allItem.forEach((it)=>{
-          colCount=-1;
-          it.forEach((t,tIndex)=>{
-            if(t.key!=null){
-              this.$set(this.$refs['form_'+this.formObj.id].model,t.key,null)
-
-              //让最左侧的组件一直在最左侧，不会因为高度问题导致错位
-              if(t.col&&t.col>1){
-                colCount+=t.col;
-              }else{
-                colCount+=1;
-              }
-
-              if(custIndex!=0 && (colCount)%this.formObj.col==0){
-                if(elformItem[custIndex]){
-                  elformItem[custIndex].style.clear="left";
-                }
-              }
-              custIndex++;
-            }
-          });
-        })
-      }else{
-        初始化formItem,并且修改最左侧的组件的样式
-        this.formObj.formArr.forEach((item,index)=>{
-          //非折叠form
-          if(item.key!=null){
-            this.$set(this.$refs['form_'+this.formObj.id].model,item.key,null)
-          }
-
-          //让最左侧的组件一直在最左侧，不会因为高度问题导致错位
-          if(item.col&&item.col>1){
-            colCount+=item.col;
-          }else{
-            colCount+=1;
-          }
-
-          if(index!=0 && (colCount)%this.formObj.col==0){
-            if(elformItem[index]){
-              elformItem[index].style.clear="left";
-            }
-          }
-        })
-      }
-      */
-
       //初始化formItem的值
       if(this.formObj.formCollapse){
         //如果是折叠的form
@@ -689,8 +625,6 @@ export default {
       if(this.formObj.labelWidth!==null){
         this.labelWidth = this.formObj.labelWidth;
       }
-
-
 
       let custForm = this.$refs[this.formObj.id];
       let formContent = custForm.getElementsByClassName('el-form-item__content');
@@ -1056,6 +990,9 @@ export default {
   *zoom:1;
 }
 #customForm{
+  .el-collapse-item__wrap{
+    width: 100%;
+  }
   .el-radio{
     margin-right:10px!important;
   }
