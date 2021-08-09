@@ -542,6 +542,11 @@ export default {
           if(item.key && item.key!==''){
             //model默认值赋值操作
             if(this.formObj.model){
+              if(item.type=="inputComp"&&item.select){
+                //前面有下拉列表的复合输入框
+                this.$set(this.$refs['form_'+this.formObj.id].model,item.select.key,this.formObj.model[item.select.key])
+              }
+
               if(this.formObj.model[item.key]){
                 setTimeout(() => {
                   this.$set(this.$refs['form_'+this.formObj.id].model,item.key,this.formObj.model[item.key])
@@ -570,6 +575,11 @@ export default {
           if(item.key && item.key!==''){
             //model默认值赋值操作
             if(this.formObj.model){
+              if(item.type=="inputComp"&&item.select){
+                //前面有下拉列表的复合输入框
+                this.$set(this.$refs['form_'+this.formObj.id].model,item.select.key,this.formObj.model[item.select.key])
+              }
+
               if(this.formObj.model[item.key]){
                 setTimeout(() => {
                   this.$set(this.$refs['form_'+this.formObj.id].model,item.key,this.formObj.model[item.key])

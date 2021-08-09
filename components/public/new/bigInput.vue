@@ -20,6 +20,15 @@ export default {
     mwidth:{
       type:String,
       default:'100%'
+    },
+    data:{
+      type:String,
+      default:''
+    }
+  },
+  watch:{
+    data(newVal,oldVal){
+      this.input = newVal;
     }
   },
   data(){

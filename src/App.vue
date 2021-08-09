@@ -251,6 +251,10 @@ export default {
               text:'下拉选项2',
               value:'下拉选项2'
             }
+          ],
+          driver1NameSelect:[
+            {text:'你好',value:'你好'},
+            {text:'吃饭',value:'吃饭'}
           ]
         },
         // form表单组件
@@ -274,6 +278,13 @@ export default {
           //   }
           // },
           {
+            type: 'bigInput',
+            title: '文本输入框',
+            key: 'bigInputComp',
+            outAdvanced: true,
+            placeholder: '请输入',
+          },
+          {
             type: 'checkgroupComp', //checkbox组
             title: 'checkgroup', //checkbox组需要label,但是必须为空格
             key: 'checkGroup',
@@ -294,15 +305,15 @@ export default {
           },
           {
             type: "inputComp",
-            title: "输入框",
+            title: "复合输入框",
             key: "driver1Name",
             maxlength: 50,
             clearable: true,
             autocomplete: "on",
-            selectWidth:'150px',
+            selectWidth:'80px',
             showSelect:true,
             select:{
-              key:'routeName',
+              key:'driver1NameSelect',
               type:'bigDataSelectComp'
             },
             showButton:true,
@@ -557,7 +568,8 @@ export default {
           // }
         ],
         model:{
-          checkGroup:[]
+          driver1Name:'222222',
+          driver1NameSelect:'你好'
         }
       },
       //table组件库
