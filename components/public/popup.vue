@@ -3,7 +3,7 @@
 弹窗属性
 popObj{
   title:'弹窗标题'
-  col:4 ,//弹窗的宽度和高度，计算方式(col*20%) 默认是4 ，也就是相对于浏览器视窗80%的宽度和80%的高度
+  percent:80 ,//弹窗的宽度和高度为80% ，也就是相对于浏览器视窗80%的宽度和80%的高度
   loading:true,// 弹窗是否允许loading
   loadingText:'请稍等,数据请求中!', //自定义loading的文字
   //自定义的按钮组，如果不自定义，就使用默认的按钮组
@@ -22,7 +22,7 @@ popObj{
 
 */
 <template>
-  <div id="popupBox" v-if="dialogFormVisible" :style="{width:popObj.col?(popObj.col*20)+'%':'80%',height:popObj.col?(popObj.col*20)+'%':'80%'}">
+  <div id="popupBox" v-if="dialogFormVisible" :style="{width:popObj.percent?(popObj.percent)+'%':'80%',height:popObj.percent?(popObj.percent)+'%':'80%'}">
     <!-- 带缓存功能的弹窗 -->
     <el-dialog
       class="popup"
