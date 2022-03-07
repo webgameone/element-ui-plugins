@@ -490,6 +490,21 @@
     >
     </el-cascader>
 
+    <!-- 滑块 -->
+    <el-slider
+      style="width:100%;"
+      v-if="item.type=='slider'"
+      v-model="formItem[item.key]"
+      :min="item.min?item.min:0"
+      :max="item.max?item.max:100"
+      :step="item.step"
+      :disabled="item.disabled?item.disabled:false"
+      :format-tooltip="item.formatTooltip"
+      :marks="item.marks?item.marks:null"
+      @change="formChange($event,item)"
+      show-stops>
+    </el-slider>
+
 
     <el-upload
       v-if="item.type=='singelUploadComp'"

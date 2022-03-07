@@ -278,6 +278,15 @@ export default {
           //   }
           // },
           {
+            type:'slider',
+            title:'滑块',
+            key: 'sliderInput',
+            step: 10,
+            formatTooltip:(val)=>{
+              return (val)+'%';
+            }
+          },
+          {
             type: 'bigInput',
             title: '文本输入框',
             key: 'bigInputComp',
