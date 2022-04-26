@@ -600,6 +600,7 @@
       <el-color-picker
       v-model="formItem[item.key]"
       :predefine="item.predefineColors"
+      @change="formChange($event,item)"
       show-alpha></el-color-picker>
     </div>
 
