@@ -595,6 +595,15 @@
       >{{its.title}}</el-radio>
     </div>
 
+    <!-- 色彩选择器 -->
+    <div v-if="item.type=='colorPicker'">
+      <el-color-picker
+      v-model="formItem[item.key]"
+      :predefine="item.predefineColors"
+      show-alpha></el-color-picker>
+    </div>
+
+
     <!-- 输入框前的下拉选项，宽度一般和label保持一致 -->
     <div v-if="item.type=='vxeSelect'" class="selectwrap vxeSelectComp" :style="{'width':formObj.labelWidth?formObj.labelWidth+'px':100+'px',float:'left'}">
       <div class="dropDowmComponents">
