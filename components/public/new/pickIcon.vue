@@ -6,7 +6,7 @@
       width="400"
       trigger="click">
       <span slot="reference" class="selectBox">
-        <i :class="'iconfont '+formItem[item.key]"></i>
+        <i :class="'iconfont '+userChooseIcon"></i>
       </span>
 
       <div class="iconList">
@@ -44,6 +44,14 @@ export default {
       }
     }
   },
+  watch:{
+    formItem: {
+        handler(val, newval) {
+          this.userChooseIcon = val[this.item.key];
+        },
+        deep: true
+      }
+  },
   data() {
     return {
       userChooseIcon:'',
@@ -69,6 +77,7 @@ export default {
   methods: {
     //给icon绑定的点击事件
     setIcon(event,item){
+      this.userChooseIcon = item
       this.$emit('formChange',item)
     }
   },

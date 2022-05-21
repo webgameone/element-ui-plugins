@@ -1708,7 +1708,7 @@ export default {
         // this.$refs.uiForm.formItem.vxeSelectKey = '下拉选项2';
       }, 3000);
       // this.$refs.uiForm.formItem.vxeSelectKey = '下拉选项2';
-      // this.$refs.uiForm.formItem.pickIcon = 'icon-dalou1'
+      this.$refs.uiForm.formItem.pickIcon = 'icon-dalou1'
     });
   },
   methods: {
