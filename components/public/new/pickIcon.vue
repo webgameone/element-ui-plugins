@@ -69,7 +69,7 @@ export default {
   methods: {
     //给icon绑定的点击事件
     setIcon(event,item){
-      this.$emit('formChange',event,item,this.item.key)
+      this.$emit('formChange',item)
     }
   },
 }

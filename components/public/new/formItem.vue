@@ -512,7 +512,7 @@
       :formObj="formObj"
       :item="item"
       :formItem="formItem"
-      @formChange="formChange"
+      @formChange="formChange(formItem[item.key]=$event,item)"
     >
     </pickIcon>
 
