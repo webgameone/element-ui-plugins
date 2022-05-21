@@ -255,10 +255,34 @@ export default {
           driver1NameSelect:[
             {text:'你好',value:'你好'},
             {text:'吃饭',value:'吃饭'}
+          ],
+          //图标合集
+          pickIcon:[
+            "icon-dalou",
+            "icon-ic_location_city_px",
+            "icon-24gf-building",
+            "icon-dalou1",
+            "icon-wuding",
+            "icon-dalou",
+            "icon-ic_location_city_px",
+            "icon-24gf-building",
+            "icon-dalou1",
+            "icon-dalou1",
+            "icon-wuding",
+            "icon-dalou",
+            "icon-ic_location_city_px",
+            "icon-24gf-building",
+            "icon-dalou1",
           ]
         },
         // form表单组件
         formArr: [
+          {
+            type:'pickIcon',
+            title: "拾取图标",
+            key:'pickIcon',
+            outAdvanced: true
+          },
           // {
           //   type: "inputComp",
           //   title: "两个组件",
@@ -1684,6 +1708,7 @@ export default {
         // this.$refs.uiForm.formItem.vxeSelectKey = '下拉选项2';
       }, 3000);
       // this.$refs.uiForm.formItem.vxeSelectKey = '下拉选项2';
+      // this.$refs.uiForm.formItem.pickIcon = 'icon-dalou1'
     });
   },
   methods: {

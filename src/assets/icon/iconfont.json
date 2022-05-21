@@ -1,0 +1,359 @@
+{
+  "id": "2940842",
+  "name": "旧改",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "537391",
+      "name": "大楼",
+      "font_class": "dalou",
+      "unicode": "e62e",
+      "unicode_decimal": 58926
+    },
+    {
+      "icon_id": "1697698",
+      "name": "楼房",
+      "font_class": "ic_location_city_px",
+      "unicode": "e6c4",
+      "unicode_decimal": 59076
+    },
+    {
+      "icon_id": "7542149",
+      "name": "24gf-building",
+      "font_class": "24gf-building",
+      "unicode": "e838",
+      "unicode_decimal": 59448
+    },
+    {
+      "icon_id": "15516704",
+      "name": "大楼",
+      "font_class": "dalou1",
+      "unicode": "e673",
+      "unicode_decimal": 58995
+    },
+    {
+      "icon_id": "22385689",
+      "name": "创建屋顶高程信息",
+      "font_class": "chuangjianwudinggaochengxinxi",
+      "unicode": "ee21",
+      "unicode_decimal": 60961
+    },
+    {
+      "icon_id": "25368727",
+      "name": "屋顶",
+      "font_class": "wuding",
+      "unicode": "e745",
+      "unicode_decimal": 59205
+    },
+    {
+      "icon_id": "26785832",
+      "name": "屋顶",
+      "font_class": "wuding1",
+      "unicode": "ea13",
+      "unicode_decimal": 59923
+    },
+    {
+      "icon_id": "28009687",
+      "name": "屋顶",
+      "font_class": "wuding2",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
+      "icon_id": "3782933",
+      "name": "修改",
+      "font_class": "xiugai",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "25739952",
+      "name": "修改",
+      "font_class": "xiugai1",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "26696884",
+      "name": "画矩形_0",
+      "font_class": "huajuxing_0",
+      "unicode": "e765",
+      "unicode_decimal": 59237
+    },
+    {
+      "icon_id": "4276948",
+      "name": "空间",
+      "font_class": "kongjian",
+      "unicode": "e623",
+      "unicode_decimal": 58915
+    },
+    {
+      "icon_id": "21529215",
+      "name": "海洋功能区域的图集",
+      "font_class": "haiyanggongnengquyudetuji",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "28606949",
+      "name": "日照时数",
+      "font_class": "rizhaoshishu",
+      "unicode": "e6c0",
+      "unicode_decimal": 59072
+    },
+    {
+      "icon_id": "12932741",
+      "name": "照片",
+      "font_class": "zhaopian",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "3315990",
+      "name": "绘制",
+      "font_class": "huizhi",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "11316728",
+      "name": "绘制",
+      "font_class": "huizhi1",
+      "unicode": "e79e",
+      "unicode_decimal": 59294
+    },
+    {
+      "icon_id": "11572568",
+      "name": "绘制",
+      "font_class": "huizhi2",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
+      "icon_id": "25317573",
+      "name": "绘制面",
+      "font_class": "huizhimian",
+      "unicode": "e6ae",
+      "unicode_decimal": 59054
+    },
+    {
+      "icon_id": "11471267",
+      "name": "模型库",
+      "font_class": "moxingku",
+      "unicode": "e968",
+      "unicode_decimal": 59752
+    },
+    {
+      "icon_id": "24843741",
+      "name": "模型库",
+      "font_class": "moxingku1",
+      "unicode": "e66f",
+      "unicode_decimal": 58991
+    },
+    {
+      "icon_id": "1177376",
+      "name": "统计表",
+      "font_class": "tongjibiao-copy",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "2572065",
+      "name": "1 楼信息设施",
+      "font_class": "shujujiankong",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "9658652",
+      "name": "库存初始化",
+      "font_class": "kucunchushihua",
+      "unicode": "e632",
+      "unicode_decimal": 58930
+    },
+    {
+      "icon_id": "20826362",
+      "name": "公共区域",
+      "font_class": "gonggongquyu",
+      "unicode": "e690",
+      "unicode_decimal": 59024
+    },
+    {
+      "icon_id": "22610019",
+      "name": "楼信息",
+      "font_class": "louxinxi",
+      "unicode": "e66d",
+      "unicode_decimal": 58989
+    },
+    {
+      "icon_id": "11799000",
+      "name": "3D旋转",
+      "font_class": "Dxuanzhuan",
+      "unicode": "e64c",
+      "unicode_decimal": 58956
+    },
+    {
+      "icon_id": "17196601",
+      "name": "贴地面_24",
+      "font_class": "tiedimian_24",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "15779682",
+      "name": "建筑",
+      "font_class": "jianzhu",
+      "unicode": "e702",
+      "unicode_decimal": 59138
+    },
+    {
+      "icon_id": "36071",
+      "name": "测量",
+      "font_class": "celiang",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "36107",
+      "name": "面积",
+      "font_class": "mianji",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "9039260",
+      "name": "移动",
+      "font_class": "yidong",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    },
+    {
+      "icon_id": "9923725",
+      "name": "测量类型",
+      "font_class": "celiangleixing",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "17937317",
+      "name": "测量",
+      "font_class": "celiang1",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "17937333",
+      "name": "测量工具1",
+      "font_class": "celianggongju1",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
+      "icon_id": "22381630",
+      "name": "模型压平",
+      "font_class": "moxingyaping",
+      "unicode": "edbd",
+      "unicode_decimal": 60861
+    },
+    {
+      "icon_id": "22383736",
+      "name": "模型编辑",
+      "font_class": "moxingbianji",
+      "unicode": "ee03",
+      "unicode_decimal": 60931
+    },
+    {
+      "icon_id": "26069155",
+      "name": "缩放",
+      "font_class": "scale",
+      "unicode": "e6b4",
+      "unicode_decimal": 59060
+    },
+    {
+      "icon_id": "586911",
+      "name": "guide-delete",
+      "font_class": "guidedelete",
+      "unicode": "e740",
+      "unicode_decimal": 59200
+    },
+    {
+      "icon_id": "2076385",
+      "name": "删除",
+      "font_class": "shanchu",
+      "unicode": "e8c1",
+      "unicode_decimal": 59585
+    },
+    {
+      "icon_id": "4770724",
+      "name": "导入",
+      "font_class": "daoru",
+      "unicode": "e635",
+      "unicode_decimal": 58933
+    },
+    {
+      "icon_id": "5357319",
+      "name": "人机交互3D-三维坐标",
+      "font_class": "renjijiaohuD-sanweizuobiao",
+      "unicode": "e6e1",
+      "unicode_decimal": 59105
+    },
+    {
+      "icon_id": "5357320",
+      "name": "人机交互3D-三维缩放",
+      "font_class": "renjijiaohuD-sanweisuofang",
+      "unicode": "e6e2",
+      "unicode_decimal": 59106
+    },
+    {
+      "icon_id": "5357321",
+      "name": "人机交互3D-三维旋转",
+      "font_class": "renjijiaohuD-sanweixuanzhuan",
+      "unicode": "e6e3",
+      "unicode_decimal": 59107
+    },
+    {
+      "icon_id": "5485672",
+      "name": "显示",
+      "font_class": "xianshi",
+      "unicode": "e61e",
+      "unicode_decimal": 58910
+    },
+    {
+      "icon_id": "5896808",
+      "name": "地图-地标",
+      "font_class": "ditu-dibiao",
+      "unicode": "ec3f",
+      "unicode_decimal": 60479
+    },
+    {
+      "icon_id": "7579563",
+      "name": "对比",
+      "font_class": "zaixianduibiweijihuo",
+      "unicode": "e7dc",
+      "unicode_decimal": 59356
+    },
+    {
+      "icon_id": "20104509",
+      "name": "快照",
+      "font_class": "kuaizhao",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
+      "icon_id": "22383092",
+      "name": "比例缩放",
+      "font_class": "bilisuofang",
+      "unicode": "edd9",
+      "unicode_decimal": 60889
+    },
+    {
+      "icon_id": "22383460",
+      "name": "贴图设置",
+      "font_class": "tietushezhi",
+      "unicode": "edeb",
+      "unicode_decimal": 60907
+    }
+  ]
+}

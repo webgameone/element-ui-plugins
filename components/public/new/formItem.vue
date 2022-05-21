@@ -505,6 +505,16 @@
       show-stops>
     </el-slider>
 
+    <!-- 选择拾取图标工具 -->
+    <pickIcon
+      style="width:100%;"
+      v-if="item.type=='pickIcon'"
+      :formObj="formObj"
+      :item="item"
+      :formItem="formItem"
+      @formChange="formChange"
+    >
+    </pickIcon>
 
     <el-upload
       v-if="item.type=='singelUploadComp'"
@@ -649,6 +659,7 @@ import selectList from '@/components/public/new/selectList'
 import bigSelectList from '@/components/public/new/bigSelectList'
 import bigDataSelect from '@/components/public/new/bigDataSelect'
 import selectTree from '@/components/public/selectTree'
+import pickIcon from '@/components/public/new/pickIcon'
 
 //过滤器
 import {setTextLengthFilter} from '@/filters/index.js'
@@ -689,6 +700,7 @@ export default {
     selectList,
     bigSelectList,
     bigDataSelect,
+    pickIcon,
     selectTree
   },
   // watch:{
