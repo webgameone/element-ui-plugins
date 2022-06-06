@@ -48,6 +48,7 @@
     >
       <div slot="slot">
         <!-- form组件库 -->
+
         <ui-form
           @formReady="userFormReady"
           @formClick="userFormClick"
@@ -65,9 +66,15 @@
       @popupBtnFn="popupBtnFn"
     >
       <div slot="slot" style="height:100%">
-        <ui-ztree
-          :treeProps="ztreeObj"
-        ></ui-ztree>
+      <ui-tree
+        ref="infoTreeBox"
+        class="infoTreeBox"
+        :treeObj="InfoTreeData"
+        @checkChange="checkChange"
+        @getNodeData="clickInfoTree"
+        :filter-node-method="InfoTreeData.filterNode"
+      >
+      </ui-tree>
       </div>
     </ui-drag-popup>
 
@@ -1580,7 +1587,13 @@ export default {
       formTree: {
         isShowInput: true,
         key: "popTree",
-        treeDeptData: [{"id":"1001","roleName":"菜单管理员"},{"id":"1002","roleName":"测试编辑功能"},{"id":"1003","roleName":"财务测试"},{"id":"1004","roleName":"信息"},{"id":"1006","roleName":"IT"}],
+        treeDeptData: [
+          {"id":"1001","roleName":"菜单管理员"},
+          {"id":"1002","roleName":"测试编辑功能"},
+          {"id":"1003","roleName":"财务测试"},
+          {"id":"1004","roleName":"信息"},
+          {"id":"1006","roleName":"IT"}
+        ],
         checkedKeys: [],
         defaultProps: {
           children: "childMenu",
@@ -1635,6 +1648,99 @@ export default {
           }
         },
         data:null
+      },
+      //tree
+      InfoTreeData: {
+        isShowInput: true, //是否显示搜索框
+        key: "infoTree2",
+        treeDeptData: [
+          {
+            "id":"1001",
+            "roleName":"楼栋A",
+            children:[
+              {
+                "id":"10010",
+                "roleName":"楼顶"
+              },
+              {
+                "id":"10011",
+                "roleName":"楼内"
+              },
+              {
+                "id":"10012",
+                "roleName":"外立面A",
+                children:[
+                  {
+                    "id":"100120",
+                    "roleName":"外墙",
+                    "hideBtn":true
+                  },
+                  {
+                    "id":"100121",
+                    "roleName":"单元门",
+                    "hideBtn":true
+                  }
+                ]
+              },
+              {
+                "id":"10013",
+                "roleName":"外立面B"
+              }
+            ]
+          },
+          {
+            "id":"1002",
+            "roleName":"公共区域",
+            children:[
+              {
+                "id":"10020",
+                "roleName":"楼顶"
+              },
+              {
+                "id":"10021",
+                "roleName":"楼内"
+              },
+              {
+                "id":"10022",
+                "roleName":"外立面A",
+                children:[
+                  {
+                    "id":"100220",
+                    "roleName":"外墙",
+                    "hideBtn":true
+                  },
+                  {
+                    "id":"100221",
+                    "roleName":"单元门",
+                    "hideBtn":true
+                  }
+                ]
+              },
+              {
+                "id":"10023",
+                "roleName":"外立面B"
+              }
+            ]
+          }
+        ],
+        checkedKeys: [],
+        defaultProps: {
+          children: "children",
+          label: "roleName",
+          id:"id",
+          hideBtn: "hideBtn"
+        },
+        filterNode: (value, data) => {
+          if (!value) return true;
+          return (
+            data.roleName.indexOf(value) !== -1 || data.id.indexOf(value) !== -1
+          );
+        },
+        expandAll: false,
+        showCheckbox: false,//是否显示checkbox
+        checkOnClickNode: true,
+        checkStrictly: false,
+        treeSlot: true
       }
     };
   },
@@ -1709,6 +1815,120 @@ export default {
       }, 3000);
       // this.$refs.uiForm.formItem.vxeSelectKey = '下拉选项2';
       this.$refs.uiForm.formItem.pickIcon = 'icon-dalou1'
+
+      //tree的测试
+      setTimeout(() => {
+        this.InfoTreeData.treeDeptData = [
+          {
+            "id":"1001",
+            "roleName":"楼栋A",
+            children:[
+              {
+                "id":"10010",
+                "roleName":"楼顶"
+              },
+              {
+                "id":"10011",
+                "roleName":"楼内"
+              },
+              {
+                "id":"10012",
+                "roleName":"外立面A",
+                children:[
+                  {
+                    "id":"100120",
+                    "roleName":"外墙",
+                    "hideBtn":true
+                  },
+                  {
+                    "id":"100121",
+                    "roleName":"单元门",
+                    "hideBtn":true
+                  },
+                   {
+                    "id":"100122",
+                    "roleName":"单元门2",
+                    "hideBtn":true
+                  }
+                ]
+              },
+              {
+                "id":"10013",
+                "roleName":"外立面B"
+              }
+            ]
+          },
+          {
+            "id":"1002",
+            "roleName":"公共区域",
+            children:[
+              {
+                "id":"10020",
+                "roleName":"楼顶"
+              },
+              {
+                "id":"10021",
+                "roleName":"楼内"
+              },
+              {
+                "id":"10022",
+                "roleName":"外立面A",
+                children:[
+                  {
+                    "id":"100220",
+                    "roleName":"外墙",
+                    "hideBtn":true
+                  },
+                  {
+                    "id":"100221",
+                    "roleName":"单元门",
+                    "hideBtn":true
+                  }
+                ]
+              },
+              {
+                "id":"10023",
+                "roleName":"外立面B"
+              }
+            ]
+          },
+          {
+            "id":"1003",
+            "roleName":"公共区域2",
+            children:[
+              {
+                "id":"10030",
+                "roleName":"楼顶2"
+              },
+              {
+                "id":"10031",
+                "roleName":"楼内2"
+              },
+              {
+                "id":"10032",
+                "roleName":"外立面A2",
+                children:[
+                  {
+                    "id":"100301",
+                    "roleName":"外墙2",
+                    "hideBtn":true
+                  },
+                  {
+                    "id":"100302",
+                    "roleName":"单元门2",
+                    "hideBtn":true
+                  }
+                ]
+              },
+              {
+                "id":"10033",
+                "roleName":"外立面B2"
+              }
+            ]
+          }
+        ]
+      }, 7000);
+
     });
   },
   methods: {
@@ -1923,6 +2143,9 @@ export default {
       // console.log(node)
       // console.log(check)
       // console.log(checked)
+    },
+    clickInfoTree(){
+
     },
     userFormClick(event){
       console.log(event.target.getAttribute('name'));

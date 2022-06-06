@@ -39,6 +39,8 @@ filterNode //对树节点进行筛选时执行的方法，返回 true 表示这�
       highlight-current
       @node-click="getNodeData"
       @check-change="checkChange"
+      @node-expand="handleNodeExpand"
+      @node-collapse="handleNodeCollapse"
       style="width:100%">
         <template v-if="treeObj.treeSlot?treeObj.treeSlot:false" v-slot="{ node }">
           <slot name="treeButton" :node="node"></slot>
@@ -102,6 +104,50 @@ export default {
     },
     checkChange(node, check, checked) {
       this.$emit('checkChange',node, check, checked)
+    },
+    // 树节点展开
+    handleNodeExpand(data) {
+      // 保存当前展开的节点
+      let flag = false
+      if(!this.treeObj.expandKeys){
+        this.treeObj.expandKeys = []
+      }
+      this.treeObj.expandKeys.some(item => {
+        if (item === data.id) { // 判断当前节点是否存在， 存在不做处理
+          flag = true
+          return true
+        }
+      })
+      if (!flag) { // 不存在则存到数组里
+        this.treeObj.expandKeys.push(data.id)
+      }
+    },
+    // 树节点关闭
+    handleNodeCollapse(data) {
+      // 删除当前关闭的节点
+      if(!this.treeObj.expandKeys){
+        return
+      }
+      if(this.treeObj.expandKeys&&this.treeObj.expandKeys.length>0){
+        this.treeObj.expandKeys.some((item, i) => {
+          if (item === data.id) {
+            this.treeObj.expandKeys.splice(i, 1)
+          }
+        })
+        this.removeChildrenIds(data) // 这里主要针对多级树状结构，当关闭父节点时，递归删除父节点下的所有子节点
+      }
+    },
+    // 删除树子节点
+    removeChildrenIds(data) {
+      if (data.children) {
+        data.children.forEach((item)=>{
+          const index = this.treeObj.expandKeys.indexOf(item.id)
+          if (index > 0) {
+            this.treeObj.expandKeys.splice(index, 1)
+          }
+          this.removeChildrenIds(item)
+        })
+      }
     }
   },
 }
