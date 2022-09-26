@@ -7,9 +7,9 @@ drawerObj{
   direction:'rtl',//抽屉打开的方向
   showClose:true, //是否显示关闭按钮
   size: '40%',  // 抽屉尺寸
-    withHeader: true,// 是否显示标题（默认true）
-    footer: true,// 是否显示底部按钮（默认true）
-    wrapperClosable: true,// 是否可点击遮罩关闭（默认true）
+  withHeader: true,// 是否显示标题（默认true）
+  footer: true,// 是否显示底部按钮（默认true）
+  wrapperClosable: true,// 是否可点击遮罩关闭（默认true）
   btnAlign: 'flex-end',  // 底部按钮对齐方式，需要传入justifyContent相关属性
   //自定义的按钮组，如果不自定义，就使用默认的按钮组
   btnArr:[
@@ -24,6 +24,8 @@ drawerObj{
     }
   ]
 }
+
+显示抽屉：showDrawer
 */
 <template>
   <el-drawer

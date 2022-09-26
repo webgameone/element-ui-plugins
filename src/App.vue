@@ -141,17 +141,23 @@ export default {
         fixedWidth:false,//固定宽度，不使用自适应
         labelPosition:'right',
         col: 4, // 自定义列数
-        labelWidth: 120, // 自定义label的宽度
+        labelWidth: 150, // 自定义label的宽度
         btnInline: true, //查询按钮默认在右侧
         btnArrPos: "left", //下方按钮组默认位置
         showpopup: true,
         needAdvanced:true,//展开收起
         searchTop: '10px',//form距离顶部距离，默认20px
-        noButton:false,//是否因此查询和重置按钮
+        noButton:true,//是否因此查询和重置按钮
         //自定义的查询按钮
         custQueryBtn:[
           {
-            title: "增加",
+            title: "搜索",
+            key: "add",
+            type: "primary",
+            disabled: false
+          },
+          {
+            title: "哈哈哈",
             key: "add",
             type: "primary",
             disabled: false
@@ -286,7 +292,7 @@ export default {
         formArr: [
           {
             type:'pickIcon',
-            title: "拾取图标",
+            title: "拾取图标哈哈哈哈哈",
             key:'pickIcon',
             outAdvanced: true
           },
@@ -619,6 +625,16 @@ export default {
             uploadType:'handUpload', //手动上传
             acceptSize:10  //只允许上传小于10M的文件
           },
+          {
+            type:'singelUploadComp',//拖拽方式上传文件，可以支持单个文件，也可以支持多个文件
+            title:'拖拽上传',
+            txt:'只能上传gltf模型，最大不能超过10m',
+            acceptFile: '.gltf',
+            uploadType: 'handUpload', //手动上传
+            multiple:false, //是否允许选择多个文件
+            fileLimit: 1,//只能上传一个文件
+            acceptSize:10  //只允许上传小于10M的文件
+          }
           // {
           //   type:'uploadComp',
           //   title:'背景图',
@@ -2007,6 +2023,7 @@ export default {
       }
     },
     formChange(event, item, itemKey) {
+      console.log(event)
       if(itemKey == 'isHaveDown'){
         this.$refs.uiForm.setFormAttribute('routeName','disabled',true)
       }else if(itemKey == 'vxeSelectKey'){
@@ -2150,6 +2167,9 @@ export default {
     userFormClick(event){
       console.log(event.target.getAttribute('name'));
       console.log(event.target.dataset.name);
+    },
+    handleChange(file,fileList,item){
+      console.log(file)
     }
   }
 };
