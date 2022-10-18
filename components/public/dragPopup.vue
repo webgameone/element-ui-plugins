@@ -138,7 +138,7 @@ export default {
     position: relative;
     .vxe-modal--content{
       position: relative;
-      padding: 5px;
+      padding: 5px 20px;
     }
     .vxe-modal--content  div:nth-child(1){
       // border: 1px solid transparent;

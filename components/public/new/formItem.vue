@@ -501,6 +501,8 @@
       :disabled="item.disabled?item.disabled:false"
       :format-tooltip="item.formatTooltip"
       :marks="item.marks?item.marks:null"
+      input-size="mini"
+      :show-input="item.input?item.input:false"
       @change="formChange($event,item)"
       show-stops>
     </el-slider>

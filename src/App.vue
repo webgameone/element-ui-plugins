@@ -340,6 +340,7 @@ export default {
             title:'滑块',
             key: 'sliderInput',
             step: 10,
+            input: true,
             formatTooltip:(val)=>{
               return (val)+'%';
             }
