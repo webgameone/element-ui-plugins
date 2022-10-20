@@ -401,6 +401,25 @@ export default {
           },
           {
             type: "selectComp",
+            title: "前输入后文字",
+            key: "111111",
+            isHand:true,
+            placeholder: "请选择或输入查找",
+            width:'calc(100% - 30px)',
+
+            hasSlot:true,//是否 可以在当前列中再加入一个输入项，但是两个输入项的宽度需要自定义，否则都为100%
+            slotData:{
+              width:'30px',
+              type:'rightTextComp',
+              title:'文字组件',
+              key:'test2222222', //key值，唯一值
+              textValue:'呵呵',
+              color:'#ff0000',
+              floatType:'right'
+            },
+          },
+          {
+            type: "selectComp",
             title: "归属",
             key: "111111",
             isHand:true,
@@ -457,7 +476,7 @@ export default {
               key:'queryTime',
               clearable:false,
               disabled:false,
-              width: `calc(100% - 120px)`,//如果是120，后面的就使用120
+              width: `calc(100% - 150px)`,//如果是120，后面的就使用120
             }
           },
           {
@@ -477,11 +496,11 @@ export default {
           },
           {
             type: "checkboxComp",
-            key: "start",
+            key: "start222",
             title: "",
             disabled:false,
             marginLeft:'5px',
-            secondTitle: "这个没标题"
+            secondTitle: "这个checkbox没有标题的"
           },
           {
             type: "bigDataSelectComp",
@@ -513,7 +532,7 @@ export default {
             key: "routeType",
             custText: "content",
             custValue: "content",
-            width:400,
+            width:400, //写死宽度
             // col:2,
             placeholder: "请选择或输入查找"
           },
@@ -647,7 +666,8 @@ export default {
         ],
         model:{
           driver1Name:'222222',
-          driver1NameSelect:'你好'
+          driver1NameSelect:'你好',
+          texts:'呵呵'
         }
       },
       //table组件库
