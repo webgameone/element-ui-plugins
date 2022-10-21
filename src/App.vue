@@ -414,7 +414,7 @@ export default {
               title:'文字组件',
               key:'test2222222', //key值，唯一值
               textValue:'呵呵',
-              color:'#ff0000',
+              color:'#ffff00',
               floatType:'right'
             },
           },

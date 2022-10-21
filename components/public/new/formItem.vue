@@ -25,7 +25,7 @@
     <!-- 输入框右侧的文字标识符 -->
     <span
       v-if="item.type=='rightTextComp'"
-      :style="{color:item.color?item.color:'#000000',float:item.floatType?item.floatType:'right'}"
+      :style="{color:item.color?item.color:'#606266',float:item.floatType?item.floatType:'right'}"
     >
       {{item.textValue}}
     </span>
