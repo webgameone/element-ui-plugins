@@ -30,6 +30,24 @@
       {{item.textValue}}
     </span>
 
+    <!-- 表格输入项 -->
+    <div class="tableInputContainer" style="width:100%" v-if="item.type=='tableInput'">
+      <el-table
+        :data="item.tableData"
+        style="width: 100%">
+        <el-table-column
+          v-for="(its,mindex) in item.tableName"
+          :key="mindex"
+          :label="its"
+          :min-Width="(100/item.tableData.length)+'%'">
+          <template slot-scope="scope">
+            <!-- <span>{{ scope.row[its] }}</span> -->
+            <el-input-number style="width:100%" size="mini" v-model="scope.row[item.tableField[mindex]]" :controls="false"></el-input-number>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
+
 
 
     <!-- 时分秒时间查询组件 -->
@@ -1100,6 +1118,15 @@ export default {
 
 <style lang="scss">
 .formItemContainer{
+  .tableInputContainer{
+    .cell{
+      text-align: center!important;
+    }
+  }
+  .el-table .cell{
+    padding-left: 1px!important;
+    padding-right: 1px!important;
+  }
   .nullComp{
     height: 29px;
   }

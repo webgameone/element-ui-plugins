@@ -7,6 +7,7 @@
         :formObj="dataForm"
         @formReady="dataFormReady"
         @formBlur="formBlur"
+        @formClick="formClick"
         @formBtnClick="formBtnClick"
         @formChange="formChange"
         @searchList="searchList"
@@ -140,7 +141,7 @@ export default {
         id: "testForm",
         fixedWidth:false,//固定宽度，不使用自适应
         labelPosition:'right',
-        col: 4, // 自定义列数
+        col: 3, // 自定义列数
         labelWidth: 150, // 自定义label的宽度
         btnInline: true, //查询按钮默认在右侧
         btnArrPos: "left", //下方按钮组默认位置
@@ -290,6 +291,29 @@ export default {
         },
         // form表单组件
         formArr: [
+          {
+            type:'tableInput',//表格输入项
+            title: "",//不是要标题
+            key:'tableIn',
+            tableName:['时间1','时间2','时间3','时间4','时间5','时间6','时间7','时间8','时间9','时间10'],//表格显示名称数组
+            tableField:['1','2','3','4','5','6','7','8','9','10'],//数组对应字段值
+            outAdvanced: true,
+            //真正的值
+            tableData:[
+              {
+                '1': 124,
+                '2': 212,
+                '3': 1024,
+                '4': 444,
+                '5': 5551,
+                '6': 1212,
+                '7': 2121,
+                '8': 3234,
+                '9': 4567,
+                '10': 9876
+              },
+            ]
+          },
           {
             type:'pickIcon',
             title: "拾取图标哈哈哈哈哈",
@@ -2017,6 +2041,7 @@ export default {
       // this.$refs["uiForm"].setFormAttribute("start", "disabled", true);
     },
     formBtnClick(event, item) {
+      console.log(item)
       if (item == "btn1") {
         this.queryForm.selectData.selectListA=[];
         for(let i=0;i<100;i++){
@@ -2055,12 +2080,17 @@ export default {
     formKeyupEnter(event, item, itemKey) {
     },
     formClick(event, item) {
-      switch (item.key) {
+      switch (item) {
         case "siteCode":
           // 点击输入框右侧按钮，获取输入框内的值
           // console.log(this.$refs.drawerForm.formItem.siteCode);
           break;
-
+        case "add":
+          //获取修改table输入框里面的值
+          // console.log(this.dataForm.formArr[0].tableData)
+          let attribute = this.$refs.uiForm.getFormAttribute('tableIn')
+          console.log(attribute)
+          break;
         default:
           break;
       }

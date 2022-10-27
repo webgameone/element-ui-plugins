@@ -591,7 +591,7 @@ export default {
           }
           //如果有组合组件
           if(item.slotData&&item.slotData.key&&item.slotData.key!==''){
-            console.log(item.slotData.key);
+            // console.log(item.slotData.key);
             //model默认值赋值操作 组合组件
             if(this.formObj.model){
               if(this.formObj.model[item.key]){
@@ -659,6 +659,10 @@ export default {
           }
           //checkboxComp
           if(formContent[i].parentNode.getAttribute('tag') == 'checkboxComp' && formContent[i].parentNode.getAttribute('tag').innerHtml==''){
+            formContent[i].style.width = `100%`;
+          }
+          //tableInput
+          if(formContent[i].parentNode.getAttribute('tag') == 'tableInput' && formContent[i].parentNode.children[0].innerHTML==' '){
             formContent[i].style.width = `100%`;
           }
           if(this.formObj.labelTop==true){
@@ -890,7 +894,53 @@ export default {
           }
         }
       }
+    },
+    //获取指定的组件属性
+    getFormAttribute(keyName){
+       if(this.formObj.formCollapse){
+        //折叠的form结构
+        for(let i=0;i<this.formObj.formArr.length;i++){
+          let j = this.formObj.formArr[i].formItem.findIndex((e,index)=>{
+            if(e.hasSlot&&e.slotData){
+              if(e.slotData.key == keyName){
+                return e.slotData.key == keyName;
+              }
+            }
+            return e.key == keyName;
+          })
 
+          if(j!==-1){
+            if(this.formObj.formArr[i].formItem[j][key]==keyName){
+              return this.formObj.formArr[i].formItem[j];
+            }
+            //1.有hasSlot,2.slotData里面的key值一样,3.eachAttribute分开属性设置
+            if(this.formObj.formArr[i].formItem[j].hasSlot && this.formObj.formArr[i].formItem[j].slotData.key==keyName&&this.formObj.formArr[i].formItem[j].eachAttribute){
+              return this.formObj.formArr[i].formItem[j].slotData;
+            }
+          }
+        }
+      }else{
+        //非折叠的form结构
+        let i = this.formObj.formArr.findIndex((e,index)=>{
+          if(e.hasSlot&&e.slotData){
+            if(e.slotData.key == keyName){
+              return e.slotData.key == keyName;
+            }
+          }
+          return e.key == keyName;
+        })
+
+
+        if(i!==-1){
+          if(this.formObj.formArr[i].key==keyName){
+            return this.formObj.formArr[i];
+          }
+          //1.有hasSlot,2.slotData里面的key值一样,3.eachAttribute分开属性设置
+          if(this.formObj.formArr[i].hasSlot && this.formObj.formArr[i].slotData.key==keyName&&this.formObj.formArr[i].eachAttribute){
+            return this.formObj.formArr[i].slotData;
+          }
+        }
+      }
     },
     //修改组件按钮属性 keyName:key的名字   attrName:要修改的属性名称  value:属性要修改的值
     setFormBtnAttribute(keyName,attrName,value){
