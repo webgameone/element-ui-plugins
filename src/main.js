@@ -14,8 +14,6 @@ import "@/src/assets/z-tree/js/jquery.ztree.excheck.min.js"
 import "@/src/assets/z-tree/js/jquery.ztree.exedit.min.js"
 import "@/src/assets/z-tree/js/jquery.ztree.exhide.min.js"
 
-
-
 //jquery使用this.$$
 Vue.prototype.$$ = jQuery;
 
