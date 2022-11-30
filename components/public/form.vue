@@ -58,6 +58,9 @@
             :inline="formObj.formArr.inline?formObj.formArr.inline:true"
             :model="formItem"
             :label-suffix="formObj.labelSuffix?formObj.labelSuffix:''"
+            :style="{
+              background:formObj.formBackground?formObj.formBackground:'#fff',
+            }"
             :size="formObj.formArr.size?formObj.formArr.size:'mini'">
 
             <!-- form表单是需要分组折叠的 -->
@@ -83,6 +86,7 @@
                     display:item.display?item.display:(formObj.needAdvanced==null||item.outAdvanced||advanced)?'inline-block':'none',
                     opacity:(item.type=='nullComp'||item.type=='nullTopComp')?'0':'1',
                     color:item.titleColor?item.titleColor:'#606266',
+                    background:formObj.formItemBgColor?formObj.formItemBgColor:'#fff',
                     fontWeight:item.fontWeight?item.fontWeight:'default',
                     marginLeft:formObj.fixedWidth?'15px':0
                     }"
@@ -182,6 +186,7 @@
                   float:(item.title==' '||item.title=='')&&(item.type!=='vxeSelect'&&item.type!=='checkboxComp'&&item.type!=='radioComp')?none:'left',
                   opacity:(item.type=='nullComp'||item.type=='nullTopComp')?'0':'1',
                   color:item.titleColor?item.titleColor:'#606266',
+                  background:formObj.formItemBgColor?formObj.formItemBgColor:'#fff',
                   fontWeight:item.fontWeight?item.fontWeight:'default',
                   marginLeft:formObj.fixedWidth?'15px':0
                   }"
@@ -505,6 +510,24 @@ export default {
       this.init();
       //通知父组件，form组件已经渲染完成了
       this.$emit('formReady')
+
+      //如果有form表单的背景颜色设置
+      if(this.formObj.formBackground){
+        this.$$('.el-collapse-item__wrap').css('background',this.formObj.formBackground);
+      }
+      //
+      if(this.formObj.collapseBottomBorder){
+        this.$$('.el-collapse-item__wrap').css('border-bottom',this.formObj.collapseBottomBorder);
+      }
+
+      //collapse收纳盒header背景颜色
+      if(this.formObj.collapseHeaderBGColor){
+        this.$$('.el-collapse-item__header').css('background',this.formObj.collapseHeaderBGColor);
+      }
+      //collapse收纳盒header文字颜色
+      if(this.formObj.collapseHeaderTextColor){
+        this.$$('.el-collapse-item__header').css('color',this.formObj.collapseHeaderTextColor);
+      }
     })
   },
   watch:{

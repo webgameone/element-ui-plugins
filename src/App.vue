@@ -969,14 +969,22 @@ export default {
       },
       //弹窗对象
       popObj: {
-        title: "新增",
+        title: "新增12",
         col: 4, //弹窗列数
         loading: false,
+        bgColor: 'rgba(255,0,0,0.5)',//背景颜色
+        border: 'none', //弹窗边框
+        headerColor: 'rgba(255,255,0,0.5)', //顶部标题栏背景颜色
+        headerBottomBorder: 'none', //顶部标题栏底部border
+        headerTitleColor: '#ffffff', //顶部标题栏文字颜色
+        headerTitleTextWeight: '400', //顶部标题栏文字weight
+        headerZoomBtnColor: '#ff0000', //顶部标题栏zoom按钮颜色
+        headerCloseBtnColor: '#00ff00', //顶部标题栏close按钮颜色
         // showFooter: false//隐藏底部按钮
       },
       showDrawer: false, //是否显示抽屉弹窗
       drawerObj: {
-        title: "新增" //（默认''）
+        title: "新增34", //（默认''）
       }, //抽屉弹窗数据
       //弹窗内的form组件
       // form组件库
@@ -1210,8 +1218,20 @@ export default {
         labelPosition: 'left',
         formCollapse:true,//开启可以折叠的form表单
         activeNames:[1,2,3],
+
+        formBackground:'rgba(0,0,0,0.0)', //form表单背景颜色
+        formItemBgColor: 'rgba(0,0,0,0)', //form表单每个元素的背景颜色
+        collapseBottomBorder: '1px solid #ff0000', //collapse收纳盒底部border
+        collapseHeaderBGColor: 'rgba(0,0,0,0)', //collapse收纳盒header背景颜色
+        collapseHeaderTextColor: '#fff', //collapse收纳盒header的文字颜色
+
         // 下拉列表的options
         selectData: {
+          selectA:[
+            { text: "网点到中心", value: "网点到中心" },
+            { text: "中心到中心", value: "中心到中心" },
+            { text: "中心到网点", value: "中心到网点" }
+          ]
         },
         rules: {
         },

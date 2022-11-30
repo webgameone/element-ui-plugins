@@ -300,7 +300,7 @@
       @change="formBlur($event,item)"
       @keyup.enter.native="formKeyupEnter($event,item)"
       :placeholder="item.placeholder?item.placeholder:'请输入内容'"
-      style="width:100%;"
+      :style="{width:'100%'}"
     >
       <!-- 前面的下拉列表 -->
       <bigDataSelect

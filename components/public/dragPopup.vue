@@ -7,6 +7,17 @@ popObj{
   loading:true,// 弹窗是否允许loading
   loadingText:'请稍等,数据请求中!', //自定义loading的文字
   setNoBtn: false,  // 设置底部按钮不显示， 默认显示， false 是显示  true 是不显示
+
+  bgColor: 'rgba(255,0,0,0.5)',//背景颜色
+  border: 'none', //弹窗边框
+  headerColor: 'rgba(255,255,0,0.5)', //顶部标题栏背景颜色
+  headerBottomBorder: 'none', //顶部标题栏底部border
+  headerTitleColor: '#ffffff', //顶部标题栏文字颜色
+  headerTitleTextWeight: '400', //顶部标题栏文字weight
+  headerZoomBtnColor: '#ff0000', //顶部标题栏zoom按钮颜色
+  headerCloseBtnColor: '#00ff00', //顶部标题栏close按钮颜色
+
+  showFooter: true/false, //是否显示底部按钮组
   //自定义的按钮组，如果不自定义，就使用默认的按钮组
   btnArr:[
     {
@@ -83,9 +94,60 @@ export default {
     };
   },
   watch: {
-    showPopup(newVal) {
-      console.log(this.popObj);
-      // this.dialogVisible = newVal;
+    popObj:{
+      handler(newVal){
+        //弹窗背景颜色
+        if(newVal.bgColor){
+          setTimeout(() => {
+            this.$$('.vxe-modal--box').css('background',newVal.bgColor);
+          }, 100);
+        }
+        //弹窗边框
+        if(newVal.border){
+          setTimeout(() => {
+            this.$$('.vxe-modal--box').css('border',newVal.border);
+          }, 100);
+        }
+        //标题背景颜色
+        if(newVal.headerColor){
+          setTimeout(() => {
+            this.$$('.vxe-modal--header').css('background',newVal.headerColor);
+          }, 100);
+        }
+        //标题栏底部Border
+        if(newVal.headerBottomBorder){
+          setTimeout(() => {
+            this.$$('.vxe-modal--header').css('border-bottom',newVal.headerBottomBorder);
+          }, 100);
+        }
+        //标题文字颜色
+        if(newVal.headerTitleColor){
+          setTimeout(() => {
+            this.$$('.vxe-modal--title').css('color',newVal.headerTitleColor);
+          }, 100);
+        }
+        //标题栏文字weight
+        if(newVal.headerTitleTextWeight){
+          setTimeout(() => {
+            this.$$('.vxe-modal--title').css('font-weight',newVal.headerTitleTextWeight);
+          }, 100);
+        }
+        //标题右侧按钮颜色(zoom)
+        if(newVal.headerZoomBtnColor){
+          setTimeout(() => {
+            this.$$('.vxe-modal--zoom-btn').css('color',newVal.headerZoomBtnColor);
+          }, 100);
+        }
+        //标题右侧按钮颜色(close)
+        if(newVal.headerCloseBtnColor){
+          setTimeout(() => {
+            this.$$('.vxe-modal--close-btn').css('color',newVal.headerCloseBtnColor);
+          }, 100);
+        }
+
+      },
+      deep:true,
+      immediate:true
     }
   },
   created() {
