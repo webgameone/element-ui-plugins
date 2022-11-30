@@ -130,6 +130,7 @@
     <el-select
       v-if="item.type=='selectComp'"
       filterable
+      :popper-class="item.poperClass?item.poperClass:''"
       :multiple="item.multiple?item.multiple:false"
       :collapse-tags="item.collapseTags && item.multiple ? true : false"
       :remote="item.remote?item.remote:false"
@@ -193,6 +194,7 @@
       filterable
       class="selectShowIdCompClass"
       :multiple="item.multiple?item.multiple:false"
+      :popper-class="item.poperClass?item.poperClass:''"
       :collapse-tags="item.collapseTags && item.multiple ? true : false"
       :remote="item.remote?item.remote:false"
       :remote-method="item.remoteMethod?item.remoteMethod:null"
@@ -372,6 +374,7 @@
       <el-select
           class="checkboxSelect"
           filterable
+          :popper-class="item.poperClass?item.poperClass:''"
           :placeholder="item.placeholder?item.placeholder:'请选择'"
           clearable
           v-model="formItem[item.key]"
@@ -656,6 +659,7 @@
         <el-select
           filterable
           :multiple="item.multiple?item.multiple:false"
+          :popper-class="item.poperClass?item.poperClass:''"
           :remote="item.remote?item.remote:false"
           :remote-method="item.remoteMethod?item.remoteMethod:null"
           :placeholder="item.placeholder?item.placeholder:'请选择'"

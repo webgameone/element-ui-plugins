@@ -2,6 +2,7 @@
 /*
 弹窗属性
 popObj{
+  className:'自定义的class名字' //弹窗自定义的class名字
   title:'弹窗标题'
   col:4 ,//弹窗的宽度和高度，计算方式(col*20%) 默认是4 ，也就是相对于浏览器视窗80%的宽度和80%的高度
   loading:true,// 弹窗是否允许loading
@@ -35,7 +36,7 @@ popObj{
 */
 <template>
   <vxe-modal
-    class="dragPopup"
+    :class="'dragPopup '+popObj.className?popObj.className:''"
     v-model="dialogVisible"
     :title="popObj.title?popObj.title:''"
     :width="popObj.width?popObj.width+'px':(popObj.col?(popObj.col*20)+'%':'80%')"
