@@ -295,6 +295,7 @@ export default {
             type:'tableInput',//表格输入项
             title: "",//不是要标题
             key:'tableIn',
+            className:'tableInputClass',//自定义的class名字
             tableName:['时间1','时间2','时间3','时间4','时间5','时间6','时间7','时间8','时间9','时间10'],//表格显示名称数组
             tableField:['1','2','3','4','5','6','7','8','9','10'],//数组对应字段值
             outAdvanced: true,

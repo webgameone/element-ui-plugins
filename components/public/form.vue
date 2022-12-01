@@ -80,6 +80,7 @@
                   :hasslot="item.hasSlot"
                   :key="item.key"
                   :prop="item.key"
+                  :class="item.className?item.className:''"
                   :label="item.title&&item.title!=''?item.title:' '"
                   :style="{
                     width: formObj.fixedWidth?'auto':(formObj.col?(100/(item.col&&item.col!==1?(formObj.col/item.col):formObj.col)+'%'):'25%'),
@@ -179,6 +180,7 @@
                 :hasslot="item.hasSlot"
                 :key="item.key"
                 :prop="item.key"
+                :class="item.className?item.className:''"
                 :label="item.title&&item.title!=''?item.title:' '"
                 :style="{
                   width: formObj.fixedWidth?'auto':(formObj.col?(100/(item.col&&item.col!==1?(formObj.col/item.col):formObj.col)+'%'):'25%'),
