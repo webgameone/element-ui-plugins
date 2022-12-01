@@ -443,6 +443,17 @@ export default {
             },
           },
           {
+            type:'singelUploadSmallComp',//拖拽方式上传文件，可以支持单个文件，也可以支持多个文件
+            title:'拖拽上传',
+            showType: 'line', //单行显示模式
+            txt:'只能上传gltf模型，最大不能超过10m',
+            acceptFile: '.gltf',
+            uploadType: 'handUpload', //手动上传
+            multiple:false, //是否允许选择多个文件
+            fileLimit: 1,//只能上传一个文件
+            acceptSize:10  //只允许上传小于10M的文件
+          },
+          {
             type: "selectComp",
             title: "归属",
             key: "111111",

@@ -549,6 +549,7 @@
     >
     </pickIcon>
 
+    <!-- 单文件上传 大输入框-->
     <el-upload
       v-if="item.type=='singelUploadComp'"
       class="upload-demo"
@@ -564,6 +565,22 @@
       <i class="el-icon-upload"></i>
       <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
       <div class="el-upload__tip" slot="tip">{{item.txt}}</div> <!--说明性的文字-->
+    </el-upload>
+
+    <!-- 单文件上传 小输入框-->
+    <el-upload
+      v-if="item.type=='singelUploadSmallComp'"
+      class="upload-demo-small"
+      drag
+      :auto-upload="false"
+      :accept="item.acceptFile?item.acceptFile:''"
+      :multiple="(typeof item.multiple!=='undefined')&&!item.multiple?item.multiple:true"
+      :limit="item.fileLimit?item.fileLimit:3"
+      :on-remove="function (file,fileList) { return handleRemove(file,fileList ,item)}"
+      :on-change="function (file,fileList) { return handleChange(file,fileList ,item)}"
+      :on-exceed="handleExceed"
+    >
+      <div class="upload__text">{{item.txt}}</div> <!--说明性的文字-->
     </el-upload>
 
     <!-- 上传组件 上传后就自动提交服务器-->
@@ -1258,6 +1275,24 @@ export default {
   .el-upload-dragger{
     width: 100%;
     height: 90px;
+  }
+  .upload-demo-small{
+    .el-upload {
+      width:100%;
+    }
+    .el-upload-dragger{
+      width: 100%;
+      height: 28px;
+    }
+    .el-upload-list__item{
+      position: absolute;
+      top: -10px;
+      // margin-top: -35px;
+      width: 100%;
+      height: 28px;
+      line-height: 28px;
+      backdrop-filter: blur(20px); //模糊度
+    }
   }
   .el-upload__tip{
     margin-top: -10px;
