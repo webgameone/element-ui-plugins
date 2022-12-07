@@ -5,6 +5,18 @@
     <!-- topNull 文字在上面时候使用-->
     <div class="nullTopComp" v-if="item.type=='nullTopComp'" style="width:100%;"></div>
 
+    <!-- 标题 -->
+    <span
+      v-if="item.type=='formItemTitle'"
+      class="collapseSecondTitle"
+      :style="{
+        color:item.secondTitleColor?item.secondTitleColor:'#000000',
+        paddingLeft:item.secondTitleLeft?item.secondTitleLeft:'0px',
+        fontSize:item.seconfFontSize?item.seconfFontSize:'12px',
+        fontWeight:item.secondFontWeight?item.secondFontWeight:'normal'
+      }"
+    >{{item.stitle}}</span>
+
     <!-- 普通文本显示组件 -->
     <el-tooltip
       v-if="item.type=='textComp'"
@@ -34,12 +46,13 @@
     <div class="tableInputContainer" style="width:100%" v-if="item.type=='tableInput'">
       <el-table
         :data="item.tableData"
-        style="width: 100%">
+      >
         <el-table-column
           v-for="(its,mindex) in item.tableName"
           :key="mindex"
           :label="its"
-          :min-Width="(100/item.tableData.length)+'%'">
+          :minWidth="(100/item.tableName.length)+'%'"
+        >
           <template slot-scope="scope">
             <!-- <span>{{ scope.row[its] }}</span> -->
             <el-input-number style="width:100%" size="mini" v-model="scope.row[item.tableField[mindex]]" :controls="false"></el-input-number>
@@ -47,8 +60,6 @@
         </el-table-column>
       </el-table>
     </div>
-
-
 
     <!-- 时分秒时间查询组件 -->
     <el-time-picker
@@ -186,7 +197,6 @@
         @loadNode="loadNode"
       ></selectTree>
     </div>
-
 
     <!-- 下拉组件展示id和名称 -->
     <el-select
@@ -1143,6 +1153,10 @@ export default {
     .cell{
       text-align: center!important;
     }
+    .el-input-number.is-without-controls .el-input__inner{
+      padding-left:0px!important;
+      padding-right:0px!important;
+    }
   }
   .el-table .cell{
     padding-left: 1px!important;
@@ -1287,11 +1301,9 @@ export default {
     .el-upload-list__item{
       position: absolute;
       top: -10px;
-      // margin-top: -35px;
       width: 100%;
       height: 28px;
       line-height: 28px;
-      backdrop-filter: blur(20px); //模糊度
     }
   }
   .el-upload__tip{

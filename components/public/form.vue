@@ -64,7 +64,7 @@
             :size="formObj.formArr.size?formObj.formArr.size:'mini'">
 
             <!-- form表单是需要分组折叠的 -->
-            <el-collapse class="formCollapseContainer" v-if="formObj.formCollapse&&formObj.formCollapse==true" :value="formObj.activeNames" @change="handleChange">
+            <el-collapse class="formCollapseContainer" v-if="formObj.formCollapse&&formObj.formCollapse==true&&formObj.layer==false" :value="formObj.activeNames" @change="handleChange">
               <el-collapse-item
                 v-for="(items,index) in formObj.formArr"
                 :title="items.title"
@@ -74,6 +74,15 @@
                 class="formFlex"
               >
                 <div class="formFlex">
+                  <span
+                    class="collapseSecondTitle"
+                    :style="{
+                      color:items.secondTitleColor?items.secondTitleColor:'#000000',
+                      paddingLeft:items.secondTitleLeft?items.secondTitleLeft:'0px',
+                      fontSize:items.seconfFontSize?items.seconfFontSize:'12px',
+                      fontWeight:items.secondFontWeight?items.secondFontWeight:'normal'
+                    }"
+                  >{{items.secondTitle}}</span>
                   <el-form-item
                   v-for="(item) in items.formItem"
                   :tag="item.type"
@@ -121,6 +130,7 @@
                         @getBigSelectListTableData="getBigSelectListTableData"
                       />
 
+
                       <formItem
                         v-if="item.hasSlot&&item.hasSlot==true"
                         :formItem="formItem"
@@ -148,6 +158,8 @@
                         @loadNode="loadNode"
                         @getBigSelectListTableData="getBigSelectListTableData"
                       />
+
+
                       <!-- 副标题 -->
                       <div
                         class="secondTitle"
@@ -170,6 +182,122 @@
 
               </el-collapse-item>
             </el-collapse>
+
+
+            <!-- form表单是需要分组折叠的 但是这个formItems里面包含更多的数组，方便增加删除组模块使用 -->
+            <el-collapse class="formCollapseContainer" v-if="formObj.formCollapse&&formObj.formCollapse==true&&formObj.layer&&formObj.layer==true" :value="formObj.activeNames" @change="handleChange">
+              <el-collapse-item
+                v-for="(items,index) in formObj.formArr"
+                :title="items.title"
+                :name="index+1"
+                :key="items.key"
+                style="position:relative"
+                class="formFlex"
+              >
+                <div class="formFlex">
+                  <div v-for="(mitem,index) in items.formItems" :key="index">
+                    <el-form-item
+                    v-for="(item) in mitem"
+                    :tag="item.type"
+                    :hasslot="item.hasSlot"
+                    :key="item.key"
+                    :prop="item.key"
+                    :class="item.className?item.className:''"
+                    :label="item.title&&item.title!=''?item.title:' '"
+                    :style="{
+                      width: formObj.fixedWidth?'auto':(formObj.col?(100/(item.col&&item.col!==1?(formObj.col/item.col):formObj.col)+'%'):'25%'),
+                      display:item.display?item.display:(formObj.needAdvanced==null||item.outAdvanced||advanced)?'inline-block':'none',
+                      opacity:(item.type=='nullComp'||item.type=='nullTopComp')?'0':'1',
+                      color:item.titleColor?item.titleColor:'#606266',
+                      background:formObj.formItemBgColor?formObj.formItemBgColor:'#fff',
+                      fontWeight:item.fontWeight?item.fontWeight:'default',
+                      marginLeft:formObj.fixedWidth?'15px':0
+                      }"
+                    >
+                      <!-- 自定义的label -->
+                      <span v-if="item.labelSlot" slot="label" v-html="item.title" @click="formClick"></span>
+                      <el-col :span="24">
+                        <formItem
+                          :formItem="formItem"
+                          :formObj="formObj"
+                          :item="item"
+                          :style="{
+                            width:item.width?item.width:'100%',
+                            float:'left'
+                          }"
+                          @formClick="formClick"
+                          @formChange="formChange"
+                          @formKeyupEnter="formKeyupEnter"
+                          @formUploadChange="formUploadChange"
+                          @submitFormUpload="submitFormUpload"
+                          @formBlur="formBlur"
+                          @formClear="formClear"
+                          @optionChange="optionChange"
+                          @formBtnClick="formBtnClick"
+                          @inputCheckChange="inputCheckChange"
+                          @inputEnter="inputEnter"
+                          @formRemoveFiles="formRemoveFiles"
+                          @formVisibleChange="formVisibleChange"
+                          @getNodeData="getNodeData"
+                          @loadNode="loadNode"
+                          @getBigSelectListTableData="getBigSelectListTableData"
+                        />
+
+
+                        <formItem
+                          v-if="item.hasSlot&&item.hasSlot==true"
+                          :formItem="formItem"
+                          :formObj="formObj"
+                          :item="item.slotData"
+                          :style="{
+                            width:item.slotData.width?item.slotData.width:'100%',
+                            float:item.slotData.float?item.slotData.float:'right',
+                            marginLeft:item.slotData.marginLeft?item.slotData.marginLeft:'0'
+                          }"
+                          @formClick="formClick"
+                          @formChange="formChange"
+                          @formKeyupEnter="formKeyupEnter"
+                          @formUploadChange="formUploadChange"
+                          @submitFormUpload="submitFormUpload"
+                          @formBlur="formBlur"
+                          @formClear="formClear"
+                          @optionChange="optionChange"
+                          @formBtnClick="formBtnClick"
+                          @inputCheckChange="inputCheckChange"
+                          @inputEnter="inputEnter"
+                          @formRemoveFiles="formRemoveFiles"
+                          @formVisibleChange="formVisibleChange"
+                          @getNodeData="getNodeData"
+                          @loadNode="loadNode"
+                          @getBigSelectListTableData="getBigSelectListTableData"
+                        />
+
+
+                        <!-- 副标题 -->
+                        <div
+                          class="secondTitle"
+                          v-if="item.hasSlot&&item.hasSlot==true&&item.needLable==true"
+                          :style="{
+                            float:formObj.labelTop?'left':'right',
+                            width:item.secondTitleWidth?item.secondTitleWidth:'auto',
+                            'margin-top':formObj.labelTop?'-56px':'0',
+                            'margin-left':formObj.labelTop?filterPre(item.slotData.width):'0'
+                          }">
+                          <span>{{item.slotData.title}}</span>
+                        </div>
+                      </el-col>
+                    </el-form-item>
+
+                    <!-- 预留插槽 -->
+                    <slot v-if="items.formCollapseSlotShow" name="formCollapseSlot" :slotkey="items.key" :slotIndex="index"></slot>
+                  </div>
+
+                </div>
+
+
+              </el-collapse-item>
+            </el-collapse>
+
 
             <!-- form表单是不需要分组折叠的 -->
             <el-form-item
@@ -688,7 +816,8 @@ export default {
           }
           //tableInput
           if(formContent[i].parentNode.getAttribute('tag') == 'tableInput' && formContent[i].parentNode.children[0].innerHTML==' '){
-            formContent[i].style.width = `100%`;
+            // formContent[i].style.width = `100%`;
+            formContent[i].style.width = `calc(100% - ${this.labelWidth}px)`;
           }
           if(this.formObj.labelTop==true){
             formContent[i].style.marginLeft = `${this.labelWidth/2}px`;
@@ -1122,6 +1251,9 @@ export default {
 }
 </style>
 <style lang="scss" scoped>
+.collapseSecondTitle{
+  width: 100%;
+}
 .showAdvanced{
   display: inline-block;
 }
