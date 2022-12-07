@@ -64,7 +64,7 @@
             :size="formObj.formArr.size?formObj.formArr.size:'mini'">
 
             <!-- form表单是需要分组折叠的 -->
-            <el-collapse class="formCollapseContainer" v-if="formObj.formCollapse&&formObj.formCollapse==true&&formObj.layer==false" :value="formObj.activeNames" @change="handleChange">
+            <el-collapse class="formCollapseContainer" v-if="formObj.formCollapse&&formObj.formCollapse==true&&!formObj.layer" :value="formObj.activeNames" @change="handleChange">
               <el-collapse-item
                 v-for="(items,index) in formObj.formArr"
                 :title="items.title"
