@@ -40,7 +40,7 @@
       </vxe-pager>
     </div>
 
-    <!-- 可拖拽缩放的弹窗 -->
+    <!-- 可拖拽缩放的弹窗1 -->
     <ui-drag-popup
       v-if="showpopup"
       :popObj="popObj"
@@ -54,8 +54,49 @@
           @formReady="userFormReady"
           @formClick="userFormClick"
           ref="userForm"
+          :formObj="queryForm2"
+        >
+          <!-- 删除按钮 -->
+          <template slot="formCollapseSlot" slot-scope="formCollapseSlot">
+            <el-popconfirm
+              placement="top"
+              title="确定删除该节点吗？"
+              @confirm="beginOperationFn(formCollapseSlot.slotkey,formCollapseSlot.slotIndex)"
+            >
+              <el-button slot="reference" size="mini" style="position:absolute;right:40px;top:5px;" circle type="danger" icon="el-icon-delete"></el-button>
+            </el-popconfirm>
+          </template>
+        </ui-form>
+      </div>
+    </ui-drag-popup>
+
+     <!-- 可拖拽缩放的弹窗2 -->
+    <ui-drag-popup
+      v-if="showpopup2"
+      :popObj="popObj"
+      :dialogVisible="showpopup2"
+      @popupBtnFn="popupBtnFn"
+    >
+      <div slot="slot">
+        <!-- form组件库 -->
+
+        <ui-form
+          @formReady="userFormReady"
+          @formClick="userFormClick"
+          ref="userForm"
           :formObj="queryFormTest2"
-        ></ui-form>
+        >
+          <!-- 删除按钮 -->
+          <template slot="formCollapseSlot" slot-scope="formCollapseSlot">
+            <el-popconfirm
+              placement="top"
+              title="确定删除该节点组吗？"
+              @confirm="beginOperationFn(formCollapseSlot.slotkey,formCollapseSlot.slotIndex)"
+            >
+              <el-button slot="reference" size="mini" style="position:absolute;right:40px;top:5px;" circle type="danger" icon="el-icon-delete"></el-button>
+            </el-popconfirm>
+          </template>
+        </ui-form>
       </div>
     </ui-drag-popup>
 
@@ -135,6 +176,7 @@ export default {
     const that = this;
     return {
       showpopup: false,
+      showpopup2: false,
       showZtreePopup:false,
       // form组件库
       dataForm: {
@@ -174,7 +216,7 @@ export default {
             icon: "el-icon-download"
           },
           {
-            title: "不可拖拽缩放弹窗按钮",
+            title: "可拖拽缩放弹窗按钮2",
             key: "btn2",
             icon: "el-icon-setting"
           },
@@ -984,7 +1026,7 @@ export default {
         title: "新增12",
         col: 4, //弹窗列数
         loading: false,
-        bgColor: 'rgba(255,0,0,0.5)',//背景颜色
+        bgColor: 'rgba(255,255,255,0.5)',//背景颜色
         border: 'none', //弹窗边框
         headerColor: 'rgba(255,255,0,0.5)', //顶部标题栏背景颜色
         headerBottomBorder: 'none', //顶部标题栏底部border
@@ -1296,6 +1338,7 @@ export default {
             seconfFontSize: '14px',//副标题文字大小
             secondTitleLeft:'50px',//副标题左移位置
             secondFontWeight: 700,//副标题粗细
+            formCollapseSlotShow:true,//是否显示右侧删除按钮
             formItem: [
               {
                 type:'tableInput',//表格输入项
@@ -1435,6 +1478,7 @@ export default {
             title: "其他数据",
             secondTitle: '标题二',
             secondTitleColor:'#00ffff',
+            formCollapseSlotShow:true,//是否显示右侧删除按钮
             formItem: [
               {
                 type: "dateTime",
@@ -1483,7 +1527,7 @@ export default {
         noButton: true, //不显示查询按钮
         labelTop: true,
         labelPosition: 'left',
-        layer:true,
+        layer:true,//使用分组的折叠form
         formCollapse:true,//开启可以折叠的form表单
         activeNames:[1,2,3],
 
@@ -1508,6 +1552,7 @@ export default {
           {
             key: "base",
             title: "基础资料",
+            formBtnShow:true,//是否显示右侧按钮
             formItems: [
               [
                 {
@@ -1646,8 +1691,18 @@ export default {
             title: "其他数据",
             secondTitle: '标题二',
             secondTitleColor:'#00ffff',
+            formBtnShow:true,//是否显示右侧按钮
             formItems: [
               [
+                {
+                  type:'formItemTitle',//表格输入项
+                  title:'', //为空
+                  stitle: '标题呀',//副标题
+                  secondTitleColor:'#ffffff',//副标题颜色
+                  seconfFontSize: '14px',//副标题文字大小
+                  // secondTitleLeft:'50px',//副标题左移位置
+                  secondFontWeight: 700,//副标题粗细
+                },
                 {
                   type:'tableInput',//表格输入项
                   title: "",//不是要标题
@@ -1710,6 +1765,15 @@ export default {
                 }
               ],
               [
+                {
+                  type:'formItemTitle',//表格输入项
+                  title:'', //为空
+                  stitle: '标题呀',//副标题
+                  secondTitleColor:'#ffffff',//副标题颜色
+                  seconfFontSize: '14px',//副标题文字大小
+                  // secondTitleLeft:'50px',//副标题左移位置
+                  secondFontWeight: 700,//副标题粗细
+                },
                 {
                   type:'tableInput',//表格输入项
                   title: "",//不是要标题
@@ -2429,7 +2493,10 @@ export default {
             '列表3','列表5','列表30'
           ]
         }, 300);
-      } else if (item === "drawerBtn") {
+      } else if (item === "btn2") {
+        this.showpopup2 = true;
+      }
+      else if (item === "drawerBtn") {
         this.showDrawer = true;
       } else if (item === "customDrawerBtn") {
         this.showCustomDrawer = true;
