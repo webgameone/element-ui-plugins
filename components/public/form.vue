@@ -197,7 +197,7 @@
                 <div class="formFlex">
                   <div v-for="(mitem,index) in items.formItems" :key="index">
                     <!--数组模块的 增加按钮 -->
-                    <el-button @click="formBtnOperationFn('add',items.key,index)" v-if="items.formBtnShow&&index==0" slot="reference" size="mini" style="position:absolute;right:40px;" circle type="success" icon="el-icon-plus"></el-button>
+                    <el-button @click="formBtnOperationFn('add',items.key,index)" v-if="items.formBtnShow&&index==0" slot="reference" size="mini" style="position:absolute;right:40px;z-index:1;" circle type="success" icon="el-icon-plus"></el-button>
 
                     <!--数组模块的 删除按钮 -->
                     <el-popconfirm
@@ -205,7 +205,7 @@
                       title="确定删除该节点吗？"
                       @confirm="formBtnOperationFn('delete',items.key,index)"
                     >
-                      <el-button v-if="items.formBtnShow&&index!=0" slot="reference" size="mini" style="position:absolute;right:40px;" circle type="danger" icon="el-icon-delete"></el-button>
+                      <el-button v-if="items.formBtnShow&&index!=0" slot="reference" size="mini" style="position:absolute;right:40px;z-index:1;" circle type="danger" icon="el-icon-delete"></el-button>
                     </el-popconfirm>
 
                     <el-form-item
@@ -992,7 +992,6 @@ export default {
     },
     //折叠组-数组模块右侧的按钮事件
     formBtnOperationFn(typeName,key,index){
-      console.log(typeName,key,index)
       this.$emit('formBtnOperationFn',typeName,key,index)
     },
     //修改组件属性 keyName:key的名字   attrName:要修改的属性名称  value:属性要修改的值
