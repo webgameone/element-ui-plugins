@@ -64,7 +64,7 @@
             :size="formObj.formArr.size?formObj.formArr.size:'mini'">
 
             <!-- form表单是需要分组折叠的 -->
-            <el-collapse class="formCollapseContainer" v-if="formObj.formCollapse&&formObj.formCollapse==true&&!formObj.layer" :value="formObj.activeNames" @change="handleChange">
+            <el-collapse class="formCollapseContainer" v-if="formObj.formCollapse&&formObj.formCollapse==true&&formObj.layer===undefined" :value="formObj.activeNames" @change="handleChange">
               <el-collapse-item
                 v-for="(items,index) in formObj.formArr"
                 :title="items.title"
@@ -182,7 +182,6 @@
 
               </el-collapse-item>
             </el-collapse>
-
 
             <!-- form表单是需要分组折叠的 但是这个formItems里面包含更多的数组，方便增加删除组模块使用 -->
             <el-collapse class="formCollapseContainer" v-if="formObj.formCollapse&&formObj.formCollapse==true&&formObj.layer&&formObj.layer==true" :value="formObj.activeNames" @change="handleChange">
@@ -307,15 +306,13 @@
 
                 </div>
 
-
               </el-collapse-item>
             </el-collapse>
 
-
             <!-- form表单是不需要分组折叠的 -->
-            <el-form-item
+            <template v-if="formObj.formCollapse===undefined&&formObj.layer===undefined">
+               <el-form-item
                 :ref="'formItem_'+formObj.id"
-                v-else
                 v-for="(item) in formObj.formArr"
                 :tag="item.type"
                 :hasslot="item.hasSlot"
@@ -405,7 +402,9 @@
                     <span>{{item.slotData.title}}</span>
                   </div>
                 </el-col>
-            </el-form-item>
+              </el-form-item>
+            </template>
+
 
             <!-- form内右侧的查询和重置 -->
             <div v-if="formObj.btnInline" style="float:left;margin-left:10px;margin-bottom:18px;">
