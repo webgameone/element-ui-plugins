@@ -6,10 +6,15 @@
       width="400"
       trigger="click">
       <span slot="reference" class="selectBox">
-        <i :class="'iconfont '+userChooseIcon"></i>
+        <i v-if="item.iconType=='iconfont'" :class="'iconfont '+userChooseIcon"></i>
+
+        <i v-if="item.iconType=='img'" class="iconfont">
+          <img class="selectIconImg" :src="userChooseIcon">
+        </i>
       </span>
 
-      <div class="iconList">
+      <!-- iconfont模式 -->
+      <div class="iconList" v-if="item.iconType=='iconfont'">
         <i
           v-for="item in formObj.selectData[item.key]"
           :key="item"
@@ -17,6 +22,19 @@
           @click="setIcon($event,item)"
           style="font-size:20px"
         ></i>
+      </div>
+
+      <!-- img模式 -->
+      <div class="iconList" v-if="item.iconType=='img'">
+        <i
+          v-for="item in formObj.selectData[item.key]"
+          :key="item"
+          class="iconfont"
+          @click="setIcon($event,item)"
+          style="font-size:20px"
+        >
+        <img class="iconImg" :src="item.url">
+        </i>
       </div>
    </el-popover>
   </div>
@@ -47,7 +65,11 @@ export default {
   watch:{
     formItem: {
         handler(val, newval) {
-          this.userChooseIcon = val[this.item.key];
+          if(this.item.iconType=="iconfont"){
+            this.userChooseIcon = val[this.item.key];
+          }else if(this.item.iconType=="img"){
+            this.userChooseIcon = val[this.item.key];
+          }
         },
         deep: true
       }
@@ -77,8 +99,18 @@ export default {
   methods: {
     //给icon绑定的点击事件
     setIcon(event,item){
-      this.userChooseIcon = item
-      this.$emit('formChange',item)
+      if(this.item.iconType=="iconfont"){
+        this.userChooseIcon = item;
+        this.$emit('formChange',item)
+      }else if(this.item.iconType=="img"){
+        console.log(item.url)
+        setTimeout(() => {
+          this.userChooseIcon = item.url;
+        }, 200);
+        // this.userChooseIcon = item.url;
+        this.$emit('formChange',item)
+      }
+
     }
   },
 }
@@ -93,6 +125,10 @@ export default {
   border-radius: 4px;
   text-align: center;
   line-height: 26px;
+}
+.selectIconImg{
+  width: 26px;
+  height: 26px;
 }
 .iconList{
     width: 400px;
@@ -122,6 +158,11 @@ export default {
     }
     i:nth-of-type(8n+0){
       margin-right: 0;
+    }
+
+    .iconImg{
+      width: 100%;
+      height: 100%;
     }
 }
 </style>

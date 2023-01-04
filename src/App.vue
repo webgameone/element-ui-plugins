@@ -312,23 +312,150 @@ export default {
             {text:'你好',value:'你好'},
             {text:'吃饭',value:'吃饭'}
           ],
-          //图标合集
+          //图标合集 iconfont
+          pickIconFont:[
+            "icon-dalou",
+            "icon-ic_location_city_px",
+            "icon-24gf-building",
+            "icon-dalou1",
+            "icon-wuding",
+            "icon-dalou",
+            "icon-ic_location_city_px",
+            "icon-24gf-building",
+            "icon-dalou1",
+            "icon-dalou1",
+            "icon-wuding",
+            "icon-dalou",
+            "icon-ic_location_city_px",
+            "icon-24gf-building",
+            "icon-dalou1",
+          ],
+          //图标合集 img
           pickIcon:[
-            "icon-dalou",
-            "icon-ic_location_city_px",
-            "icon-24gf-building",
-            "icon-dalou1",
-            "icon-wuding",
-            "icon-dalou",
-            "icon-ic_location_city_px",
-            "icon-24gf-building",
-            "icon-dalou1",
-            "icon-dalou1",
-            "icon-wuding",
-            "icon-dalou",
-            "icon-ic_location_city_px",
-            "icon-24gf-building",
-            "icon-dalou1",
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/amusementPark.png",
+                "name": "游乐设施"
+            },
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/anfangsheshi.png",
+                "name": "安防设施"
+            },
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/bunisesBuild.png",
+                "name": "商业建筑"
+            },
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/churukou.png",
+                "name": "出入口"
+            },
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/commemorateBuild.png",
+                "name": "纪念建筑"
+            },
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/comprehensiveBuild.png",
+                "name": "综合建筑"
+            },
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/cultureBuild.png",
+                "name": "文化建筑"
+            },
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/customIntelligent.png",
+                "name": "自动智能设施"
+            },
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/daolu-mian.png",
+                "name": "道路"
+            },
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/daoshi.png",
+                "name": "导视设施"
+            },
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/ditu-dibiao.png",
+                "name": "地标位置"
+            },
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/dormitoryBuild.png",
+                "name": "宿舍建筑"
+            },
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/educateBuild.png",
+                "name": "教育建筑"
+            },
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/feijidongche.png",
+                "name": "非机动车位"
+            },
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/gardenBuild.png",
+                "name": "园林建筑"
+            },
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/homeBuild.png",
+                "name": "住宅"
+            },
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/hospital.png",
+                "name": "医疗建筑"
+            },
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/icon-anfangsheshixiangguanshenqing.png",
+                "name": "安防设施"
+            },
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/lajizhan1.png",
+                "name": "环卫设施"
+            },
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/officeBuild.png",
+                "name": "办公建筑"
+            },
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/plant.png",
+                "name": "植物类"
+            },
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/playground.png",
+                "name": "体育建筑"
+            },
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/rest.png",
+                "name": "休息设施"
+            },
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/scientificBuild.png",
+                "name": "科研建筑"
+            },
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/severBuild.png",
+                "name": "服务建筑"
+            },
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/tingche.png",
+                "name": "停车场"
+            },
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/trafficBuild.png",
+                "name": "交通建筑"
+            },
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/trafficFacilities.png",
+                "name": "交通设施"
+            },
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/wuzhangaisheshi.png",
+                "name": "无障碍设施"
+            },
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/zhaoming.png",
+                "name": "照明设施"
+            },
+            {
+                "url": "http://60.205.231.120/model/qdyl/img/labIcon/zhinengkuaidigui.png",
+                "name": "快递柜"
+            }
           ]
         },
         // form表单组件
@@ -357,9 +484,17 @@ export default {
               },
             ]
           },
+           {
+            type:'pickIcon',
+            iconType: 'iconfont', //iconfont或者img
+            title: "拾取图标iconfont",
+            key:'pickIconFont',
+            outAdvanced: true
+          },
           {
             type:'pickIcon',
-            title: "拾取图标哈哈哈哈哈",
+            iconType: 'img', //iconfont或者img
+            title: "拾取图标img",
             key:'pickIcon',
             outAdvanced: true
           },
@@ -2308,7 +2443,8 @@ export default {
         // this.$refs.uiForm.formItem.vxeSelectKey = '下拉选项2';
       }, 3000);
       // this.$refs.uiForm.formItem.vxeSelectKey = '下拉选项2';
-      this.$refs.uiForm.formItem.pickIcon = 'icon-dalou1'
+      this.$refs.uiForm.formItem.pickIconFont = 'icon-dalou1';
+      this.$refs.uiForm.formItem.pickIcon = 'http://60.205.231.120/model/qdyl/img/labIcon/amusementPark.png'
 
       //tree的测试
       setTimeout(() => {
@@ -2505,7 +2641,6 @@ export default {
       }
     },
     formChange(event, item, itemKey) {
-      console.log(event)
       if(itemKey == 'isHaveDown'){
         this.$refs.uiForm.setFormAttribute('routeName','disabled',true)
       }else if(itemKey == 'vxeSelectKey'){
