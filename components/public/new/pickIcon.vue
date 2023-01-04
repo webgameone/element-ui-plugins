@@ -103,11 +103,7 @@ export default {
         this.userChooseIcon = item;
         this.$emit('formChange',item)
       }else if(this.item.iconType=="img"){
-        console.log(item.url)
-        setTimeout(() => {
-          this.userChooseIcon = item.url;
-        }, 200);
-        // this.userChooseIcon = item.url;
+        this.userChooseIcon = item.url;
         this.$emit('formChange',item)
       }
 
