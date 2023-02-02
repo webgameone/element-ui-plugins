@@ -461,6 +461,61 @@ export default {
         // form表单组件
         formArr: [
           {
+            type:'onlyMonthDayRangeComp',
+            title: "月份日期范围",
+            key: "monthDayRange",
+            outAdvanced: true,
+            pickerOptions:{ //只能选择的范围
+              disabledDate(time) {
+                return (
+                  time.getFullYear() < "2023" ||
+                  time.getFullYear() > 2023
+                ); // 注意是 || 不是 && 哦
+              }
+            }
+          },
+          {
+            type:'onlyMonthDayComp',
+            title: "月份日期",
+            key: "monthDay",
+            year: 2023 //设置年份，有闰年(2012,2014)和非闰年(2022,2023)，2月份会存在一天区别
+          },
+          {
+            type:'onlyMonthDayComp',
+            title: "月份日子",
+            key: "monthDay2",
+            year: 2023,
+            width: "50%",
+
+            hasSlot: true, //是否 可以在当前列中再加入一个输入项，但是两个输入项的宽度需要自定义，否则都为100%
+            slotData: {
+              type:'onlyMonthDayComp',
+              title: "月份日子",
+              key: "monthDay3",
+              year: 2023,
+              width: "50%"
+            }
+          },
+          {
+            type: "onlyMonthDayComp",
+            title: "开始日期",
+            key: "beginDay1",
+            year: 2023,
+            width:'40%',
+
+            hasSlot:true,//是否 可以在当前列中再加入一个输入项，但是两个输入项的宽度需要自定义，否则都为100%
+            needLable:true,
+            secondTitleWidth:'calc(20% - 5px)',
+            slotData:{
+              width:'40%',
+              type: "onlyMonthDayComp",
+              // marginLeft:'5px',
+              title: "结束日期",
+              key: "endDay1",
+              year: 2023,
+            },
+          },
+          {
             type:'tableInput',//表格输入项
             title: "",//不是要标题
             key:'tableIn',
@@ -484,7 +539,7 @@ export default {
               },
             ]
           },
-           {
+          {
             type:'pickIcon',
             iconType: 'iconfont', //iconfont或者img
             title: "拾取图标iconfont",
@@ -878,6 +933,7 @@ export default {
           // }
         ],
         model:{
+          monthDayRange:['2023-01-01','2023-01-01'],
           driver1Name:'222222',
           driver1NameSelect:'你好',
           texts:'呵呵'

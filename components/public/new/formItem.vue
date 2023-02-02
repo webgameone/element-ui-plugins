@@ -124,6 +124,27 @@
     >
     </el-date-picker>
 
+    <!-- 只有月份和日期的时间选择器 -->
+    <monthDaySelect
+      style="width:100%"
+      v-if="item.type=='onlyMonthDayComp'"
+      class="date-select"
+      :year="item.year"
+      :item="item"
+      @change="formChange($event,item)"
+      :dateDefault="formItem[item.key]"
+    ></monthDaySelect>
+
+    <!-- 只有月份和日期的时间范围选择器 -->
+    <monthDayRangeSelect
+      style="width:100%"
+      v-if="item.type=='onlyMonthDayRangeComp'"
+      :formObj="formObj"
+      :item="item"
+      :formItem="formItem"
+      @change="formChange($event,item)"
+    ></monthDayRangeSelect>
+
     <!--new 前面有select的下拉组件 -->
     <beforeSelect
       v-if="item.type=='beforeSelectComp'"
@@ -727,6 +748,8 @@ import bigSelectList from '@/components/public/new/bigSelectList'
 import bigDataSelect from '@/components/public/new/bigDataSelect'
 import selectTree from '@/components/public/selectTree'
 import pickIcon from '@/components/public/new/pickIcon'
+import monthDaySelect from '@/components/public/new/monthDay'
+import monthDayRangeSelect from '@/components/public/new/monthDayRange'
 
 //过滤器
 import {setTextLengthFilter} from '@/filters/index.js'
@@ -768,7 +791,9 @@ export default {
     bigSelectList,
     bigDataSelect,
     pickIcon,
-    selectTree
+    selectTree,
+    monthDaySelect,
+    monthDayRangeSelect
   },
   // watch:{
   //   formItem:{
@@ -825,6 +850,8 @@ export default {
       //   this.$set(this.formItem,item.key,event.value);
       //   this.$refs[item.key].hidePanel();
       // }
+      // console.log(event)
+      // console.log(item)
       this.$emit('formChange',event,item,item.key,allData)
     },
     formKeyupEnter(event,item) {

@@ -8,9 +8,7 @@
       <span slot="reference" class="selectBox">
         <i v-if="item.iconType=='iconfont'" :class="'iconfont '+userChooseIcon"></i>
 
-        <i v-if="item.iconType=='img'" class="iconfont">
-          <img class="selectIconImg" :src="userChooseIcon">
-        </i>
+        <img v-if="item.iconType=='img'" class="selectIconImg" :src="userChooseIcon" alt="">
       </span>
 
       <!-- iconfont模式 -->
@@ -33,7 +31,7 @@
           @click="setIcon($event,item)"
           style="font-size:20px"
         >
-        <img class="iconImg" :src="item.url">
+        <img class="iconImg" :src="item.url" alt="">
         </i>
       </div>
    </el-popover>
@@ -103,7 +101,9 @@ export default {
         this.userChooseIcon = item;
         this.$emit('formChange',item)
       }else if(this.item.iconType=="img"){
-        this.userChooseIcon = item.url;
+        setTimeout(() => {
+          this.userChooseIcon = item.url;
+        }, 10);
         this.$emit('formChange',item)
       }
 
