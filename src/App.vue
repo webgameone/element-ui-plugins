@@ -1676,7 +1676,7 @@ export default {
           {
             key: "base",
             title: "基础资料",
-            secondTitle: '标题一',//副标题
+            secondTitle: '弹窗1',//副标题
             secondTitleColor:'#ffffff',//副标题颜色
             seconfFontSize: '14px',//副标题文字大小
             secondTitleLeft:'50px',//副标题左移位置
@@ -1706,27 +1706,11 @@ export default {
               {
                 type:'tableInput',//表格输入项
                 title: "",//不是要标题
-                key:'tableIn',
+                key:'tableInPop2',
                 col:3,
                 className:'tableInputClass',//自定义的class名字
                 tableName:['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24'],//表格显示名称数组
                 tableField:['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24'],//数组对应字段值
-                outAdvanced: true,
-                //真正的值
-                tableData:[
-                  {
-                    '1': 124,
-                    '2': 212,
-                    '3': 1024,
-                    '4': 444,
-                    '5': 5551,
-                    '6': 1212,
-                    '7': 2121,
-                    '8': 3234,
-                    '9': 4567,
-                    '10': 9876,
-                  },
-                ]
               },
               {
                 type: 'selectComp',
@@ -1882,22 +1866,7 @@ export default {
                   className:'tableInputClass',//自定义的class名字
                   tableName:['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24'],//表格显示名称数组
                   tableField:['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24'],//数组对应字段值
-                  outAdvanced: true,
-                  //真正的值
-                  tableData:[
-                    {
-                      '1': 124,
-                      '2': 212,
-                      '3': 1024,
-                      '4': 444,
-                      '5': 5551,
-                      '6': 1212,
-                      '7': 2121,
-                      '8': 3234,
-                      '9': 4567,
-                      '10': 9876,
-                    },
-                  ]
+                  outAdvanced: true
                 },
                 {
                   type: 'selectComp',
@@ -1948,21 +1917,6 @@ export default {
                   tableName:['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24'],//表格显示名称数组
                   tableField:['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24'],//数组对应字段值
                   outAdvanced: true,
-                  //真正的值
-                  tableData:[
-                    {
-                      '1': 124,
-                      '2': 212,
-                      '3': 1024,
-                      '4': 444,
-                      '5': 5551,
-                      '6': 1212,
-                      '7': 2121,
-                      '8': 3234,
-                      '9': 4567,
-                      '10': 9876,
-                    },
-                  ]
                 },
                 {
                   type: 'selectComp',
@@ -2021,22 +1975,7 @@ export default {
                   className:'tableInputClass',//自定义的class名字
                   tableName:['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24'],//表格显示名称数组
                   tableField:['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24'],//数组对应字段值
-                  outAdvanced: true,
-                  //真正的值
-                  tableData:[
-                    {
-                      '1': 124,
-                      '2': 212,
-                      '3': 1024,
-                      '4': 444,
-                      '5': 5551,
-                      '6': 1212,
-                      '7': 2121,
-                      '8': 3234,
-                      '9': 4567,
-                      '10': 9876,
-                    },
-                  ]
+                  outAdvanced: true
                 },
                 {
                   type: 'selectComp',
@@ -2092,22 +2031,7 @@ export default {
                   className:'tableInputClass',//自定义的class名字
                   tableName:['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24'],//表格显示名称数组
                   tableField:['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24'],//数组对应字段值
-                  outAdvanced: true,
-                  //真正的值
-                  tableData:[
-                    {
-                      '1': 124,
-                      '2': 212,
-                      '3': 1024,
-                      '4': 444,
-                      '5': 5551,
-                      '6': 1212,
-                      '7': 2121,
-                      '8': 3234,
-                      '9': 4567,
-                      '10': 9876,
-                    },
-                  ]
+                  outAdvanced: true
                 },
                 {
                   type:'onlyMonthDayRangeComp',
@@ -2786,7 +2710,7 @@ export default {
       }
     },
     userFormReady(){
-      this.$refs.userForm.Reset()
+      // this.$refs.userForm.Reset()
     },
     searchList() {
       console.log(this.$refs.uiForm.formItem)
@@ -2815,23 +2739,57 @@ export default {
     formBtnClick(event, item) {
       console.log(item)
       if (item == "btn1") {
-        this.queryForm.selectData.selectListA=[];
-        for(let i=0;i<100;i++){
-          let t = {
-            text:`列表${i}`,
-            value:`列表${i}`,
-            table:{col1:`数据${i}`,col2:`数据${i}`,col3:`数据${i}`}
-          }
-          this.queryForm.selectData.selectListA.push(t);
-        }
+        // this.queryForm.selectData.selectListA=[];
+        // for(let i=0;i<100;i++){
+        //   let t = {
+        //     text:`列表${i}`,
+        //     value:`列表${i}`,
+        //     table:{col1:`数据${i}`,col2:`数据${i}`,col3:`数据${i}`}
+        //   }
+        //   this.queryForm.selectData.selectListA.push(t);
+        // }
         this.showpopup = true;
 
+        // setTimeout(() => {
+        //   //赋值测试
+        //   this.$refs.userForm.formItem.selectListA=[
+        //     '列表3','列表5','列表30'
+        //   ]
+        // }, 300);
+
         setTimeout(() => {
-          //赋值测试
-          this.$refs.userForm.formItem.selectListA=[
-            '列表3','列表5','列表30'
-          ]
-        }, 300);
+          this.$set(this.$refs.userForm.formItem,'tableInPop2',[
+            {
+              '0': 124,
+              '1': 212,
+              '2': 1024,
+              '3': 444,
+              '4': 5551,
+              '5': 1212,
+              '6': 2121,
+              '7': 3234,
+              '8': 4567,
+              '9': 9876,
+              '10':1,
+              '11':1,
+              '12':1,
+              '13':1,
+              '14':1,
+              '15':1,
+              '16':1,
+              '17':1,
+              '18':1,
+              '19':1,
+              '20':1,
+              '21':1,
+              '22':1,
+              '23':1,
+            }
+          ])
+          console.log(this.$refs.userForm.formItem)
+        }, 100);
+
+
       } else if (item === "btn2") {
         this.showpopup2 = true;
       }

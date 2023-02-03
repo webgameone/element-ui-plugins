@@ -59,7 +59,7 @@
           v-for="(its,mindex) in item.tableName"
           :key="mindex"
           :label="its"
-          :minWidth="(100/item.tableName.length)+'%'"
+          :minWidth="(100/item.tableName.length)"
         >
           <template slot-scope="scope">
             <!-- <span>{{ scope.row[its] }}</span> -->

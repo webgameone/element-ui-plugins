@@ -92,7 +92,8 @@ export default {
       }
     },
     formChange(e,item){
-      console.log(e)
+      // console.log(e)
+      this.$emit('change', val, this.item);
     }
   },
 }
