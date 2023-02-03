@@ -5,7 +5,7 @@
     <!-- topNull 文字在上面时候使用-->
     <div class="nullTopComp" v-if="item.type=='nullTopComp'" style="width:100%;"></div>
 
-    <!-- 标题 -->
+    <!-- 标题 文字不可以修改-->
     <span
       v-if="item.type=='formItemTitle'"
       class="collapseSecondTitle"
@@ -16,6 +16,14 @@
         fontWeight:item.secondFontWeight?item.secondFontWeight:'normal'
       }"
     >{{item.stitle}}</span>
+
+    <!-- 标题-文字可修改 -->
+    <div class="titleInputContainer" v-if="item.type=='formItemTitleInput'">
+      <el-input
+        v-model="formItem[item.key]"
+        @change="formChange($event,item)"
+      ></el-input>
+    </div>
 
     <!-- 普通文本显示组件 -->
     <el-tooltip
@@ -45,7 +53,7 @@
     <!-- 表格输入项 -->
     <div class="tableInputContainer" style="width:100%" v-if="item.type=='tableInput'">
       <el-table
-        :data="item.tableData"
+        :data="formItem[item.key]"
       >
         <el-table-column
           v-for="(its,mindex) in item.tableName"
@@ -55,7 +63,13 @@
         >
           <template slot-scope="scope">
             <!-- <span>{{ scope.row[its] }}</span> -->
-            <el-input-number style="width:100%" size="mini" v-model="scope.row[item.tableField[mindex]]" :controls="false"></el-input-number>
+            <el-input-number
+              style="width:100%"
+              size="mini"
+              v-model="scope.row[item.tableField[mindex]]"
+              :controls="false"
+              @change="formChange($event,item)"
+          ></el-input-number>
           </template>
         </el-table-column>
       </el-table>
@@ -1183,6 +1197,16 @@ export default {
     .el-input-number.is-without-controls .el-input__inner{
       padding-left:0px!important;
       padding-right:0px!important;
+    }
+  }
+  .titleInputContainer{
+    input{
+      background: rgba(0,0,0,0);
+      border:none;
+      font-size: 14px;
+      font-weight: 600;
+      color: #000000;
+      padding: 0;
     }
   }
   .el-table .cell{

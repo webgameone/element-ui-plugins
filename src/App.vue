@@ -40,7 +40,28 @@
       </vxe-pager>
     </div>
 
-    <!-- 可拖拽缩放的弹窗1 -->
+    <!-- 可拖拽缩放的弹窗0 form普通的 -->
+    <ui-drag-popup
+      v-if="showpopup0"
+      :popObj="popObj"
+      :dialogVisible="showpopup0"
+      @popupBtnFn="popupBtnFn"
+    >
+      <div slot="slot">
+        <!-- form组件库 -->
+
+        <ui-form
+          @formReady="userFormReady"
+          @formClick="userFormClick"
+          @formChange="formChange"
+          ref="userForm"
+          :formObj="popupForm0"
+        >
+        </ui-form>
+      </div>
+    </ui-drag-popup>
+
+    <!-- 可拖拽缩放的弹窗1 form带折叠不能分组的-->
     <ui-drag-popup
       v-if="showpopup"
       :popObj="popObj"
@@ -53,6 +74,7 @@
         <ui-form
           @formReady="userFormReady"
           @formClick="userFormClick"
+          @formChange="formChange"
           ref="userForm"
           :formObj="queryForm2"
         >
@@ -70,7 +92,7 @@
       </div>
     </ui-drag-popup>
 
-     <!-- 可拖拽缩放的弹窗2 -->
+     <!-- 可拖拽缩放的弹窗2 form带折叠可以分组的-->
     <ui-drag-popup
       v-if="showpopup2"
       :popObj="popObj"
@@ -175,6 +197,7 @@ export default {
   data() {
     const that = this;
     return {
+      showpopup0: false,
       showpopup: false,
       showpopup2: false,
       showZtreePopup:false,
@@ -209,7 +232,11 @@ export default {
         // 表单下方的按钮组
         bottomBtnArr: [
           {
-            title: "可拖拽缩放弹窗按钮",
+            title: "可拖拽缩放弹窗按钮0",
+            key: "btn0"
+          },
+          {
+            title: "可拖拽缩放弹窗按钮1",
             key: "btn1",
             type: "primary",
             disabled: false,
@@ -235,10 +262,6 @@ export default {
             title:'更多操作',
             key:'moreOperation',
             btnType:'dropdown'
-          },
-          {
-            title: "自定义弹窗",
-            key: "customDrawerBtn"
           },
           {
               title:'逻辑说明',
@@ -518,26 +541,11 @@ export default {
           {
             type:'tableInput',//表格输入项
             title: "",//不是要标题
-            key:'tableIn',
+            key:'tableInds',
             className:'tableInputClass',//自定义的class名字
             tableName:['时间1','时间2','时间3','时间4','时间5','时间6','时间7','时间8','时间9','时间10'],//表格显示名称数组
             tableField:['1','2','3','4','5','6','7','8','9','10'],//数组对应字段值
-            outAdvanced: true,
-            //真正的值
-            tableData:[
-              {
-                '1': 124,
-                '2': 212,
-                '3': 1024,
-                '4': 444,
-                '5': 5551,
-                '6': 1212,
-                '7': 2121,
-                '8': 3234,
-                '9': 4567,
-                '10': 9876
-              },
-            ]
+            outAdvanced: true
           },
           {
             type:'pickIcon',
@@ -1453,6 +1461,150 @@ export default {
           }
         ]
       },
+      //弹窗的form0-普通form
+      popupForm0: {
+        id: "drawerForm",
+        col: 3, // 自定义列数
+        labelWidth: 10, // 自定义label的宽度
+        noButton: true, //不显示查询按钮
+        // formCollapse: false, //开启可以折叠的form表单
+        labelPosition: "left", //label文字左对齐
+        labelTop: true,
+        // activeNames: [1, 2, 3, 4],
+        // 下拉列表的options
+        selectData: {
+          siteType: [
+            { text: "一级网点", value: "一级网点" },
+            { text: "二级网点", value: "二级网点" },
+            { text: "3级网点", value: "3级网点" }
+          ],
+          openAccount: [],
+          routeName: [], //路由
+          carNo: [], //车牌号码
+          carType: [], //车辆类型
+          carUse: [], //车辆用途
+          intervalMode: [
+            { text: "按周", value: "按周" },
+            { text: "按月", value: "按月" }
+          ], //周期模式
+          periodWeek: [
+            { text: "周日", value: "1" },
+            { text: "周一", value: "2" },
+            { text: "周二", value: "3" },
+            { text: "周三", value: "4" },
+            { text: "周四", value: "5" },
+            { text: "周五", value: "6" },
+            { text: "周六", value: "7" }
+          ],
+          periodMonth: [],
+          showCheck: ["分拨库存", "网点库存", "预到库存", "未到库存"],
+          area:[],
+          pid: [{"id":"1022","companyId":"1000","companyName":"汇森集团","isEnable":1,"stanoPrefix":"H","stanoSuffix":"8882223121222","stano":"H8882223121222","station":"测试网3点22222222223222","sysType":"TYPE_5","sysTableName":"B_STAT_TYPE","sysTypeName":"一级网点","openAccountType":"TYPE_3","openAccountTableName":"B_OPEN_ACCOUNT_TYPE","openAccountTypeName":"财务中心","pid":"1007","pidName":"名称","financeCenterId":"1002","financeCenterName":"名称","paymentAccountId":"1002","paymentAccountNo":1113,"statManageType":"经营类别","statManageTableName":"B_STAT_MANAGE_TYPE","serviceType":1,"state":"省A","city":"市B","district":"区C","town":"镇C","street":"街道C","addr":"addr","coordinate":"","operStartDate":"2020-09-01 00:00:00","operEndDate":"9999-12-31 00:00:00","remark":"","manager":"manager","managerTel":"managerTel","manager2":"manager2","manager2Tel":"manager2Tel","serviceTel":"serviceTel","networkManagerId":0,"isSysDelicc":0,"isSysDelicod":0,"isSysDeli":0,"serviceArea":"service1022","noServiceArea":"","specialServiceArea":"","isOperate":1,"isFinace":0,"level":1,"path":"1022","createTime":"2021-05-15 16:10:19","createBy":"12","updateTime":"2021-06-07 09:07:54","updateBy":"0","isDelete":0},{"id":"1023","companyId":"1000","companyName":"汇森集团","isEnable":1,"stanoPrefix":"H","stanoSuffix":"88822213121222","stano":"H88822213121222","station":"测试网13点222222221223222","sysType":"TYPE_5","sysTableName":"B_STAT_TYPE","sysTypeName":"一级网点","openAccountType":"TYPE_3","openAccountTableName":"B_OPEN_ACCOUNT_TYPE","openAccountTypeName":"财务中心","pid":"1022","pidName":"测试网3点22222222223222","financeCenterId":"1002","financeCenterName":"名称","paymentAccountId":"1002","paymentAccountNo":1113,"statManageType":"经营类别","statManageTableName":"B_STAT_MANAGE_TYPE","serviceType":1,"state":"省A","city":"市B","district":"区C","town":"镇C","street":"街道C","addr":"addr","coordinate":"","operStartDate":"2020-09-01 00:00:00","operEndDate":"9999-12-31 00:00:00","remark":"","manager":"manager","managerTel":"managerTel","manager2":"manager2","manager2Tel":"manager2Tel","serviceTel":"serviceTel","networkManagerId":0,"isSysDelicc":0,"isSysDelicod":0,"isSysDeli":0,"serviceArea":"service1023","noServiceArea":"","specialServiceArea":"","isOperate":1,"isFinace":0,"level":2,"path":"1022|1023","createTime":"2021-05-20 09:54:04","createBy":"1000","createName":"系统管理员","updateTime":"2021-06-07 09:07:54","updateBy":"0","isDelete":0},{"id":"1024","companyId":"1000","companyName":"汇森集团","isEnable":1,"stanoPrefix":"H","stanoSuffix":"888222131121222","stano":"H888222131121222","station":"测试网13点2222221221223222","sysType":"TYPE_5","sysTableName":"B_STAT_TYPE","sysTypeName":"一级网点","openAccountType":"TYPE_3","openAccountTableName":"B_OPEN_ACCOUNT_TYPE","openAccountTypeName":"财务中心","pid":"1022","pidName":"测试网3点22222222223222","financeCenterId":"1002","financeCenterName":"名称","paymentAccountId":"1002","paymentAccountNo":1113,"statManageType":"经营类别","statManageTableName":"B_STAT_MANAGE_TYPE","serviceType":1,"state":"省A","city":"市B","district":"区C","town":"镇C","street":"街道C","addr":"addr","coordinate":"","operStartDate":"2020-09-01 00:00:00","operEndDate":"9999-12-31 00:00:00","remark":"","manager":"manager","managerTel":"managerTel","manager2":"manager2","manager2Tel":"manager2Tel","serviceTel":"serviceTel","networkManagerId":0,"isSysDelicc":0,"isSysDelicod":0,"isSysDeli":0,"serviceArea":"service1024","noServiceArea":"","specialServiceArea":"","isOperate":1,"isFinace":0,"level":2,"path":"1022|1024","createTime":"2021-05-20 09:54:22","createBy":"1000","createName":"系统管理员","updateTime":"2021-06-07 09:07:54","updateBy":"0","isDelete":0},{"id":"1025","companyId":"1000","companyName":"汇森集团","isEnable":1,"stanoPrefix":"H","stanoSuffix":"8882221311212122","stano":"H8882221311212122","station":"测试网13点22222212211223222","sysType":"TYPE_5","sysTableName":"B_STAT_TYPE","sysTypeName":"一级网点","openAccountType":"TYPE_3","openAccountTableName":"B_OPEN_ACCOUNT_TYPE","openAccountTypeName":"财务中心","pid":"1024","pidName":"测试网13点2222221221223222","financeCenterId":"1002","financeCenterName":"名称","paymentAccountId":"1002","paymentAccountNo":1113,"statManageType":"经营类别","statManageTableName":"B_STAT_MANAGE_TYPE","serviceType":1,"state":"省A","city":"市B","district":"区C","town":"镇C","street":"街道C","addr":"addr","coordinate":"","operStartDate":"2020-09-01 00:00:00","operEndDate":"9999-12-31 00:00:00","remark":"","manager":"manager","managerTel":"managerTel","manager2":"manager2","manager2Tel":"manager2Tel","serviceTel":"serviceTel","networkManagerId":0,"isSysDelicc":0,"isSysDelicod":0,"isSysDeli":0,"serviceArea":"service1025","noServiceArea":"","specialServiceArea":"","isOperate":1,"isFinace":0,"level":3,"path":"1022|1024|1025","createTime":"2021-05-20 09:54:40","createBy":"1000","createName":"系统管理员","updateTime":"2021-06-07 09:07:54","updateBy":"0","isDelete":0},{"id":"1027","companyId":"1000","companyName":"汇森集团","isEnable":1,"stanoPrefix":"H","stanoSuffix":"888222131112212122","stano":"H888","station":"新网点","sysType":"TYPE_5","sysTableName":"B_STAT_TYPE","sysTypeName":"一级网点","openAccountType":"TYPE_3","openAccountTableName":"B_OPEN_ACCOUNT_TYPE","openAccountTypeName":"财务中心","pid":"1024","pidName":"测试网13点2222221221223222","financeCenterId":"1002","financeCenterName":"名称","paymentAccountId":"1002","paymentAccountNo":1113,"statManageType":"经营类别","statManageTableName":"B_STAT_MANAGE_TYPE","serviceType":1,"state":"省A1","city":"市B11","district":"区C2","town":"11","street":"街道C","addr":"addr2","coordinate":"","operStartDate":"2020-09-01 00:00:00","operEndDate":"9999-12-31 00:00:00","remark":"","manager":"manager2","managerTel":"managerTel","manager2":"manager2","manager2Tel":"manager2Tel","serviceTel":"serviceTel","networkManagerId":0,"isSysDelicc":0,"isSysDelicod":0,"isSysDeli":0,"serviceArea":"service","noServiceArea":"","specialServiceArea":"","isOperate":1,"isFinace":1,"level":3,"path":"1022|1024|1027","createTime":"2021-05-20 17:46:20","createBy":"1000","createName":"系统管理员","updateTime":"2021-06-07 09:07:54","updateBy":"1000","updateName":"系统管理员","isDelete":0},{"id":"4675","companyId":"1000","companyName":"汇森集团","isEnable":1,"stanoPrefix":"H","stanoSuffix":"88822213111212122","stano":"H88822213111212122","station":"测试网13点222212212211223222","sysType":"TYPE_5","sysTableName":"B_STAT_TYPE","sysTypeName":"一级网点","openAccountType":"TYPE_3","openAccountTableName":"B_OPEN_ACCOUNT_TYPE","openAccountTypeName":"财务中心","pid":"1024","pidName":"测试网13点2222221221223222","financeCenterId":"1002","financeCenterName":"名称","paymentAccountId":"1002","paymentAccountNo":1113,"statManageType":"经营类别","statManageTableName":"B_STAT_MANAGE_TYPE","serviceType":1,"state":"省A","city":"市B","district":"区C","town":"镇C","street":"街道C","addr":"addr","coordinate":"","operStartDate":"2020-09-01 00:00:00","operEndDate":"9999-12-31 00:00:00","remark":"","manager":"manager","managerTel":"managerTel","manager2":"manager2","manager2Tel":"manager2Tel","serviceTel":"serviceTel","networkManagerId":0,"isSysDelicc":0,"isSysDelicod":0,"isSysDeli":0,"serviceArea":"","noServiceArea":"","specialServiceArea":"","isOperate":1,"isFinace":0,"level":3,"path":"1022|1024|4675","createTime":"2021-05-27 17:16:32","createBy":"1000","createName":"系统管理员","updateTime":"2021-06-07 09:07:54","updateBy":"1000","updateName":"系统管理员","isDelete":0},{"id":"4676","companyId":"1000","companyName":"汇森集团","isEnable":1,"stanoPrefix":"H","stanoSuffix":"8882221311121212122","stano":"H8882221311121212122","station":"测试网13点2222121221212211223222","sysType":"TYPE_5","sysTableName":"B_STAT_TYPE","sysTypeName":"一级网点","openAccountType":"TYPE_3","openAccountTableName":"B_OPEN_ACCOUNT_TYPE","openAccountTypeName":"财务中心","pid":"1024","pidName":"测试网13点2222221221223222","financeCenterId":"1002","financeCenterName":"名称","paymentAccountId":"1002","paymentAccountNo":1113,"statManageType":"经营类别","statManageTableName":"B_STAT_MANAGE_TYPE","serviceType":1,"state":"省A","city":"市B","district":"区C","town":"镇C","street":"街道C","addr":"addr","coordinate":"","operStartDate":"2020-09-01 00:00:00","operEndDate":"9999-12-31 00:00:00","remark":"","manager":"manager","managerTel":"managerTel","manager2":"manager2","manager2Tel":"manager2Tel","serviceTel":"serviceTel","networkManagerId":0,"isSysDelicc":0,"isSysDelicod":0,"isSysDeli":0,"serviceArea":"","noServiceArea":"","specialServiceArea":"","isOperate":1,"isFinace":0,"level":3,"path":"1022|1024|4676","createTime":"2021-05-27 17:57:11","createBy":"1000","createName":"系统管理员","updateTime":"2021-06-07 09:07:54","updateBy":"1000","updateName":"系统管理员","isDelete":0},{"id":"4677","companyId":"1000","companyName":"汇森集团","isEnable":1,"stanoPrefix":"H","stanoSuffix":"1","stano":"H888","station":"新网1点","sysType":"TYPE_5","sysTableName":"B_STAT_TYPE","sysTypeName":"一级网点","openAccountType":"TYPE_3","openAccountTableName":"B_OPEN_ACCOUNT_TYPE","openAccountTypeName":"财务中心","pid":"1024","pidName":"测试网13点2222221221223222","financeCenterId":"1002","financeCenterName":"名称","paymentAccountId":"1002","paymentAccountNo":1113,"statManageType":"经营类别","statManageTableName":"B_STAT_MANAGE_TYPE","serviceType":1,"state":"省A1","city":"市B11","district":"区C2","town":"11","street":"街道C","addr":"addr2","coordinate":"","operStartDate":"2020-09-01 00:00:00","operEndDate":"9999-12-31 00:00:00","remark":"","manager":"manager2","managerTel":"managerTel","manager2":"manager2","manager2Tel":"manager2Tel","serviceTel":"serviceTel","networkManagerId":0,"isSysDelicc":0,"isSysDelicod":0,"isSysDeli":0,"serviceArea":"","noServiceArea":"","specialServiceArea":"","isOperate":1,"isFinace":1,"level":3,"path":"1022|1024|4677","createTime":"2021-05-27 17:58:14","createBy":"1000","createName":"系统管理员","updateTime":"2021-06-07 09:07:54","updateBy":"1000","updateName":"系统管理员","isDelete":0},{"id":"4678","companyId":"1000","companyName":"汇森集团","isEnable":1,"stanoPrefix":"H","stanoSuffix":"s1","stano":"Hs1","station":"2","sysType":"TYPE_5","sysTableName":"B_STAT_TYPE","sysTypeName":"一级网点","openAccountType":"TYPE_3","openAccountTableName":"B_OPEN_ACCOUNT_TYPE","openAccountTypeName":"财务中心","pid":"1024","pidName":"测试网13点2222221221223222","financeCenterId":"1002","financeCenterName":"名称","paymentAccountId":"1002","paymentAccountNo":1113,"statManageType":"经营类别","statManageTableName":"B_STAT_MANAGE_TYPE","serviceType":1,"state":"省A","city":"市B","district":"区C","town":"镇C","street":"街道C","addr":"addr","coordinate":"","operStartDate":"2020-09-01 00:00:00","operEndDate":"9999-12-31 00:00:00","remark":"","manager":"manager","managerTel":"managerTel","manager2":"manager2","manager2Tel":"manager2Tel","serviceTel":"serviceTel","networkManagerId":0,"isSysDelicc":0,"isSysDelicod":0,"isSysDeli":0,"serviceArea":"","noServiceArea":"","specialServiceArea":"","isOperate":1,"isFinace":0,"level":3,"path":"1022|1024|4678","createTime":"2021-05-31 15:01:51","createBy":"1000","createName":"系统管理员","updateTime":"2021-06-07 09:07:54","updateBy":"1000","updateName":"系统管理员","isDelete":0},{"id":"4684","companyId":"1000","companyName":"汇森集团","isEnable":1,"stanoPrefix":"1","stanoSuffix":"202106070910","stano":"1202106070910","station":"重固网点","sysType":"TYPE_1","sysTableName":"B_STAT_TYPE","sysTypeName":"集团","openAccountType":"TYPE_3","openAccountTableName":"B_OPEN_ACCOUNT_TYPE","openAccountTypeName":"财务中心","pid":"1022","pidName":"测试网3点22222222223222","financeCenterId":"1023","financeCenterName":"测试网13点222222221223222","paymentAccountId":"1000","paymentAccountNo":111,"statManageType":"TYPE_1","statManageTableName":"B_STAT_MANAGE_TYPE","statManageTypeName":"直营","serviceType":1,"state":"上海市","city":"上海市","district":"青浦区","town":"重固镇","street":"","addr":"北青公路5777号","coordinate":"121.206469,31.189719","operStartDate":"2021-06-07 00:00:00","operEndDate":"2021-06-30 00:00:00","remark":"测试数据","manager":"邱福建","managerTel":"17610275289","manager2":"邱福建","manager2Tel":"17610275289","serviceTel":"17610275289","networkManagerId":0,"isSysDelicc":1,"isSysDelicod":1,"isSysDeli":1,"serviceArea":"1","noServiceArea":"3","specialServiceArea":"2","isOperate":1,"isFinace":0,"level":3,"path":"1022|4685|4684","createTime":"2021-06-07 09:10:30","createBy":"1000","createName":"系统管理员","updateTime":"2021-06-07 09:21:14","updateBy":"1000","updateName":"系统管理员","isDelete":0},{"id":"4685","companyId":"1000","companyName":"汇森集团","isEnable":1,"stanoPrefix":"1","stanoSuffix":"202106070920","stano":"1202106070920","station":"虹桥网点","sysType":"TYPE_1","sysTableName":"B_STAT_TYPE","sysTypeName":"集团","openAccountType":"TYPE_3","openAccountTableName":"B_OPEN_ACCOUNT_TYPE","openAccountTypeName":"财务中心","pid":"1022","pidName":"测试网3点22222222223222","financeCenterId":"1022","financeCenterName":"测试网3点22222222223222","paymentAccountId":"1000","paymentAccountNo":111,"statManageType":"TYPE_1","statManageTableName":"B_STAT_MANAGE_TYPE","statManageTypeName":"直营","serviceType":1,"state":"上海市","city":"上海市","district":"闵行区","town":"虹桥镇","street":"","addr":"虹桥天地","coordinate":"121.316511,31.19209","operStartDate":"2021-06-07 00:00:00","operEndDate":"2021-06-30 00:00:00","remark":"测试备注","manager":"邱福建","managerTel":"17610275289","manager2":"邱福建","manager2Tel":"17610275289","serviceTel":"17610275289","networkManagerId":0,"isSysDelicc":1,"isSysDelicod":1,"isSysDeli":1,"serviceArea":"1","noServiceArea":"3","specialServiceArea":"2","isOperate":1,"isFinace":0,"level":2,"path":"1022|4685","createTime":"2021-06-07 09:20:51","createBy":"1000","createName":"系统管理员","updateTime":"2021-06-07 09:20:51","updateBy":"1000","updateName":"系统管理员","isDelete":0},{"id":"4686","companyId":"1000","companyName":"汇森集团","isEnable":1,"stanoPrefix":"1","stanoSuffix":"202106070925","stano":"1202106070925","station":"徐泾网点","sysType":"TYPE_1","sysTableName":"B_STAT_TYPE","sysTypeName":"集团","openAccountType":"TYPE_3","openAccountTableName":"B_OPEN_ACCOUNT_TYPE","openAccountTypeName":"财务中心","pid":"1022","pidName":"测试网3点22222222223222","financeCenterId":"1022","financeCenterName":"测试网3点22222222223222","paymentAccountId":"1000","paymentAccountNo":111,"statManageType":"TYPE_1","statManageTableName":"B_STAT_MANAGE_TYPE","statManageTypeName":"直营","serviceType":1,"state":"上海市","city":"上海市","district":"青浦区","town":"徐泾镇","street":"","addr":"捷克小区","coordinate":"121.280257,31.160599","operStartDate":"2021-06-07 00:00:00","operEndDate":"2021-06-30 00:00:00","remark":"测试数据","manager":"邱福建","managerTel":"17610275289","manager2":"邱福建","manager2Tel":"17610275289","serviceTel":"17610275289","networkManagerId":0,"isSysDelicc":1,"isSysDelicod":1,"isSysDeli":1,"serviceArea":"1","noServiceArea":"3","specialServiceArea":"2","isOperate":1,"isFinace":0,"level":3,"path":"1022|4685|4686","createTime":"2021-06-07 09:27:45","createBy":"1000","createName":"系统管理员","updateTime":"2021-06-07 09:30:43","updateBy":"1000","updateName":"系统管理员","isDelete":0},{"id":"4687","companyId":"1000","companyName":"汇森集团","isEnable":1,"stanoPrefix":"1","stanoSuffix":"202106070935","stano":"1202106070935","station":"淀山湖网点","sysType":"TYPE_1","sysTableName":"B_STAT_TYPE","sysTypeName":"集团","openAccountType":"TYPE_3","openAccountTableName":"B_OPEN_ACCOUNT_TYPE","openAccountTypeName":"财务中心","pid":"1022","pidName":"测试网3点22222222223222","financeCenterId":"1022","financeCenterName":"测试网3点22222222223222","paymentAccountId":"1000","paymentAccountNo":111,"statManageType":"TYPE_1","statManageTableName":"B_STAT_MANAGE_TYPE","statManageTypeName":"直营","serviceType":1,"state":"江苏省","city":"苏州市","district":"昆山市","town":"淀山湖镇","street":"","addr":"淀山湖","coordinate":"121.035725,31.179277","operStartDate":"2021-06-07 00:00:00","operEndDate":"2021-06-30 00:00:00","remark":"测试数据","manager":"邱政德","managerTel":"17610275289","manager2":"邱政德","manager2Tel":"17610275289","serviceTel":"17610275289","networkManagerId":0,"isSysDelicc":1,"isSysDelicod":1,"isSysDeli":1,"serviceArea":"1","noServiceArea":"3","specialServiceArea":"2","isOperate":1,"isFinace":0,"level":3,"path":"1022|4685|4687","createTime":"2021-06-07 09:37:10","createBy":"1000","createName":"系统管理员","updateTime":"2021-06-07 09:41:28","updateBy":"1000","updateName":"系统管理员","isDelete":0},{"id":"4688","companyId":"1000","companyName":"汇森集团","isEnable":1,"stanoPrefix":"1","stanoSuffix":"202106070943","stano":"1202106070943","station":"爱博网点","sysType":"TYPE_1","sysTableName":"B_STAT_TYPE","sysTypeName":"集团","openAccountType":"TYPE_3","openAccountTableName":"B_OPEN_ACCOUNT_TYPE","openAccountTypeName":"财务中心","pid":"4685","pidName":"虹桥网点","financeCenterId":"1022","financeCenterName":"测试网3点22222222223222","paymentAccountId":"1000","paymentAccountNo":111,"statManageType":"TYPE_1","statManageTableName":"B_STAT_MANAGE_TYPE","statManageTypeName":"直营","serviceType":1,"state":"上海市","city":"上海市","district":"闵行区","town":"华漕镇","street":"","addr":"爱博一村","coordinate":"121.311115,31.206757","operStartDate":"2021-06-07 00:00:00","operEndDate":"2021-06-30 00:00:00","remark":"测试数据","manager":"邱福建","managerTel":"17610275289","manager2":"邱福建","manager2Tel":"17610275289","serviceTel":"17610275289","networkManagerId":0,"isSysDelicc":1,"isSysDelicod":1,"isSysDeli":1,"serviceArea":"1","noServiceArea":"3","specialServiceArea":"2","isOperate":1,"isFinace":0,"level":3,"path":"1022|4685|4688","createTime":"2021-06-07 09:44:31","createBy":"1000","createName":"系统管理员","updateTime":"2021-06-07 10:18:13","updateBy":"1000","updateName":"系统管理员","isDelete":0}]
+        },
+        rules: {
+          //form表单验证
+        },
+        // form表单组件
+        formArr: [
+          {
+            type: "inputComp",
+            title: `<span>网点编码</span><span style="color:red">(注意事项)</span>`,
+            key: "siteCode",
+            placeholder: "请输入",
+            showButton: true,
+            icon: "el-icon-arrow-right",
+            labelSlot: true
+          },
+          {
+            type: "inputComp",
+            title: "网点名称",
+            key: "siteName",
+            placeholder: "请输入"
+          },
+          {
+            type: "selectComp",
+            title: "网点类型",
+            key: "siteType",
+            enableMatch: true,
+            placeholder: "请选择"
+          },
+          {
+            type: "bigDataSelectComp",
+            title: "归属上级",
+            key: "pid",
+            isHand: true,
+            selectType: "selectShowIdComp",
+            placeholder: "请选择或输入查找",
+            custText: "station",
+            custValue: "id",
+            options: [
+              {
+                title: "网点名称",
+                str: "station",
+                mstyle: { width: "50%" }
+              },
+              {
+                title: "网点编号",
+                str: "stano",
+                mstyle: { width: "50%", textAlign: "center" }
+              }
+            ]
+          },
+          {
+            type: "bigDataSelectComp",
+            title: "经营地址",
+            key: "area",
+            isHand: true,
+            width: "50%",
+            placeholder: "请选择或输入查找",
+            custText: "text",
+            custValue: "value",
+            col:2,
+            filterMethod: query => {
+              if (query !== "") {
+                setTimeout(() => {
+                  this.drawerForm.selectData.area = this.destStrAll.filter(
+                    item => {
+                      if (item.text.indexOf(query) > -1) {
+                        return item;
+                      }
+                    }
+                  );
+                }, 100);
+              } else {
+                this.drawerForm.selectData.area = this.destStrAll;
+              }
+            },
+
+            hasSlot: true,
+            slotData: {
+              type: "inputComp",
+              key: "address",
+              title: "启用",
+              width: "50%"
+            }
+          },
+          {
+            type: "dateTime",
+            title: "开始时间",
+            key: "beginTime",
+            placeholder: "请选择时间"
+          },
+          {
+            type: "dateTime",
+            title: "结束时间",
+            key: "endTime",
+            placeholder: "请选择时间"
+          },
+          {
+            type: "checkgroupComp",
+            title: " ",
+            key: "showCheck",
+            disabled:false,
+            col: 4
+          }
+        ]
+      },
       //弹窗的form-折叠不带分组效果
       queryForm2: {
         id: "popupForm2",
@@ -1531,6 +1683,26 @@ export default {
             secondFontWeight: 700,//副标题粗细
             formCollapseSlotShow:true,//是否显示右侧删除按钮
             formItem: [
+              {
+                type: "dateTime",
+                title: "开始时间",
+                key: "beginTime",
+                placeholder: "请选择时间"
+              },
+              {
+                type:'onlyMonthDayRangeComp',
+                title: "月份日期范围",
+                key: "monthDayRange",
+                outAdvanced: true,
+                pickerOptions:{ //只能选择的范围
+                  disabledDate(time) {
+                    return (
+                      time.getFullYear() < "2023" ||
+                      time.getFullYear() > 2023
+                    ); // 注意是 || 不是 && 哦
+                  }
+                }
+              },
               {
                 type:'tableInput',//表格输入项
                 title: "",//不是要标题
@@ -1614,54 +1786,6 @@ export default {
                 key: "driver1Name",
                 disabled: true,
               }
-              // {
-              //   type: "inputComp",
-              //   title: "司机二姓名",
-              //   key: "driver2Name",
-              //   disabled: true,
-              // },
-              // {
-              //   type: "inputComp",
-              //   title: "车牌号码",
-              //   key: "carNumber",
-              //   disabled: true,
-              // },
-              // {
-              //   type: "inputComp",
-              //   title: "司机一电话",
-              //   key: "driver1Phone",
-              //   disabled: true,
-              // },
-              // {
-              //   type: "inputComp",
-              //   title: "司机二电话",
-              //   key: "driver2Phone",
-              //   disabled: true,
-              // },
-              // {
-              //   type: "inputComp",
-              //   title: "车辆类型",
-              //   key: "carType",
-              //   disabled: true,
-              // },
-              // {
-              //   type: "inputComp",
-              //   title: "车辆用途",
-              //   key: "carUseType",
-              //   disabled: true,
-              // },
-              // {
-              //   type: "inputComp",
-              //   title: "路由类型",
-              //   key: "routeType",
-              //   disabled: true,
-              // },
-              // {
-              //   type: "inputComp",
-              //   title: "路由编号",
-              //   key: "routeCode",
-              //   disabled: true,
-              // }
             ],
           },
           {
@@ -1747,13 +1871,8 @@ export default {
             formItems: [
               [
                 {
-                  type:'formItemTitle',//表格输入项
-                  title:'', //为空
-                  stitle: '标题一',//副标题
-                  secondTitleColor:'#ffffff',//副标题颜色
-                  seconfFontSize: '14px',//副标题文字大小
-                  // secondTitleLeft:'50px',//副标题左移位置
-                  secondFontWeight: 700,//副标题粗细
+                  type:'formItemTitleInput',//标题，允许修改
+                  title:'' //为空
                 },
                 {
                   type:'tableInput',//表格输入项
@@ -1991,6 +2110,20 @@ export default {
                   ]
                 },
                 {
+                  type:'onlyMonthDayRangeComp',
+                  title: "月份日期范围",
+                  key: "monthDayRange",
+                  outAdvanced: true,
+                  pickerOptions:{ //只能选择的范围
+                    disabledDate(time) {
+                      return (
+                        time.getFullYear() < "2023" ||
+                        time.getFullYear() > 2023
+                      ); // 注意是 || 不是 && 哦
+                    }
+                  }
+                },
+                {
                   type: 'selectComp',
                   title: '普通下拉',
                   key: 'selectA',
@@ -2031,6 +2164,7 @@ export default {
         ],
         model:{
           sendCarFormId:'测试的值',
+          monthDayRange:['2023-01-01','2023-01-01'],
           brand1:11.22,
           brand2:25.32
         }
@@ -2129,7 +2263,7 @@ export default {
         formArr: [
           {
             key: "base",
-            title: "基础资料",
+            title: "基础资料111",
             formItem: [
               {
                 type: "inputComp",
@@ -2501,7 +2635,20 @@ export default {
       // this.$refs.uiForm.formItem.vxeSelectKey = '下拉选项2';
       this.$refs.uiForm.formItem.pickIconFont = 'icon-dalou1';
       this.$refs.uiForm.formItem.pickIcon = 'http://60.205.231.120/model/qdyl/img/labIcon/amusementPark.png'
-
+      this.$refs.uiForm.formItem.tableInds = [
+        {
+          '1': 124,
+          '2': 212,
+          '3': 1024,
+          '4': 444,
+          '5': 5551,
+          '6': 1212,
+          '7': 2121,
+          '8': 3234,
+          '9': 4567,
+          '10': 9876
+        }
+      ]
       //tree的测试
       setTimeout(() => {
         this.InfoTreeData.treeDeptData = [
@@ -2690,13 +2837,15 @@ export default {
       }
       else if (item === "drawerBtn") {
         this.showDrawer = true;
-      } else if (item === "customDrawerBtn") {
-        this.showCustomDrawer = true;
+      } else if (item === "btn0") {
+        this.showpopup0 = true;
       } else if (item == "ztreeBtn"){
         this.showZtreePopup = true;
       }
     },
     formChange(event, item, itemKey) {
+      console.log(event)
+      // console.log(this.$refs.uiForm.formItem)
       if(itemKey == 'isHaveDown'){
         this.$refs.uiForm.setFormAttribute('routeName','disabled',true)
       }else if(itemKey == 'vxeSelectKey'){

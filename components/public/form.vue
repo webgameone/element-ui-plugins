@@ -405,7 +405,6 @@
               </el-form-item>
             </template>
 
-
             <!-- form内右侧的查询和重置 -->
             <div v-if="formObj.btnInline" style="float:left;margin-left:10px;margin-bottom:18px;">
               <a v-if="formObj.needAdvanced" @click="toggleAdvanced" style="float:left;margin-right:8px;margin-top:4px;font-size:12px;cursor:pointer;color:#409EFF">
