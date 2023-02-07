@@ -93,7 +93,7 @@ export default {
     },
     formChange(e,item){
       // console.log(e)
-      this.$emit('change', val, this.item);
+      this.$emit('change', e, this.item);
     }
   },
 }

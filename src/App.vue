@@ -1850,7 +1850,7 @@ export default {
         formArr: [
           {
             key: "base",
-            title: "基础资料",
+            title: "基础资料呵呵",
             formBtnShow:true,//是否显示右侧按钮
             formItems: [
               [
@@ -1898,56 +1898,56 @@ export default {
                   },
                 }
               ],
-              [
-                {
-                  type:'formItemTitle',//表格输入项
-                  title:'', //为空
-                  stitle: '标题二',//副标题
-                  secondTitleColor:'#ffffff',//副标题颜色
-                  seconfFontSize: '14px',//副标题文字大小
-                  // secondTitleLeft:'50px',//副标题左移位置
-                  secondFontWeight: 700,//副标题粗细
-                },
-                {
-                  type:'tableInput',//表格输入项
-                  title: "",//不是要标题
-                  key:'tableIn',
-                  col:3,
-                  className:'tableInputClass',//自定义的class名字
-                  tableName:['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24'],//表格显示名称数组
-                  tableField:['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24'],//数组对应字段值
-                  outAdvanced: true,
-                },
-                {
-                  type: 'selectComp',
-                  title: '普通下拉',
-                  key: 'selectA',
-                  placeholder: '不支持巨量数据，大量数据会卡',
-                },
-                {
-                  type:'numberInputComp', //数字输入框
-                  title:'数字输入框',
-                  key:'brand1',
-                  precision:2, //数值精度 2-2个小数点，不设置该属性或者为0时只能输入整数
-                  controls:false, //是否显示右侧的数值调节按钮
-                  min:0, //最小值，可以不设置
-                  max:50, //最大值，可以不设置
-                  width:'49%',
+              // [
+              //   {
+              //     type:'formItemTitle',//表格输入项
+              //     title:'', //为空
+              //     stitle: '标题二',//副标题
+              //     secondTitleColor:'#ffffff',//副标题颜色
+              //     seconfFontSize: '14px',//副标题文字大小
+              //     // secondTitleLeft:'50px',//副标题左移位置
+              //     secondFontWeight: 700,//副标题粗细
+              //   },
+              //   {
+              //     type:'tableInput',//表格输入项
+              //     title: "",//不是要标题
+              //     key:'tableIn',
+              //     col:3,
+              //     className:'tableInputClass',//自定义的class名字
+              //     tableName:['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24'],//表格显示名称数组
+              //     tableField:['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24'],//数组对应字段值
+              //     outAdvanced: true,
+              //   },
+              //   {
+              //     type: 'selectComp',
+              //     title: '普通下拉',
+              //     key: 'selectA',
+              //     placeholder: '不支持巨量数据，大量数据会卡',
+              //   },
+              //   {
+              //     type:'numberInputComp', //数字输入框
+              //     title:'数字输入框',
+              //     key:'brand1',
+              //     precision:2, //数值精度 2-2个小数点，不设置该属性或者为0时只能输入整数
+              //     controls:false, //是否显示右侧的数值调节按钮
+              //     min:0, //最小值，可以不设置
+              //     max:50, //最大值，可以不设置
+              //     width:'49%',
 
-                  hasSlot:true,//是否 可以在当前列中再加入一个输入项，但是两个输入项的宽度需要自定义，否则都为100%
-                  needLable:true,//是否需要副标题
-                  slotData:{
-                    width:'49%',
-                    type:'numberInputComp', //数字输入框
-                    title:'数字输入框',
-                    key:'brand2',
-                    precision:2, //数值精度 2-2个小数点，不设置该属性或者为0时只能输入整数
-                    controls:false, //是否显示右侧的数值调节按钮
-                    min:0, //最小值，可以不设置
-                    max:50, //最大值，可以不设置
-                  },
-                }
-              ]
+              //     hasSlot:true,//是否 可以在当前列中再加入一个输入项，但是两个输入项的宽度需要自定义，否则都为100%
+              //     needLable:true,//是否需要副标题
+              //     slotData:{
+              //       width:'49%',
+              //       type:'numberInputComp', //数字输入框
+              //       title:'数字输入框',
+              //       key:'brand2',
+              //       precision:2, //数值精度 2-2个小数点，不设置该属性或者为0时只能输入整数
+              //       controls:false, //是否显示右侧的数值调节按钮
+              //       min:0, //最小值，可以不设置
+              //       max:50, //最大值，可以不设置
+              //     },
+              //   }
+              // ]
             ]
           },
           {
