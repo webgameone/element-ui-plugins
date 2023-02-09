@@ -488,6 +488,7 @@ export default {
             title: "月份日期范围",
             key: "monthDayRange",
             outAdvanced: true,
+            disabled: false,
             pickerOptions:{ //只能选择的范围
               disabledDate(time) {
                 return (
@@ -545,6 +546,7 @@ export default {
             className:'tableInputClass',//自定义的class名字
             tableName:['时间1','时间2','时间3','时间4','时间5','时间6','时间7','时间8','时间9','时间10'],//表格显示名称数组
             tableField:['1','2','3','4','5','6','7','8','9','10'],//数组对应字段值
+            disabled: true,
             outAdvanced: true
           },
           {
@@ -1852,6 +1854,7 @@ export default {
             key: "base",
             title: "基础资料呵呵",
             formBtnShow:true,//是否显示右侧按钮
+            disabled: true, //不允许新增删除
             formItems: [
               [
                 {
@@ -1863,6 +1866,7 @@ export default {
                   title: "",//不是要标题
                   key:'tableIn',
                   col:3,
+                  disabled:true,
                   className:'tableInputClass',//自定义的class名字
                   tableName:['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24'],//表格显示名称数组
                   tableField:['0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24'],//数组对应字段值

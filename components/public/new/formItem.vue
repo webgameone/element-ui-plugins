@@ -66,6 +66,7 @@
             <el-input-number
               style="width:100%"
               size="mini"
+              :disabled="item.disabled?item.disabled:false"
               v-model="scope.row[item.tableField[mindex]]"
               :controls="false"
               @change="formChange($event,item)"
