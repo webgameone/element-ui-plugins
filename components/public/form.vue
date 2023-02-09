@@ -1016,7 +1016,7 @@ export default {
           })
 
           if(j!==-1){
-            if(this.formObj.formArr[i].formItem[j][key]==keyName){
+            if(this.formObj.formArr[i].formItem[j]['key']==keyName){
               this.formObj.formArr[i].formItem[j][attrName] = value;
             }
             //1.有hasSlot,2.slotData里面的key值一样,3.eachAttribute分开属性设置

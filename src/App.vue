@@ -1689,6 +1689,7 @@ export default {
                 type: "dateTime",
                 title: "开始时间",
                 key: "beginTime",
+                disabled: false,
                 placeholder: "请选择时间"
               },
               {
@@ -2762,6 +2763,7 @@ export default {
         // }, 300);
 
         setTimeout(() => {
+          this.$refs.userForm.setFormAttribute('beginTime','disabled',true)
           this.$set(this.$refs.userForm.formItem,'tableInPop2',[
             {
               '0': 124,
