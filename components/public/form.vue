@@ -198,8 +198,7 @@
                     <!--数组模块的 增加按钮 -->
                     <el-button
                       @click="formBtnOperationFn('add',items.key,index)"
-                      v-if="items.formBtnShow&&index==0&&!items.disabled"
-                      slot="reference"
+                      v-show="items.formBtnShow&&index==0&&!items.disabled"
                       size="mini"
                       :style="{'position':'absolute','right':items.formItems.length>1?'80px':'40px','z-index':'1'}"
                       circle type="success"
@@ -212,7 +211,7 @@
                       title="确定删除该节点吗？"
                       @confirm="formBtnOperationFn('delete',items.key,index)"
                     >
-                      <el-button v-if="items.formBtnShow&&items.formItems.length!=1&&!items.disabled" slot="reference" size="mini" style="position:absolute;right:40px;z-index:1;" circle type="danger" icon="el-icon-delete"></el-button>
+                      <el-button v-show="items.formBtnShow&&items.formItems.length!=1&&!items.disabled" slot="reference" size="mini" style="position:absolute;right:40px;z-index:1;" circle type="danger" icon="el-icon-delete"></el-button>
                     </el-popconfirm>
 
                     <el-form-item
