@@ -1856,7 +1856,7 @@ export default {
             title: "基础资料呵呵",
             formBtnShow:true,//是否显示右侧按钮
             disabled: true, //不允许新增删除
-            formItems: [
+            formItem: [
               [
                 {
                   type:'formItemTitleInput',//标题，允许修改
@@ -1961,7 +1961,7 @@ export default {
             secondTitle: '标题二',
             secondTitleColor:'#00ffff',
             formBtnShow:true,//是否显示右侧按钮
-            formItems: [
+            formItem: [
               [
                 {
                   type:'formItemTitle',//表格输入项
@@ -2798,6 +2798,9 @@ export default {
 
       } else if (item === "btn2") {
         this.showpopup2 = true;
+        setTimeout(() => {
+          this.$refs.userForm.setFormAttribute('base','disabled',false)
+        }, 200);
       }
       else if (item === "drawerBtn") {
         this.showDrawer = true;

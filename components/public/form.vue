@@ -183,7 +183,7 @@
               </el-collapse-item>
             </el-collapse>
 
-            <!-- form表单是需要分组折叠的 但是这个formItems里面包含更多的数组，方便增加删除组模块使用 -->
+            <!-- form表单是需要分组折叠的 但是这个formItem里面包含更多的数组，方便增加删除组模块使用 -->
             <el-collapse class="formCollapseContainer" v-if="formObj.formCollapse&&formObj.formCollapse==true&&formObj.layer&&formObj.layer==true" :value="formObj.activeNames" @change="handleChange">
               <el-collapse-item
                 v-for="(items,index) in formObj.formArr"
@@ -194,13 +194,13 @@
                 class="formFlex"
               >
                 <div class="formFlex">
-                  <div style="width:100%;" v-for="(mitem,index) in items.formItems" :key="index">
+                  <div style="width:100%;" v-for="(mitem,index) in items.formItem" :key="index">
                     <!--数组模块的 增加按钮 -->
                     <el-button
                       @click="formBtnOperationFn('add',items.key,index)"
                       v-show="items.formBtnShow&&index==0&&!items.disabled"
                       size="mini"
-                      :style="{'position':'absolute','right':items.formItems.length>1?'80px':'40px','z-index':'1'}"
+                      :style="{'position':'absolute','right':items.formItem.length>1?'80px':'40px','z-index':'1'}"
                       circle type="success"
                       icon="el-icon-plus"
                     ></el-button>
@@ -211,7 +211,7 @@
                       title="确定删除该节点吗？"
                       @confirm="formBtnOperationFn('delete',items.key,index)"
                     >
-                      <el-button v-show="items.formBtnShow&&items.formItems.length!=1&&!items.disabled" slot="reference" size="mini" style="position:absolute;right:40px;z-index:1;" circle type="danger" icon="el-icon-delete"></el-button>
+                      <el-button v-show="items.formBtnShow&&items.formItem.length!=1&&!items.disabled" slot="reference" size="mini" style="position:absolute;right:40px;z-index:1;" circle type="danger" icon="el-icon-delete"></el-button>
                     </el-popconfirm>
 
                     <el-form-item
@@ -1003,6 +1003,8 @@ export default {
     setFormAttribute(keyName,attrName,value){
       // console.log(this.formObj.formArr)
       if(this.formObj.formCollapse){
+        //折叠的key名字
+        let outKey = -1;
         //折叠的form结构
         for(let i=0;i<this.formObj.formArr.length;i++){
           let j = this.formObj.formArr[i].formItem.findIndex((e,index)=>{
@@ -1014,6 +1016,14 @@ export default {
             return e.key == keyName;
           })
 
+          //需要修改的是折叠key的值
+          if(this.formObj.formArr[i].key==keyName){
+            outKey  = i;
+          }else{
+            outKey  = -1;
+          }
+
+          //修改的是formItem里面组件的属性
           if(j!==-1){
             if(this.formObj.formArr[i].formItem[j]['key']==keyName){
               this.formObj.formArr[i].formItem[j][attrName] = value;
@@ -1031,6 +1041,13 @@ export default {
               if(this.formObj.formArr[i].formItem[j].showSelect) {
                 this.formObj.formArr[i].formItem[j].select[attrName] = value
               }
+            }
+          }
+
+          //修改的是折叠key的属性
+          if(outKey!=-1){
+            if(this.formObj.formArr[outKey]['key']==keyName){
+              this.formObj.formArr[outKey][attrName] = value;
             }
           }
         }
@@ -1074,6 +1091,8 @@ export default {
     //获取指定的组件属性
     getFormAttribute(keyName){
        if(this.formObj.formCollapse){
+        //折叠的key名字
+        let outKey = -1;
         //折叠的form结构
         for(let i=0;i<this.formObj.formArr.length;i++){
           let j = this.formObj.formArr[i].formItem.findIndex((e,index)=>{
@@ -1085,13 +1104,27 @@ export default {
             return e.key == keyName;
           })
 
+          //需要修改的是折叠key的值
+          if(this.formObj.formArr[i].key==keyName){
+            outKey  = i;
+          }else{
+            outKey  = -1;
+          }
+
           if(j!==-1){
-            if(this.formObj.formArr[i].formItem[j][key]==keyName){
+            if(this.formObj.formArr[i].formItem[j]['key']==keyName){
               return this.formObj.formArr[i].formItem[j];
             }
             //1.有hasSlot,2.slotData里面的key值一样,3.eachAttribute分开属性设置
             if(this.formObj.formArr[i].formItem[j].hasSlot && this.formObj.formArr[i].formItem[j].slotData.key==keyName&&this.formObj.formArr[i].formItem[j].eachAttribute){
               return this.formObj.formArr[i].formItem[j].slotData;
+            }
+          }
+
+          //修改的是折叠key的属性
+          if(outKey!=-1){
+            if(this.formObj.formArr[outKey]['key']==keyName){
+              return this.formObj.formArr[outKey]
             }
           }
         }
