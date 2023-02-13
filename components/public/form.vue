@@ -729,7 +729,7 @@ export default {
           }
           //如果有组合组件
           if(item.slotData&&item.slotData.key&&item.slotData.key!==''){
-            console.log(item.slotData.key);
+            // console.log(item.slotData.key);
             //model默认值赋值操作 组合组件
             if(this.formObj.model){
               if(this.formObj.model[item.key]){
@@ -1002,8 +1002,9 @@ export default {
     //修改组件属性 keyName:key的名字   attrName:要修改的属性名称  value:属性要修改的值
     setFormAttribute(keyName,attrName,value){
       // console.log(this.formObj.formArr)
-      if(this.formObj.formCollapse){
-        //折叠的key名字
+      if(this.formObj.formCollapse&&!this.formObj.layer){
+        //折叠但不分组
+        //key名字
         let outKey = -1;
         //折叠的form结构
         for(let i=0;i<this.formObj.formArr.length;i++){
@@ -1013,6 +1014,7 @@ export default {
                 return e.slotData.key == keyName;
               }
             }
+
             return e.key == keyName;
           })
 
@@ -1023,6 +1025,7 @@ export default {
             outKey  = -1;
           }
 
+          // console.log(j)
           //修改的是formItem里面组件的属性
           if(j!==-1){
             if(this.formObj.formArr[i].formItem[j]['key']==keyName){
@@ -1042,6 +1045,61 @@ export default {
                 this.formObj.formArr[i].formItem[j].select[attrName] = value
               }
             }
+          }
+
+          //修改的是折叠key的属性
+          if(outKey!=-1){
+            if(this.formObj.formArr[outKey]['key']==keyName){
+              this.formObj.formArr[outKey][attrName] = value;
+            }
+          }
+        }
+      }else if(this.formObj.formCollapse&&this.formObj.layer){
+        //折叠并且分组
+        //key名字
+        let outKey = -1;
+        //折叠的form结构
+        for(let i=0;i<this.formObj.formArr.length;i++){
+          //formItem的数组循环
+          this.formObj.formArr[i].formItem.map((item,index)=>{
+              //formItem内部数组的循环
+              let j = item.findIndex((e,index)=>{
+                if(e.hasSlot&&e.slotData){
+                  if(e.slotData.key == keyName){
+                    return e.slotData.key == keyName;
+                  }
+                }
+
+                return e.key == keyName;
+              })
+
+              //修改的是formItem里面组件的属性
+              if(j!==-1){
+                if(item[j]['key']==keyName){
+                  item[j][attrName] = value;
+                }
+                //1.有hasSlot,2.slotData里面的key值一样,3.eachAttribute分开属性设置
+                if(item[j].hasSlot && item[j].slotData.key==keyName&&item[j].eachAttribute){
+                  item[j].slotData[attrName] = value
+                }
+
+                // 第二个状态跟第一个保持一致
+                if(item[j].hasSlot&&!item[j].eachAttribute){
+                  if(item[j].hasSlot) {
+                    item[j].slotData[attrName] = value
+                  }
+                  if(item[j].showSelect) {
+                    item[j].select[attrName] = value
+                  }
+                }
+              }
+          })
+
+          //需要修改的是折叠key的值
+          if(this.formObj.formArr[i].key==keyName){
+            outKey  = i;
+          }else{
+            outKey  = -1;
           }
 
           //修改的是折叠key的属性
@@ -1090,8 +1148,9 @@ export default {
     },
     //获取指定的组件属性
     getFormAttribute(keyName){
-       if(this.formObj.formCollapse){
-        //折叠的key名字
+      if(this.formObj.formCollapse&&!this.formObj.layer){
+        //折叠不分组
+        //key名字
         let outKey = -1;
         //折叠的form结构
         for(let i=0;i<this.formObj.formArr.length;i++){
@@ -1119,6 +1178,56 @@ export default {
             if(this.formObj.formArr[i].formItem[j].hasSlot && this.formObj.formArr[i].formItem[j].slotData.key==keyName&&this.formObj.formArr[i].formItem[j].eachAttribute){
               return this.formObj.formArr[i].formItem[j].slotData;
             }
+          }
+
+          //修改的是折叠key的属性
+          if(outKey!=-1){
+            if(this.formObj.formArr[outKey]['key']==keyName){
+              return this.formObj.formArr[outKey]
+            }
+          }
+        }
+      }else if(this.formObj.formCollapse&&this.formObj.layer){
+        //折叠并且分组
+        //key名字
+        let outKey = -1;
+        //折叠的form结构
+        for(let i=0;i<this.formObj.formArr.length;i++){
+          let resultArr = null;
+          //formItem的数组循环
+          this.formObj.formArr[i].formItem.map((item,index)=>{
+              //formItem内部数组的循环
+              let j = item.findIndex((e,index)=>{
+                if(e.hasSlot&&e.slotData){
+                  if(e.slotData.key == keyName){
+                    return e.slotData.key == keyName;
+                  }
+                }
+
+                return e.key == keyName;
+              })
+
+              //修改的是formItem里面组件的属性
+              if(j!==-1){
+                if(item[j]['key']==keyName){
+                  resultArr = item[j]
+                }
+                //1.有hasSlot,2.slotData里面的key值一样,3.eachAttribute分开属性设置
+                if(item[j].hasSlot && item[j].slotData.key==keyName&&item[j].eachAttribute){
+                  resultArr = item[j].slotData
+                }
+              }
+          })
+
+          if(resultArr){
+            return resultArr
+          }
+
+          //需要修改的是折叠key的值
+          if(this.formObj.formArr[i].key==keyName){
+            outKey  = i;
+          }else{
+            outKey  = -1;
           }
 
           //修改的是折叠key的属性

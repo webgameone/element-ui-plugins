@@ -1855,7 +1855,7 @@ export default {
             key: "base",
             title: "基础资料呵呵",
             formBtnShow:true,//是否显示右侧按钮
-            disabled: true, //不允许新增删除
+            disabled: false, //不允许新增删除
             formItem: [
               [
                 {
@@ -1875,14 +1875,16 @@ export default {
                 },
                 {
                   type: 'selectComp',
-                  title: '普通下拉',
+                  title: '普通呵呵',
                   key: 'selectA',
-                  placeholder: '不支持巨量数据，大量数据会卡',
+                  disabled: false,
+                  placeholder: '不支持巨量数据1，大量数据会卡',
                 },
                 {
                   type:'numberInputComp', //数字输入框
-                  title:'数字输入框',
+                  title:'数字呵呵',
                   key:'brand1',
+                  disabled: false,
                   precision:2, //数值精度 2-2个小数点，不设置该属性或者为0时只能输入整数
                   controls:false, //是否显示右侧的数值调节按钮
                   min:0, //最小值，可以不设置
@@ -1985,8 +1987,8 @@ export default {
                 {
                   type: 'selectComp',
                   title: '普通下拉',
-                  key: 'selectA',
-                  placeholder: '不支持巨量数据，大量数据会卡',
+                  key: 'selectA2',
+                  placeholder: '不支持巨量数据2，大量数据会卡',
                 },
                 {
                   type:'numberInputComp', //数字输入框
@@ -2014,8 +2016,8 @@ export default {
                 {
                   type: 'selectComp',
                   title: '普通下拉',
-                  key: 'selectA',
-                  placeholder: '不支持巨量数据，大量数据会卡',
+                  key: 'selectA3',
+                  placeholder: '不支持巨量数据3，大量数据会卡',
                 }
               ],
               [
@@ -2055,8 +2057,8 @@ export default {
                 {
                   type: 'selectComp',
                   title: '普通下拉',
-                  key: 'selectA',
-                  placeholder: '不支持巨量数据，大量数据会卡',
+                  key: 'selectA4',
+                  placeholder: '不支持巨量数据4，大量数据会卡',
                 },
                 {
                   type:'numberInputComp', //数字输入框
@@ -2085,7 +2087,7 @@ export default {
                   type: 'selectComp',
                   title: '普通下拉',
                   key: 'selectA',
-                  placeholder: '不支持巨量数据，大量数据会卡',
+                  placeholder: '不支持巨量数据5，大量数据会卡',
                 }
               ]
             ]
@@ -2799,7 +2801,13 @@ export default {
       } else if (item === "btn2") {
         this.showpopup2 = true;
         setTimeout(() => {
-          this.$refs.userForm.setFormAttribute('base','disabled',false)
+          // this.$refs.userForm.setFormAttribute('base','disabled',true)
+          this.$refs.userForm.setFormAttribute('selectA','disabled',true)
+          this.$refs.userForm.setFormAttribute('brand1','disabled',true)
+
+          //获取属性
+          console.log(this.$refs.userForm.getFormAttribute('selectA1111'))
+
         }, 200);
       }
       else if (item === "drawerBtn") {
