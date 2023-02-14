@@ -1856,6 +1856,7 @@ export default {
             title: "基础资料呵呵",
             formBtnShow:true,//是否显示右侧按钮
             disabled: false, //不允许新增删除
+            display: 'block', //是否显示 block  none
             formItem: [
               [
                 {

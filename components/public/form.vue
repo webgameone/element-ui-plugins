@@ -190,7 +190,7 @@
                 :title="items.title"
                 :name="index+1"
                 :key="items.key"
-                style="position:relative"
+                :style="{'position':'relative','display':items.display?items.display:'block'}"
                 class="formFlex"
               >
                 <div class="formFlex">
