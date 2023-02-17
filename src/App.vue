@@ -223,9 +223,11 @@ export default {
             disabled: false
           },
           {
-            title: "哈哈哈",
+            title: '呵呵',
             key: "add",
             type: "primary",
+            circle:true,
+            icon:'el-icon-search',
             disabled: false
           }
         ],

@@ -430,8 +430,10 @@
                 :disabled="it.disable||false"
                 :type="it.type||'primary'"
                 size="mini"
+                :icon="it.icon?it.icon:''"
+                :circle="it.circle?it.circle:false"
                 style="float:right;margin-left:10px;"
-                @click="formClick($event,it.key)">{{it.title}}</el-button>
+                @click="formClick($event,it.key)"><span v-if="!it.circle">{{it.title}}</span></el-button>
               </template>
             </div>
 
