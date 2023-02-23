@@ -427,7 +427,7 @@
                 <el-button
                 v-for="(it) in formObj.custQueryBtn"
                 :key="it.key"
-                :disabled="it.disable||false"
+                :disabled="it.disabled||false"
                 :type="it.type||'primary'"
                 size="mini"
                 :icon="it.icon?it.icon:''"
