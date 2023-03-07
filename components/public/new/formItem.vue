@@ -69,6 +69,8 @@
               :disabled="item.disabled?item.disabled:false"
               v-model="scope.row[item.tableField[mindex]]"
               :controls="false"
+              :min="item.min"
+              :max="item.max"
               @change="formChange($event,item)"
           ></el-input-number>
           </template>
