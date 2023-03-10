@@ -491,10 +491,27 @@ export default {
             key: "monthDayRange",
             outAdvanced: true,
             disabled: false,
+            singleYear: true, //是否限制左右箭头的选择范围，只能当前年份
             pickerOptions:{ //只能选择的范围
               disabledDate(time) {
                 return (
-                  time.getFullYear() < "2023" ||
+                  time.getFullYear() < 2023 ||
+                  time.getFullYear() > 2023
+                ); // 注意是 || 不是 && 哦
+              }
+            }
+          },
+          {
+            type:'onlyMonthDayRangeComp',
+            title: "月份日期范围",
+            key: "monthDayRange",
+            outAdvanced: true,
+            disabled: false,
+            singleYear: true, //是否限制左右箭头的选择范围，只能当前年份
+            pickerOptions:{ //只能选择的范围
+              disabledDate(time) {
+                return (
+                  time.getFullYear() < 2023 ||
                   time.getFullYear() > 2023
                 ); // 注意是 || 不是 && 哦
               }

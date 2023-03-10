@@ -10,6 +10,7 @@
       end-placeholder="结束日期"
       format='MM-dd'
       value-format='yyyy-MM-dd'
+      :singleYear="item.singleYear?item.singleYear:false"
       :onlyMonthDay="true"
       :disabled="item.disabled?item.disabled:false"
       :clearable="item.clearable===false?item.clearable:true"
@@ -62,34 +63,39 @@ export default {
       let leftArrow = this.$$('.el-date-range-picker__header .el-icon-arrow-left')
       let rightArrow = this.$$('.el-date-range-picker__header .el-icon-arrow-right')
 
+
       //监听事件
       let that = this;
-      leftArrow.on("click",function(){
-        leftHeaderTxt = that.$$('.monthdayRange .data_rangge_leftLabelTxt');
-        if(leftHeaderTxt[0].innerText=='1 月'){
-          leftArrow.css('display','none')
-        }
-        rightArrow.css('display','block')
-      })
-      rightArrow.on("click",function(){
-        rightHeaderTxt = that.$$('.monthdayRange .data_rangge_rightLabelTxt');
-        if(rightHeaderTxt[0].innerText=='12 月'){
-          rightArrow.css('display','none')
-        }
-        leftArrow.css('display','block')
-      })
+      // leftArrow.on("click",function(item){
+      //   // leftHeaderTxt = that.$$('.monthdayRange .data_rangge_leftLabelTxt');
 
-      if(leftHeaderTxt[0]){
-        if(leftHeaderTxt[0].innerText=='1 月'){
-          leftArrow.css('display','none')
-        }
-      }
+      //   let leftHeaderTxtValue = that.$$(item.target).parent()[0].innerText.split('月');
+      //   if(leftHeaderTxtValue[0]==1){
+      //     leftArrow.css('display','none')
+      //   }
+      //   rightArrow.css('display','block')
+      // })
+      // rightArrow.on("click",function(item){
+      //   // rightHeaderTxt = that.$$('.monthdayRange .data_rangge_rightLabelTxt');
+      //   let rightHeaderTxtValue = that.$$(item.target).parent()[0].innerText.split('月');
 
-      if(rightHeaderTxt[0]){
-        if(rightHeaderTxt[0].innerText=='12 月'){
-          rightArrow.css('display','none')
-        }
-      }
+      //   if(rightHeaderTxtValue[0]==12){
+      //     rightArrow.css('display','none')
+      //   }
+      //   leftArrow.css('display','block')
+      // })
+
+      // if(leftHeaderTxt[0]){
+      //   if(leftHeaderTxt[0].innerText=='1 月'){
+      //     leftArrow.css('display','none')
+      //   }
+      // }
+
+      // if(rightHeaderTxt[0]){
+      //   if(rightHeaderTxt[0].innerText=='12 月'){
+      //     rightArrow.css('display','none')
+      //   }
+      // }
     },
     formChange(e,item){
       // console.log(e)
